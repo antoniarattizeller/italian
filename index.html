@@ -1,0 +1,1771 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Italiano — Guida Completa</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #08080a;
+    --bg-elevated: #0f1012;
+    --bg-card: #131416;
+    --bg-card-hover: #181a1d;
+    --bg-subtle: #1a1c1f;
+    --bg-sidebar: #0c0c0e;
+    --text: #d4cfc8;
+    --text-bright: #ece8e2;
+    --text-dim: #6e6960;
+    --text-faint: #3e3a35;
+    --terracotta: #c8614a;
+    --terracotta-bright: #e07a5f;
+    --terracotta-glow: rgba(200, 97, 74, 0.06);
+    --terracotta-glow-strong: rgba(200, 97, 74, 0.12);
+    --sage: #7a9988;
+    --sage-glow: rgba(122, 153, 136, 0.08);
+    --amber: #c49a3c;
+    --amber-glow: rgba(196, 154, 60, 0.08);
+    --lavender: #907aaa;
+    --lavender-glow: rgba(144, 122, 170, 0.08);
+    --steel: #6a8098;
+    --steel-glow: rgba(106, 128, 152, 0.08);
+    --border: rgba(255, 255, 255, 0.04);
+    --border-strong: rgba(255, 255, 255, 0.07);
+    --radius: 10px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { height: 100%; }
+
+  body {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  /* ══ Noise ══ */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.015;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 256px 256px;
+  }
+
+  /* ══ Layout Shell ══ */
+  .shell {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  /* ══ Sidebar ══ */
+  .sidebar {
+    background: var(--bg-sidebar);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .sidebar-header {
+    padding: 28px 20px 20px;
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+  .sidebar-header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--text-bright);
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+  .sidebar-header h1 span {
+    color: var(--terracotta-bright);
+    font-style: italic;
+  }
+  .sidebar-header .flag-bar {
+    display: flex;
+    gap: 0;
+    margin-top: 10px;
+  }
+  .flag-bar div { width: 32px; height: 2px; }
+  .flag-bar .g { background: #009246; border-radius: 1px 0 0 1px; }
+  .flag-bar .w { background: rgba(255,255,255,0.5); }
+  .flag-bar .r { background: #ce2b37; border-radius: 0 1px 1px 0; }
+
+  .sidebar-nav {
+    flex: 1;
+    overflow-y: auto;
+    padding: 12px 10px;
+  }
+  .sidebar-nav::-webkit-scrollbar { width: 3px; }
+  .sidebar-nav::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 3px; }
+
+  .nav-group {
+    margin-bottom: 16px;
+  }
+  .nav-group-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    padding: 4px 10px 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .nav-group-label .dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .dot-sage { background: var(--sage); }
+  .dot-steel { background: var(--steel); }
+  .dot-amber { background: var(--amber); }
+  .dot-lavender { background: var(--lavender); }
+
+  .nav-item {
+    display: block;
+    padding: 7px 10px;
+    border-radius: 6px;
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 400;
+    cursor: pointer;
+    transition: all 0.15s;
+    border: 1px solid transparent;
+  }
+  .nav-item:hover {
+    color: var(--text);
+    background: var(--terracotta-glow);
+  }
+  .nav-item.active {
+    color: var(--terracotta-bright);
+    background: var(--terracotta-glow-strong);
+    border-color: rgba(200, 97, 74, 0.08);
+    font-weight: 500;
+  }
+
+  /* ══ Content Area ══ */
+  .content {
+    overflow-y: auto;
+    padding: 40px 48px 120px;
+    scroll-behavior: smooth;
+  }
+  .content::-webkit-scrollbar { width: 6px; }
+  .content::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 6px; }
+  .content::-webkit-scrollbar-track { background: transparent; }
+
+  /* ══ Panel (each topic) ══ */
+  .panel {
+    display: none;
+    animation: panelIn 0.3s ease-out;
+    max-width: 900px;
+  }
+  .panel.active { display: block; }
+  @keyframes panelIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ══ Landing (home view) ══ */
+  .landing { max-width: 900px; }
+  .landing-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: var(--text-bright);
+    margin-bottom: 6px;
+    letter-spacing: -0.02em;
+  }
+  .landing-title span { color: var(--terracotta-bright); font-style: italic; }
+  .landing-sub {
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    margin-bottom: 36px;
+    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+  }
+  .topic-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+  }
+  .topic-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    display: block;
+  }
+  .topic-card:hover {
+    background: var(--bg-card-hover);
+    border-color: var(--border-strong);
+    transform: translateY(-1px);
+  }
+  .topic-card .tc-level {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .topic-card .tc-level .dot { width: 4px; height: 4px; border-radius: 50%; }
+  .tc-sage { color: var(--sage); }
+  .tc-steel { color: var(--steel); }
+  .tc-amber { color: var(--amber); }
+  .tc-lavender { color: var(--lavender); }
+  .topic-card .tc-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--text-bright);
+    line-height: 1.3;
+  }
+  .topic-card .tc-desc {
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    margin-top: 4px;
+    line-height: 1.4;
+  }
+
+  /* ══ Panel headers ══ */
+  .panel-header {
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border-strong);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .panel-header .back {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    border: 1px solid var(--border-strong);
+    background: var(--bg-card);
+    color: var(--text-dim);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    transition: all 0.15s;
+    flex-shrink: 0;
+  }
+  .panel-header .back:hover {
+    background: var(--terracotta-glow);
+    color: var(--terracotta-bright);
+    border-color: rgba(200, 97, 74, 0.15);
+  }
+  .panel-header h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--text-bright);
+  }
+
+  /* ══ Cards ══ */
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px 26px;
+    margin-bottom: 14px;
+    transition: background 0.3s, border-color 0.3s;
+  }
+  .card:hover { background: var(--bg-card-hover); border-color: var(--border-strong); }
+  .card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--terracotta-bright);
+  }
+
+  /* ══ Collapsible sections within cards ══ */
+  .collapse-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    padding: 8px 0;
+    user-select: none;
+  }
+  .collapse-trigger h4 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+  .collapse-trigger .chevron {
+    color: var(--text-faint);
+    font-size: 0.7rem;
+    transition: transform 0.2s;
+  }
+  .collapse-trigger.open .chevron { transform: rotate(180deg); }
+  .collapse-body {
+    display: none;
+    padding-bottom: 12px;
+  }
+  .collapse-body.open { display: block; animation: panelIn 0.2s ease-out; }
+
+  /* ══ Tables ══ */
+  .table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: 8px 0 4px;
+    border-radius: 8px;
+    border: 1px solid var(--border-strong);
+    background: var(--bg-elevated);
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+  thead th {
+    background: rgba(255,255,255,0.025);
+    color: var(--text-dim);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 9px 12px;
+    text-align: left;
+    white-space: nowrap;
+    border-bottom: 1px solid var(--border-strong);
+  }
+  tbody td {
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+    font-size: 0.88rem;
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: var(--terracotta-glow); }
+  td:first-child {
+    font-weight: 600;
+    color: var(--terracotta);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.83rem;
+  }
+
+  /* ══ Colors ══ */
+  .colors-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 8px;
+    margin-top: 12px;
+  }
+  .color-card {
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--bg-elevated);
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .color-card:hover { transform: translateY(-2px); border-color: var(--border-strong); }
+  .color-swatch { height: 48px; position: relative; }
+  .color-swatch::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.3));
+  }
+  .color-label { padding: 7px 9px; }
+  .color-label .it {
+    font-weight: 600;
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.95rem;
+    color: var(--text-bright);
+  }
+  .color-label .en { color: var(--text-dim); font-size: 0.72rem; }
+
+  /* ══ Phonetics ══ */
+  .phon {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    background: var(--terracotta-glow-strong);
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-size: 0.82rem;
+    color: var(--terracotta-bright);
+    border: 1px solid rgba(200, 97, 74, 0.08);
+  }
+
+  /* ══ Tips ══ */
+  .tip {
+    background: var(--sage-glow);
+    border-left: 3px solid var(--sage);
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+    margin: 12px 0;
+    font-size: 0.9rem;
+  }
+  .tip strong { color: var(--sage); }
+  .tip code {
+    font-family: 'IBM Plex Mono', monospace;
+    background: rgba(122,153,136,0.12);
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-size: 0.82rem;
+    color: var(--sage);
+  }
+  .warning {
+    background: var(--amber-glow);
+    border-left: 3px solid var(--amber);
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+    margin: 12px 0;
+    font-size: 0.9rem;
+  }
+  .warning strong { color: var(--amber); }
+
+  /* ══ Numbers ══ */
+  .numbers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 3px;
+    margin-top: 8px;
+  }
+  .num-item {
+    display: flex;
+    align-items: baseline;
+    gap: 7px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: background 0.15s;
+  }
+  .num-item:hover { background: var(--terracotta-glow); }
+  .num-item .n {
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    color: var(--terracotta);
+    min-width: 28px;
+    font-size: 0.82rem;
+  }
+  .num-item .w { font-size: 0.86rem; }
+
+  /* ══ Examples ══ */
+  .example {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 5px 12px;
+    align-items: baseline;
+    margin: 8px 0;
+  }
+  .example .label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-faint);
+    text-align: right;
+  }
+  .example .it-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--text-bright);
+  }
+  .example .en-text { font-size: 0.88rem; color: var(--text-dim); }
+
+  /* ══ Article rules ══ */
+  .article-rule {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 12px;
+    margin: 4px 0;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 0.9rem;
+    transition: border-color 0.2s;
+  }
+  .article-rule:hover { border-color: var(--border-strong); }
+  .article-rule .arrow { color: var(--text-faint); font-size: 0.9rem; }
+  .article-rule code {
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    background: var(--terracotta-glow-strong);
+    padding: 2px 7px;
+    border-radius: 3px;
+    color: var(--terracotta-bright);
+    font-size: 0.82rem;
+    border: 1px solid rgba(200, 97, 74, 0.06);
+  }
+
+  /* ══ Selection ══ */
+  ::selection { background: rgba(200, 97, 74, 0.25); color: var(--text-bright); }
+
+  /* ══ Game ══ */
+  .game-hero {
+    text-align: center;
+    padding: 20px 0 28px;
+  }
+  .game-hero .streak {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 8px;
+  }
+  .game-hero .streak b { color: var(--terracotta-bright); font-size: 1.1rem; }
+  .game-score {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin-top: 12px;
+  }
+  .game-score .stat {
+    text-align: center;
+  }
+  .game-score .stat-val {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-bright);
+    line-height: 1;
+  }
+  .game-score .stat-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    margin-top: 4px;
+  }
+  .game-modes {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 8px;
+    margin: 20px 0;
+  }
+  .game-mode-btn {
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--border-strong);
+    background: var(--bg-card);
+    color: var(--text-dim);
+    font-size: 0.85rem;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    transition: all 0.15s;
+    text-align: left;
+  }
+  .game-mode-btn:hover {
+    background: var(--bg-card-hover);
+    color: var(--text);
+    border-color: rgba(255,255,255,0.1);
+  }
+  .game-mode-btn.active {
+    border-color: var(--terracotta);
+    color: var(--terracotta-bright);
+    background: var(--terracotta-glow-strong);
+  }
+  .game-mode-btn .mode-name {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 2px;
+    color: inherit;
+  }
+  .game-mode-btn .mode-desc {
+    font-size: 0.72rem;
+    color: var(--text-faint);
+  }
+  .game-mode-btn.active .mode-desc { color: var(--terracotta); opacity: 0.7; }
+
+  .quiz-area {
+    margin-top: 16px;
+  }
+  .quiz-prompt {
+    text-align: center;
+    padding: 32px 20px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 16px;
+  }
+  .quiz-prompt .q-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    margin-bottom: 10px;
+  }
+  .quiz-prompt .q-word {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: var(--text-bright);
+    line-height: 1.2;
+    font-style: italic;
+  }
+  .quiz-prompt .q-hint {
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    margin-top: 8px;
+    font-style: italic;
+  }
+  .quiz-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .quiz-opt {
+    padding: 14px 16px;
+    border-radius: 8px;
+    border: 1px solid var(--border-strong);
+    background: var(--bg-card);
+    color: var(--text);
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-family: 'DM Sans', sans-serif;
+    text-align: center;
+  }
+  .quiz-opt:hover:not(.disabled) {
+    background: var(--bg-card-hover);
+    border-color: rgba(255,255,255,0.12);
+  }
+  .quiz-opt.correct {
+    border-color: var(--sage) !important;
+    background: var(--sage-glow) !important;
+    color: var(--sage) !important;
+  }
+  .quiz-opt.wrong {
+    border-color: #8a4444 !important;
+    background: rgba(138, 68, 68, 0.1) !important;
+    color: #c07070 !important;
+  }
+  .quiz-opt.disabled { pointer-events: none; opacity: 0.6; }
+  .quiz-opt.disabled.correct { opacity: 1; }
+
+  .quiz-input-wrap {
+    text-align: center;
+    margin-top: 8px;
+  }
+  .quiz-input {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.1rem;
+    padding: 12px 20px;
+    border-radius: 8px;
+    border: 1px solid var(--border-strong);
+    background: var(--bg-card);
+    color: var(--text-bright);
+    text-align: center;
+    width: 100%;
+    max-width: 320px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .quiz-input:focus { border-color: var(--terracotta); }
+  .quiz-input.correct { border-color: var(--sage); color: var(--sage); }
+  .quiz-input.wrong { border-color: #8a4444; color: #c07070; }
+
+  .quiz-feedback {
+    text-align: center;
+    margin-top: 12px;
+    font-size: 0.88rem;
+    min-height: 24px;
+  }
+  .quiz-feedback .correct-text { color: var(--sage); }
+  .quiz-feedback .wrong-text { color: #c07070; }
+  .quiz-feedback .answer-reveal {
+    color: var(--text-dim);
+    font-style: italic;
+    margin-top: 4px;
+  }
+  .quiz-next {
+    display: inline-block;
+    margin-top: 16px;
+    padding: 10px 28px;
+    border-radius: 8px;
+    border: 1px solid var(--terracotta);
+    background: var(--terracotta-glow-strong);
+    color: var(--terracotta-bright);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .quiz-next:hover { background: rgba(200, 97, 74, 0.2); }
+
+  .game-landing-card {
+    background: linear-gradient(135deg, var(--terracotta-glow-strong), var(--bg-card));
+    border: 1px solid rgba(200, 97, 74, 0.12);
+    grid-column: 1 / -1;
+  }
+  .game-landing-card:hover {
+    border-color: rgba(200, 97, 74, 0.2);
+    background: linear-gradient(135deg, rgba(200,97,74,0.16), var(--bg-card-hover));
+  }
+  .game-landing-card .tc-name { color: var(--terracotta-bright); }
+
+  /* ══ Mobile ══ */
+  @media (max-width: 768px) {
+    .shell { grid-template-columns: 1fr; }
+    .sidebar {
+      position: fixed;
+      left: -260px;
+      top: 0;
+      bottom: 0;
+      width: 260px;
+      z-index: 200;
+      transition: left 0.3s;
+    }
+    .sidebar.open { left: 0; }
+    .mobile-bar {
+      display: flex !important;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      background: var(--bg-sidebar);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .hamburger {
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      border: 1px solid var(--border-strong);
+      background: var(--bg-card);
+      color: var(--text-dim);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+    }
+    .mobile-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 199;
+    }
+    .mobile-overlay.open { display: block; }
+    .content { padding: 20px 16px 80px; }
+  }
+  @media (min-width: 769px) {
+    .mobile-bar, .mobile-overlay { display: none !important; }
+  }
+
+  /* ══ Print ══ */
+  @media print {
+    body::after { display: none; }
+    .sidebar, .mobile-bar { display: none !important; }
+    .shell { grid-template-columns: 1fr; }
+    body { overflow: visible; background: #fff; color: #222; }
+    .content { overflow: visible; }
+    .panel { display: block !important; }
+    .landing { display: none !important; }
+    .card { border: 1px solid #ddd; background: #fff; break-inside: avoid; }
+    .collapse-body { display: block !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="shell">
+
+  <!-- ══ Sidebar ══ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <h1>Impara l'<span>Italiano</span></h1>
+      <div class="flag-bar"><div class="g"></div><div class="w"></div><div class="r"></div></div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-group">
+        <div class="nav-group-label"><span class="dot" style="background:var(--terracotta)"></span>Pratica</div>
+        <a class="nav-item" data-panel="game" style="font-weight:500;color:var(--terracotta-bright)">Quiz</a>
+      </div>
+      <div class="nav-group">
+        <div class="nav-group-label"><span class="dot dot-sage"></span>Livello 1 &mdash; Basi</div>
+        <a class="nav-item" data-panel="pronunciation">Fonetica</a>
+        <a class="nav-item" data-panel="pronouns">Pronomi</a>
+        <a class="nav-item" data-panel="articles">Articoli</a>
+        <a class="nav-item" data-panel="colors">Colori</a>
+        <a class="nav-item" data-panel="numbers">Numeri</a>
+        <a class="nav-item" data-panel="phrases">Frasi Utili</a>
+      </div>
+      <div class="nav-group">
+        <div class="nav-group-label"><span class="dot dot-steel"></span>Livello 2 &mdash; Fondamenti</div>
+        <a class="nav-item" data-panel="present-prog">Presente Progressivo</a>
+        <a class="nav-item" data-panel="essere">Essere</a>
+        <a class="nav-item" data-panel="avere">Avere</a>
+      </div>
+      <div class="nav-group">
+        <div class="nav-group-label"><span class="dot dot-amber"></span>Livello 3 &mdash; Coniugazioni</div>
+        <a class="nav-item" data-panel="amare">1&ordf; &mdash; ARE (Amare)</a>
+        <a class="nav-item" data-panel="temere">2&ordf; &mdash; ERE (Temere)</a>
+        <a class="nav-item" data-panel="sentire">3&ordf; &mdash; IRE (Sentire)</a>
+      </div>
+      <div class="nav-group">
+        <div class="nav-group-label"><span class="dot dot-lavender"></span>Livello 4 &mdash; Avanzato</div>
+        <a class="nav-item" data-panel="irregular">Verbi Irregolari</a>
+        <a class="nav-item" data-panel="reflexive">Verbi Riflessivi</a>
+      </div>
+    </nav>
+  </aside>
+
+  <!-- ══ Main Content ══ -->
+  <div style="display:flex;flex-direction:column;overflow:hidden;">
+    <div class="mobile-bar">
+      <button class="hamburger" onclick="toggleSidebar()">&#9776;</button>
+      <span style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--text-bright);">Italiano</span>
+    </div>
+    <div class="mobile-overlay" id="overlay" onclick="toggleSidebar()"></div>
+
+    <div class="content" id="content">
+
+      <!-- ══ LANDING ══ -->
+      <div class="panel landing active" id="panel-home">
+        <h2 class="landing-title">Impara l'<span>Italiano</span></h2>
+        <p class="landing-sub">Dalle basi alla padronanza &mdash; scegli un argomento</p>
+
+        <div class="topic-grid">
+          <a class="topic-card game-landing-card" data-panel="game">
+            <div class="tc-level" style="color:var(--terracotta)"><span class="dot" style="background:var(--terracotta)"></span>Pratica</div>
+            <div class="tc-name">Quiz</div>
+            <div class="tc-desc">Visual vocab, conjugations, articles, numbers &mdash; test yourself</div>
+          </a>
+          <a class="topic-card" data-panel="pronunciation">
+            <div class="tc-level tc-sage"><span class="dot dot-sage"></span>Livello 1</div>
+            <div class="tc-name">Fonetica</div>
+            <div class="tc-desc">Pronunciation rules, key sounds, IPA</div>
+          </a>
+          <a class="topic-card" data-panel="pronouns">
+            <div class="tc-level tc-sage"><span class="dot dot-sage"></span>Livello 1</div>
+            <div class="tc-name">Pronomi</div>
+            <div class="tc-desc">io, tu, lui/lei, noi, voi, loro</div>
+          </a>
+          <a class="topic-card" data-panel="articles">
+            <div class="tc-level tc-sage"><span class="dot dot-sage"></span>Livello 1</div>
+            <div class="tc-name">Articoli</div>
+            <div class="tc-desc">il/lo/la, un/uno/una, plurals</div>
+          </a>
+          <a class="topic-card" data-panel="colors">
+            <div class="tc-level tc-sage"><span class="dot dot-sage"></span>Livello 1</div>
+            <div class="tc-name">Colori</div>
+            <div class="tc-desc">12 colors with declension table</div>
+          </a>
+          <a class="topic-card" data-panel="numbers">
+            <div class="tc-level tc-sage"><span class="dot dot-sage"></span>Livello 1</div>
+            <div class="tc-name">Numeri</div>
+            <div class="tc-desc">0 to un milione</div>
+          </a>
+          <a class="topic-card" data-panel="phrases">
+            <div class="tc-level tc-sage"><span class="dot dot-sage"></span>Livello 1</div>
+            <div class="tc-name">Frasi Utili</div>
+            <div class="tc-desc">Conversations, vocab, greetings</div>
+          </a>
+          <a class="topic-card" data-panel="present-prog">
+            <div class="tc-level tc-steel"><span class="dot dot-steel"></span>Livello 2</div>
+            <div class="tc-name">Progressivo</div>
+            <div class="tc-desc">stare + gerundio</div>
+          </a>
+          <a class="topic-card" data-panel="essere">
+            <div class="tc-level tc-steel"><span class="dot dot-steel"></span>Livello 2</div>
+            <div class="tc-name">Essere</div>
+            <div class="tc-desc">Full conjugation &mdash; to be</div>
+          </a>
+          <a class="topic-card" data-panel="avere">
+            <div class="tc-level tc-steel"><span class="dot dot-steel"></span>Livello 2</div>
+            <div class="tc-name">Avere</div>
+            <div class="tc-desc">Full conjugation &mdash; to have</div>
+          </a>
+          <a class="topic-card" data-panel="amare">
+            <div class="tc-level tc-amber"><span class="dot dot-amber"></span>Livello 3</div>
+            <div class="tc-name">-ARE Verbs</div>
+            <div class="tc-desc">Amare: all tenses</div>
+          </a>
+          <a class="topic-card" data-panel="temere">
+            <div class="tc-level tc-amber"><span class="dot dot-amber"></span>Livello 3</div>
+            <div class="tc-name">-ERE Verbs</div>
+            <div class="tc-desc">Temere: all tenses</div>
+          </a>
+          <a class="topic-card" data-panel="sentire">
+            <div class="tc-level tc-amber"><span class="dot dot-amber"></span>Livello 3</div>
+            <div class="tc-name">-IRE Verbs</div>
+            <div class="tc-desc">Sentire: all tenses</div>
+          </a>
+          <a class="topic-card" data-panel="irregular">
+            <div class="tc-level tc-lavender"><span class="dot dot-lavender"></span>Livello 4</div>
+            <div class="tc-name">Irregolari</div>
+            <div class="tc-desc">Stare, venire, bere</div>
+          </a>
+          <a class="topic-card" data-panel="reflexive">
+            <div class="tc-level tc-lavender"><span class="dot dot-lavender"></span>Livello 4</div>
+            <div class="tc-name">Riflessivi</div>
+            <div class="tc-desc">Lavarsi: reflexive pattern</div>
+          </a>
+        </div>
+      </div>
+
+      <!-- ══ PRONUNCIATION ══ -->
+      <div class="panel" id="panel-pronunciation">
+        <div class="panel-header">
+          <button class="back" onclick="showPanel('home')">&larr;</button>
+          <h2>Fonetica &mdash; Pronunciation</h2>
+        </div>
+        <div class="card">
+          <h3>Key Italian Sounds</h3>
+          <p>Italian is almost entirely phonetic &mdash; what you see is what you say.</p>
+          <div class="table-wrap" style="margin-top:12px">
+            <table>
+              <thead><tr><th>Letters</th><th>Sound</th><th>Like English</th><th>Example</th></tr></thead>
+              <tbody>
+                <tr><td>c + e/i</td><td><span class="phon">/t&#643;/</span></td><td><strong>ch</strong>urch</td><td>cena, cinema</td></tr>
+                <tr><td>c + a/o/u</td><td><span class="phon">/k/</span></td><td><strong>c</strong>at</td><td>casa, come</td></tr>
+                <tr><td>ch</td><td><span class="phon">/k/</span></td><td><strong>k</strong>ite</td><td>chi, che</td></tr>
+                <tr><td>ci + a/o/u</td><td><span class="phon">/t&#643;/</span></td><td><strong>ch</strong>ocolate</td><td>ciao, cioccolato</td></tr>
+                <tr><td>g + e/i</td><td><span class="phon">/d&#658;/</span></td><td><strong>j</strong>elly</td><td>gelato, giro</td></tr>
+                <tr><td>g + a/o/u</td><td><span class="phon">/g/</span></td><td><strong>g</strong>o</td><td>gatto, gusto</td></tr>
+                <tr><td>gh</td><td><span class="phon">/g/</span></td><td><strong>g</strong>et</td><td>spaghetti, ghiaccio</td></tr>
+                <tr><td>gl + i</td><td><span class="phon">/&#654;/</span></td><td><strong>lli</strong> in million</td><td>famiglia, figlio</td></tr>
+                <tr><td>gn</td><td><span class="phon">/&#626;/</span></td><td>o<strong>ni</strong>on</td><td>gnocchi, bagno</td></tr>
+                <tr><td>sc + e/i</td><td><span class="phon">/&#643;/</span></td><td><strong>sh</strong>ip</td><td>scena, pesce</td></tr>
+                <tr><td>sc + a/o/u</td><td><span class="phon">/sk/</span></td><td><strong>sk</strong>i</td><td>scuola, scarpa</td></tr>
+                <tr><td>z</td><td><span class="phon">/ts/ or /dz/</span></td><td>pi<strong>zz</strong>a / <strong>z</strong>ero</td><td>pizza, zero</td></tr>
+                <tr><td>r</td><td><span class="phon">/r/</span></td><td>rolled/trilled</td><td>rosso, birra</td></tr>
+                <tr><td>double cons.</td><td>longer hold</td><td>hold the sound</td><td>notte, bello</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="tip"><strong>Key rule:</strong> <code>ci</code> = <span class="phon">/t&#643;i/</span> ("chee"). <code>chi</code> = <span class="phon">/ki/</span> ("key"). So: <em>ci vediamo</em> = "chee veh-dee-AH-mo".</div>
+          <div class="tip"><strong>Pattern:</strong> English <code>-tion</code> &rarr; Italian <code>-zione</code>. nation &rarr; nazione | information &rarr; informazione | station &rarr; stazione</div>
+        </div>
+      </div>
+
+      <!-- ══ PRONOUNS ══ -->
+      <div class="panel" id="panel-pronouns">
+        <div class="panel-header">
+          <button class="back" onclick="showPanel('home')">&larr;</button>
+          <h2>Pronomi Personali</h2>
+        </div>
+        <div class="card">
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Persona</th><th>Italiano</th><th>English</th></tr></thead>
+              <tbody>
+                <tr><td>1a sing.</td><td>io</td><td>I</td></tr>
+                <tr><td>2a sing.</td><td>tu</td><td>you (informal)</td></tr>
+                <tr><td>3a sing.</td><td>lui / lei</td><td>he / she</td></tr>
+                <tr><td>1a plur.</td><td>noi</td><td>we</td></tr>
+                <tr><td>2a plur.</td><td>voi</td><td>you (plural)</td></tr>
+                <tr><td>3a plur.</td><td>loro</td><td>they</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="warning"><strong>Old textbooks</strong> use <em>egli</em> (he) and <em>essi</em> (they). In modern Italian, always use <strong>lui/lei</strong> and <strong>loro</strong>.</div>
+          <div class="tip"><strong>Pro-drop:</strong> Italian often drops the subject pronoun because the verb ending tells you the person. <em>"Mangio"</em> = "I eat" &mdash; no <em>"io"</em> needed.</div>
+        </div>
+      </div>
+
+      <!-- ══ ARTICLES ══ -->
+      <div class="panel" id="panel-articles">
+        <div class="panel-header">
+          <button class="back" onclick="showPanel('home')">&larr;</button>
+          <h2>Articoli</h2>
+        </div>
+        <div class="card">
+          <h3>Definite Articles (the)</h3>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Gender</th><th>Before...</th><th>Sing.</th><th>Plur.</th><th>Example</th></tr></thead>
+              <tbody>
+                <tr><td>Masc.</td><td>most consonants</td><td>il</td><td>i</td><td>il gatto &rarr; i gatti</td></tr>
+                <tr><td>Masc.</td><td>s+cons, z, gn, pn, ps, x</td><td>lo</td><td>gli</td><td>lo studente &rarr; gli studenti</td></tr>
+                <tr><td>Masc.</td><td>vowel</td><td>l'</td><td>gli</td><td>l'amico &rarr; gli amici</td></tr>
+                <tr><td>Fem.</td><td>consonant</td><td>la</td><td>le</td><td>la gatta &rarr; le gatte</td></tr>
+                <tr><td>Fem.</td><td>vowel</td><td>l'</td><td>le</td><td>l'amica &rarr; le amiche</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Indefinite Articles (a/an)</h3>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Gender</th><th>Before...</th><th>Article</th><th>Example</th></tr></thead>
+              <tbody>
+                <tr><td>Masc.</td><td>most consonants / vowels</td><td>un</td><td>un libro, un amico</td></tr>
+                <tr><td>Masc.</td><td>s+cons, z, gn, pn, ps, x</td><td>uno</td><td>uno psicologo</td></tr>
+                <tr><td>Fem.</td><td>consonant</td><td>una</td><td>una gatta</td></tr>
+                <tr><td>Fem.</td><td>vowel</td><td>un'</td><td>un'amica</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Quick Rule: il vs lo</h3>
+          <div class="article-rule"><code>il / un</code> <span class="arrow">&rarr;</span> before most consonants: <em>il drago, il treno, il libro</em></div>
+          <div class="article-rule"><code>lo / uno</code> <span class="arrow">&rarr;</span> before <strong>s+cons, z, gn, pn, ps, x</strong>: <em>lo psicologo, lo studente, lo zaino</em></div>
+          <div class="article-rule"><code>l'</code> <span class="arrow">&rarr;</span> before vowels: <em>l'amico, l'uomo</em></div>
+        </div>
+        <div class="card">
+          <h3>Gatto / Gatta</h3>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Nome</th><th>Art. det. sing.</th><th>Art. indet. sing.</th><th>Art. det. plur.</th></tr></thead>
+              <tbody>
+                <tr><td>gatto</td><td>il gatto</td><td>un gatto</td><td>i gatti</td></tr>
+                <tr><td>gatta</td><td>la gatta</td><td>una gatta</td><td>le gatte</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ COLORS ══ -->
+      <div class="panel" id="panel-colors">
+        <div class="panel-header">
+          <button class="back" onclick="showPanel('home')">&larr;</button>
+          <h2>I Colori</h2>
+        </div>
+        <div class="card">
+          <div class="colors-grid">
+            <div class="color-card"><div class="color-swatch" style="background:#1a1a1a"></div><div class="color-label"><span class="it">nero</span><span class="en">black</span></div></div>
+            <div class="color-card"><div class="color-swatch" style="background:#c0392b"></div><div class="color-label"><span class="it">rosso</span><span class="en">red</span></div></div>
+            <div class="color-card"><div class="color-swatch" style="background:#f1c40f"></div><div class="color-label"><span class="it">giallo</span><span class="en">yellow</span></div></div>
+            <div class="color-card"><div class="color-swatch" style="background:#e8e8e0"></div><div class="color-label"><span class="it">bianco</span><span class="en">white</span></div></div>
+            <div class="color-card"><div class="color-swatch" style="background:#5dade2"></div><div class="color-label"><span class="it">azzurro</span><span class="en">sky blue</span></div></div>
+            <div class="color-card"><div class="color-swatch" style="background:#7f8c8d"></div><div class="color-label"><span class="it">grigio</span><span class="en">grey</span></div></div>
+            <div class="color-card"><div class="color-swatch" style="background:#6d4c41"></div><div class="color-label"><span class="it">marrone</span><span class="en">brown</span></div></div>
+            <div class="color-card"><div class="color-swatch" style="background:#e67e22"></div><div class="color-label"><span class="it">arancione</span><span class="en">orange</span></div></div>
+            <div class="color-card"><div class="color-swatch" style="background:#27ae60"></div><div class="color-label"><span class="it">verde</span><span class="en">green</span></div></div>
+            <div class="color-card"><div class="color-swatch" style="background:#1a3c7a"></div><div class="color-label"><span class="it">blu</span><span class="en">blue</span></div></div>
+            <div class="color-card"><div class="color-swatch" style="background:#e88da8"></div><div class="color-label"><span class="it">rosa</span><span class="en">pink</span></div></div>
+            <div class="color-card"><div class="color-swatch" style="background:#8e44ad"></div><div class="color-label"><span class="it">viola</span><span class="en">purple</span></div></div>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Declension</h3>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Colore</th><th>M. sing.</th><th>F. sing.</th><th>M. plur.</th><th>F. plur.</th></tr></thead>
+              <tbody>
+                <tr><td>nero</td><td>nero</td><td>nera</td><td>neri</td><td>nere</td></tr>
+                <tr><td>rosso</td><td>rosso</td><td>rossa</td><td>rossi</td><td>rosse</td></tr>
+                <tr><td>giallo</td><td>giallo</td><td>gialla</td><td>gialli</td><td>gialle</td></tr>
+                <tr><td>bianco</td><td>bianco</td><td>bianca</td><td>bianchi</td><td>bianche</td></tr>
+                <tr><td>azzurro</td><td>azzurro</td><td>azzurra</td><td>azzurri</td><td>azzurre</td></tr>
+                <tr><td>grigio</td><td>grigio</td><td>grigia</td><td>grigi</td><td>grigie</td></tr>
+                <tr><td>verde</td><td>verde</td><td>verde</td><td>verdi</td><td>verdi</td></tr>
+                <tr><td style="color:var(--text-dim)">blu</td><td colspan="4" style="text-align:center;color:var(--text-dim);font-style:italic">invariable</td></tr>
+                <tr><td style="color:var(--text-dim)">rosa</td><td colspan="4" style="text-align:center;color:var(--text-dim);font-style:italic">invariable</td></tr>
+                <tr><td style="color:var(--text-dim)">viola</td><td colspan="4" style="text-align:center;color:var(--text-dim);font-style:italic">invariable</td></tr>
+                <tr><td style="color:var(--text-dim)">marrone</td><td colspan="4" style="text-align:center;color:var(--text-dim);font-style:italic">usually invariable</td></tr>
+                <tr><td style="color:var(--text-dim)">arancione</td><td colspan="4" style="text-align:center;color:var(--text-dim);font-style:italic">usually invariable</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ NUMBERS ══ -->
+      <div class="panel" id="panel-numbers">
+        <div class="panel-header">
+          <button class="back" onclick="showPanel('home')">&larr;</button>
+          <h2>I Numeri</h2>
+        </div>
+        <div class="card">
+          <h3>0 &mdash; 29</h3>
+          <div class="numbers-grid">
+            <div class="num-item"><span class="n">0</span><span class="w">zero</span></div><div class="num-item"><span class="n">1</span><span class="w">uno</span></div><div class="num-item"><span class="n">2</span><span class="w">due</span></div><div class="num-item"><span class="n">3</span><span class="w">tre</span></div><div class="num-item"><span class="n">4</span><span class="w">quattro</span></div><div class="num-item"><span class="n">5</span><span class="w">cinque</span></div><div class="num-item"><span class="n">6</span><span class="w">sei</span></div><div class="num-item"><span class="n">7</span><span class="w">sette</span></div><div class="num-item"><span class="n">8</span><span class="w">otto</span></div><div class="num-item"><span class="n">9</span><span class="w">nove</span></div><div class="num-item"><span class="n">10</span><span class="w">dieci</span></div><div class="num-item"><span class="n">11</span><span class="w">undici</span></div><div class="num-item"><span class="n">12</span><span class="w">dodici</span></div><div class="num-item"><span class="n">13</span><span class="w">tredici</span></div><div class="num-item"><span class="n">14</span><span class="w">quattordici</span></div><div class="num-item"><span class="n">15</span><span class="w">quindici</span></div><div class="num-item"><span class="n">16</span><span class="w">sedici</span></div><div class="num-item"><span class="n">17</span><span class="w">diciassette</span></div><div class="num-item"><span class="n">18</span><span class="w">diciotto</span></div><div class="num-item"><span class="n">19</span><span class="w">diciannove</span></div><div class="num-item"><span class="n">20</span><span class="w">venti</span></div><div class="num-item"><span class="n">21</span><span class="w">ventuno</span></div><div class="num-item"><span class="n">22</span><span class="w">ventidue</span></div><div class="num-item"><span class="n">23</span><span class="w">ventitr&eacute;</span></div><div class="num-item"><span class="n">24</span><span class="w">ventiquattro</span></div><div class="num-item"><span class="n">25</span><span class="w">venticinque</span></div><div class="num-item"><span class="n">26</span><span class="w">ventisei</span></div><div class="num-item"><span class="n">27</span><span class="w">ventisette</span></div><div class="num-item"><span class="n">28</span><span class="w">ventotto</span></div><div class="num-item"><span class="n">29</span><span class="w">ventinove</span></div>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Tens, Hundreds &amp; Beyond</h3>
+          <div class="numbers-grid">
+            <div class="num-item"><span class="n">30</span><span class="w">trenta</span></div><div class="num-item"><span class="n">40</span><span class="w">quaranta</span></div><div class="num-item"><span class="n">50</span><span class="w">cinquanta</span></div><div class="num-item"><span class="n">60</span><span class="w">sessanta</span></div><div class="num-item"><span class="n">70</span><span class="w">settanta</span></div><div class="num-item"><span class="n">80</span><span class="w">ottanta</span></div><div class="num-item"><span class="n">90</span><span class="w">novanta</span></div><div class="num-item"><span class="n">100</span><span class="w">cento</span></div><div class="num-item"><span class="n">200</span><span class="w">duecento</span></div><div class="num-item"><span class="n">500</span><span class="w">cinquecento</span></div><div class="num-item"><span class="n">1.000</span><span class="w">mille</span></div><div class="num-item"><span class="n">2.000</span><span class="w">duemila</span></div><div class="num-item"><span class="n">10.000</span><span class="w">diecimila</span></div><div class="num-item"><span class="n">100.000</span><span class="w">centomila</span></div><div class="num-item"><span class="n">1.000.000</span><span class="w">un milione</span></div>
+          </div>
+          <div class="tip" style="margin-top:12px"><strong>Pattern:</strong> Drop the last vowel before <em>uno/otto</em>: vent<strong>uno</strong>, vent<strong>otto</strong>, trent<strong>uno</strong>.</div>
+        </div>
+      </div>
+
+      <!-- ══ PHRASES ══ -->
+      <div class="panel" id="panel-phrases">
+        <div class="panel-header">
+          <button class="back" onclick="showPanel('home')">&larr;</button>
+          <h2>Frasi Utili</h2>
+        </div>
+        <div class="card">
+          <h3>Conversazione</h3>
+          <div class="example"><span class="label">IT</span><span class="it-text">Da dove vieni?</span><span class="label">EN</span><span class="en-text">Where are you from?</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Io vengo dal Brasile.</span><span class="label">EN</span><span class="en-text">I come from Brazil.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Da dove viene tua moglie?</span><span class="label">EN</span><span class="en-text">Where is your wife from?</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Lei viene dalla Germania.</span><span class="label">EN</span><span class="en-text">She comes from Germany.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Quanti anni hai?</span><span class="label">EN</span><span class="en-text">How old are you?</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Io ho trentotto anni.</span><span class="label">EN</span><span class="en-text">I am 38 years old.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Dove vivi?</span><span class="label">EN</span><span class="en-text">Where do you live?</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Io vivo in Germania.</span><span class="label">EN</span><span class="en-text">I live in Germany.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Che cosa stai mangiando?</span><span class="label">EN</span><span class="en-text">What are you eating?</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Ieri al bar stavo bevendo un caff&egrave;.</span><span class="label">EN</span><span class="en-text">Yesterday at the bar I was drinking a coffee.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Ci vediamo!</span><span class="label">EN</span><span class="en-text">See you!</span></div>
+        </div>
+        <div class="card">
+          <h3>Vocabulary</h3>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Italiano</th><th>English</th></tr></thead>
+              <tbody>
+                <tr><td>lavorare</td><td>to work</td></tr><tr><td>mangiare</td><td>to eat</td></tr><tr><td>bere</td><td>to drink</td></tr><tr><td>venire</td><td>to come</td></tr><tr><td>stare</td><td>to stay / to be (state)</td></tr><tr><td>bene</td><td>well (adverb &mdash; invariable)</td></tr><tr><td>ieri</td><td>yesterday</td></tr><tr><td>un libro</td><td>a book</td></tr><tr><td>stella alpina</td><td>edelweiss</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ PRESENTE PROGRESSIVO ══ -->
+      <div class="panel" id="panel-present-prog">
+        <div class="panel-header">
+          <button class="back" onclick="showPanel('home')">&larr;</button>
+          <h2>Presente Progressivo</h2>
+        </div>
+        <div class="card">
+          <h3>stare + gerundio</h3>
+          <p>Like English "I <strong>am doing</strong>".</p>
+          <div class="table-wrap" style="margin-top:10px">
+            <table>
+              <thead><tr><th>Ending</th><th>Gerund</th><th>Example</th></tr></thead>
+              <tbody>
+                <tr><td>-are</td><td>-ando</td><td>mangiare &rarr; mangi<strong>ando</strong></td></tr>
+                <tr><td>-ere</td><td>-endo</td><td>temere &rarr; tem<strong>endo</strong></td></tr>
+                <tr><td>-ire</td><td>-endo</td><td>sentire &rarr; sent<strong>endo</strong></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="example" style="margin-top:14px"><span class="label">IT</span><span class="it-text">Io sto studiando italiano.</span><span class="label">EN</span><span class="en-text">I am studying Italian.</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Che cosa stai mangiando?</span><span class="label">EN</span><span class="en-text">What are you eating?</span></div>
+          <div class="example"><span class="label">IT</span><span class="it-text">Ieri stavo bevendo un caff&egrave;.</span><span class="label">EN</span><span class="en-text">Yesterday I was drinking a coffee.</span></div>
+          <div class="tip"><strong>In real speech:</strong> Italians often use the simple present. <em>"Lui viene qui"</em> is more natural than <em>"lui sta venendo qui"</em>.</div>
+        </div>
+      </div>
+
+      <!-- ══ ESSERE ══ -->
+      <div class="panel" id="panel-essere">
+        <div class="panel-header">
+          <button class="back" onclick="showPanel('home')">&larr;</button>
+          <h2>Essere &mdash; To Be</h2>
+        </div>
+        <div class="card">
+          <h3>Indicativo</h3>
+          <div class="table-wrap"><table><thead><tr><th>Tempo</th><th>io</th><th>tu</th><th>lui/lei</th><th>noi</th><th>voi</th><th>loro</th></tr></thead><tbody>
+            <tr><td>Presente</td><td>sono</td><td>sei</td><td>&egrave;</td><td>siamo</td><td>siete</td><td>sono</td></tr>
+            <tr><td>Pass. prossimo</td><td>sono stato</td><td>sei stato</td><td>&egrave; stato</td><td>siamo stati</td><td>siete stati</td><td>sono stati</td></tr>
+            <tr><td>Imperfetto</td><td>ero</td><td>eri</td><td>era</td><td>eravamo</td><td>eravate</td><td>erano</td></tr>
+            <tr><td>Pass. remoto</td><td>fui</td><td>fosti</td><td>fu</td><td>fummo</td><td>foste</td><td>furono</td></tr>
+            <tr><td>Futuro</td><td>sar&ograve;</td><td>sarai</td><td>sar&agrave;</td><td>saremo</td><td>sarete</td><td>saranno</td></tr>
+          </tbody></table></div>
+        </div>
+        <div class="card">
+          <h3>Congiuntivo, Condizionale &amp; Imperativo</h3>
+          <div class="table-wrap"><table><thead><tr><th>Modo</th><th>io</th><th>tu</th><th>lui/lei</th><th>noi</th><th>voi</th><th>loro</th></tr></thead><tbody>
+            <tr><td>Cong. pres.</td><td>sia</td><td>sia</td><td>sia</td><td>siamo</td><td>siate</td><td>siano</td></tr>
+            <tr><td>Cong. imperf.</td><td>fossi</td><td>fossi</td><td>fosse</td><td>fossimo</td><td>foste</td><td>fossero</td></tr>
+            <tr><td>Condizionale</td><td>sarei</td><td>saresti</td><td>sarebbe</td><td>saremmo</td><td>sareste</td><td>sarebbero</td></tr>
+            <tr><td>Imperativo</td><td>&mdash;</td><td>sii!</td><td>sia!</td><td>siamo!</td><td>siate!</td><td>siano!</td></tr>
+          </tbody></table></div>
+        </div>
+      </div>
+
+      <!-- ══ AVERE ══ -->
+      <div class="panel" id="panel-avere">
+        <div class="panel-header">
+          <button class="back" onclick="showPanel('home')">&larr;</button>
+          <h2>Avere &mdash; To Have</h2>
+        </div>
+        <div class="card">
+          <h3>Indicativo</h3>
+          <div class="table-wrap"><table><thead><tr><th>Tempo</th><th>io</th><th>tu</th><th>lui/lei</th><th>noi</th><th>voi</th><th>loro</th></tr></thead><tbody>
+            <tr><td>Presente</td><td>ho</td><td>hai</td><td>ha</td><td>abbiamo</td><td>avete</td><td>hanno</td></tr>
+            <tr><td>Pass. prossimo</td><td>ho avuto</td><td>hai avuto</td><td>ha avuto</td><td>abbiamo avuto</td><td>avete avuto</td><td>hanno avuto</td></tr>
+            <tr><td>Imperfetto</td><td>avevo</td><td>avevi</td><td>aveva</td><td>avevamo</td><td>avevate</td><td>avevano</td></tr>
+            <tr><td>Pass. remoto</td><td>ebbi</td><td>avesti</td><td>ebbe</td><td>avemmo</td><td>aveste</td><td>ebbero</td></tr>
+            <tr><td>Futuro</td><td>avr&ograve;</td><td>avrai</td><td>avr&agrave;</td><td>avremo</td><td>avrete</td><td>avranno</td></tr>
+          </tbody></table></div>
+        </div>
+        <div class="card">
+          <h3>Congiuntivo, Condizionale &amp; Imperativo</h3>
+          <div class="table-wrap"><table><thead><tr><th>Modo</th><th>io</th><th>tu</th><th>lui/lei</th><th>noi</th><th>voi</th><th>loro</th></tr></thead><tbody>
+            <tr><td>Cong. pres.</td><td>abbia</td><td>abbia</td><td>abbia</td><td>abbiamo</td><td>abbiate</td><td>abbiano</td></tr>
+            <tr><td>Cong. imperf.</td><td>avessi</td><td>avessi</td><td>avesse</td><td>avessimo</td><td>aveste</td><td>avessero</td></tr>
+            <tr><td>Condizionale</td><td>avrei</td><td>avresti</td><td>avrebbe</td><td>avremmo</td><td>avreste</td><td>avrebbero</td></tr>
+            <tr><td>Imperativo</td><td>&mdash;</td><td>abbi!</td><td>abbia!</td><td>abbiamo!</td><td>abbiate!</td><td>abbiano!</td></tr>
+          </tbody></table></div>
+        </div>
+      </div>
+
+      <!-- ══ -ARE (AMARE) ══ -->
+      <div class="panel" id="panel-amare">
+        <div class="panel-header">
+          <button class="back" onclick="showPanel('home')">&larr;</button>
+          <h2>1&ordf; Coniugazione &mdash; ARE</h2>
+        </div>
+        <div class="card">
+          <h3>Amare = to love</h3>
+          <p style="color:var(--text-dim);font-size:0.88rem;margin-bottom:8px">Pattern for: lavorare, mangiare, parlare, studiare, and all regular -are verbs.</p>
+          <div class="table-wrap"><table><thead><tr><th>Tempo</th><th>io</th><th>tu</th><th>lui/lei</th><th>noi</th><th>voi</th><th>loro</th></tr></thead><tbody>
+            <tr><td>Presente</td><td>amo</td><td>ami</td><td>ama</td><td>amiamo</td><td>amate</td><td>amano</td></tr>
+            <tr><td>Pass. pross.</td><td>ho amato</td><td>hai amato</td><td>ha amato</td><td>abbiamo amato</td><td>avete amato</td><td>hanno amato</td></tr>
+            <tr><td>Imperfetto</td><td>amavo</td><td>amavi</td><td>amava</td><td>amavamo</td><td>amavate</td><td>amavano</td></tr>
+            <tr><td>Pass. remoto</td><td>amai</td><td>amasti</td><td>am&ograve;</td><td>amammo</td><td>amaste</td><td>amarono</td></tr>
+            <tr><td>Futuro</td><td>amer&ograve;</td><td>amerai</td><td>amer&agrave;</td><td>ameremo</td><td>amerete</td><td>ameranno</td></tr>
+            <tr><td>Cong. pres.</td><td>ami</td><td>ami</td><td>ami</td><td>amiamo</td><td>amiate</td><td>amino</td></tr>
+            <tr><td>Cong. imperf.</td><td>amassi</td><td>amassi</td><td>amasse</td><td>amassimo</td><td>amaste</td><td>amassero</td></tr>
+            <tr><td>Condizionale</td><td>amerei</td><td>ameresti</td><td>amerebbe</td><td>ameremmo</td><td>amereste</td><td>amerebbero</td></tr>
+            <tr><td>Imperativo</td><td>&mdash;</td><td>ama!</td><td>ami!</td><td>amiamo!</td><td>amate!</td><td>amino!</td></tr>
+          </tbody></table></div>
+        </div>
+        <div class="card">
+          <h3>Modi Indefiniti</h3>
+          <div class="table-wrap"><table><thead><tr><th></th><th>Infinito</th><th>Participio</th><th>Gerundio</th></tr></thead><tbody>
+            <tr><td>Presente</td><td>amare</td><td>amante</td><td>amando</td></tr>
+            <tr><td>Passato</td><td>avere amato</td><td>amato</td><td>avendo amato</td></tr>
+          </tbody></table></div>
+        </div>
+      </div>
+
+      <!-- ══ -ERE (TEMERE) ══ -->
+      <div class="panel" id="panel-temere">
+        <div class="panel-header">
+          <button class="back" onclick="showPanel('home')">&larr;</button>
+          <h2>2&ordf; Coniugazione &mdash; ERE</h2>
+        </div>
+        <div class="card">
+          <h3>Temere = to fear</h3>
+          <p style="color:var(--text-dim);font-size:0.88rem;margin-bottom:8px">Many common -ere verbs (bere, leggere, scrivere) are irregular.</p>
+          <div class="table-wrap"><table><thead><tr><th>Tempo</th><th>io</th><th>tu</th><th>lui/lei</th><th>noi</th><th>voi</th><th>loro</th></tr></thead><tbody>
+            <tr><td>Presente</td><td>temo</td><td>temi</td><td>teme</td><td>temiamo</td><td>temete</td><td>temono</td></tr>
+            <tr><td>Pass. pross.</td><td>ho temuto</td><td>hai temuto</td><td>ha temuto</td><td>abbiamo temuto</td><td>avete temuto</td><td>hanno temuto</td></tr>
+            <tr><td>Imperfetto</td><td>temevo</td><td>temevi</td><td>temeva</td><td>temevamo</td><td>temevate</td><td>temevano</td></tr>
+            <tr><td>Pass. remoto</td><td>temei</td><td>temesti</td><td>temette</td><td>tememmo</td><td>temeste</td><td>temettero</td></tr>
+            <tr><td>Futuro</td><td>temer&ograve;</td><td>temerai</td><td>temer&agrave;</td><td>temeremo</td><td>temerete</td><td>temeranno</td></tr>
+            <tr><td>Cong. pres.</td><td>tema</td><td>tema</td><td>tema</td><td>temiamo</td><td>temiate</td><td>temano</td></tr>
+            <tr><td>Cong. imperf.</td><td>temessi</td><td>temessi</td><td>temesse</td><td>temessimo</td><td>temeste</td><td>temessero</td></tr>
+            <tr><td>Condizionale</td><td>temerei</td><td>temeresti</td><td>temerebbe</td><td>temeremmo</td><td>temereste</td><td>temerebbero</td></tr>
+            <tr><td>Imperativo</td><td>&mdash;</td><td>temi!</td><td>tema!</td><td>temiamo!</td><td>temete!</td><td>temano!</td></tr>
+          </tbody></table></div>
+        </div>
+      </div>
+
+      <!-- ══ -IRE (SENTIRE) ══ -->
+      <div class="panel" id="panel-sentire">
+        <div class="panel-header">
+          <button class="back" onclick="showPanel('home')">&larr;</button>
+          <h2>3&ordf; Coniugazione &mdash; IRE</h2>
+        </div>
+        <div class="card">
+          <h3>Sentire = to hear / to feel</h3>
+          <div class="table-wrap"><table><thead><tr><th>Tempo</th><th>io</th><th>tu</th><th>lui/lei</th><th>noi</th><th>voi</th><th>loro</th></tr></thead><tbody>
+            <tr><td>Presente</td><td>sento</td><td>senti</td><td>sente</td><td>sentiamo</td><td>sentite</td><td>sentono</td></tr>
+            <tr><td>Pass. pross.</td><td>ho sentito</td><td>hai sentito</td><td>ha sentito</td><td>abbiamo sentito</td><td>avete sentito</td><td>hanno sentito</td></tr>
+            <tr><td>Imperfetto</td><td>sentivo</td><td>sentivi</td><td>sentiva</td><td>sentivamo</td><td>sentivate</td><td>sentivano</td></tr>
+            <tr><td>Pass. remoto</td><td>sentii</td><td>sentisti</td><td>sent&igrave;</td><td>sentimmo</td><td>sentiste</td><td>sentirono</td></tr>
+            <tr><td>Futuro</td><td>sentir&ograve;</td><td>sentirai</td><td>sentir&agrave;</td><td>sentiremo</td><td>sentirete</td><td>sentiranno</td></tr>
+            <tr><td>Cong. pres.</td><td>senta</td><td>senta</td><td>senta</td><td>sentiamo</td><td>sentiate</td><td>sentano</td></tr>
+            <tr><td>Cong. imperf.</td><td>sentissi</td><td>sentissi</td><td>sentisse</td><td>sentissimo</td><td>sentiste</td><td>sentissero</td></tr>
+            <tr><td>Condizionale</td><td>sentirei</td><td>sentiresti</td><td>sentirebbe</td><td>sentiremmo</td><td>sentireste</td><td>sentirebbero</td></tr>
+            <tr><td>Imperativo</td><td>&mdash;</td><td>senti!</td><td>senta!</td><td>sentiamo!</td><td>sentite!</td><td>sentano!</td></tr>
+          </tbody></table></div>
+        </div>
+      </div>
+
+      <!-- ══ IRREGULAR ══ -->
+      <div class="panel" id="panel-irregular">
+        <div class="panel-header">
+          <button class="back" onclick="showPanel('home')">&larr;</button>
+          <h2>Verbi Irregolari</h2>
+        </div>
+        <div class="card">
+          <h3>Stare &mdash; to stay / to be</h3>
+          <div class="table-wrap"><table><thead><tr><th>Tempo</th><th>io</th><th>tu</th><th>lui/lei</th><th>noi</th><th>voi</th><th>loro</th></tr></thead><tbody>
+            <tr><td>Presente</td><td>sto</td><td>stai</td><td>sta</td><td>stiamo</td><td>state</td><td>stanno</td></tr>
+            <tr><td>Imperfetto</td><td>stavo</td><td>stavi</td><td>stava</td><td>stavamo</td><td>stavate</td><td>stavano</td></tr>
+          </tbody></table></div>
+          <div class="tip"><strong>Stare</strong> is for: health (<em>sto bene</em>), progressive (<em>sto mangiando</em>), location (<em>sto a casa</em>).</div>
+        </div>
+        <div class="card">
+          <h3>Venire &mdash; to come</h3>
+          <div class="table-wrap"><table><thead><tr><th>io</th><th>tu</th><th>lui/lei</th><th>noi</th><th>voi</th><th>loro</th></tr></thead><tbody>
+            <tr><td>vengo</td><td>vieni</td><td>viene</td><td>veniamo</td><td>venite</td><td>vengono</td></tr>
+          </tbody></table></div>
+        </div>
+        <div class="card">
+          <h3>Bere &mdash; to drink</h3>
+          <div class="table-wrap"><table><thead><tr><th>io</th><th>tu</th><th>lui/lei</th><th>noi</th><th>voi</th><th>loro</th></tr></thead><tbody>
+            <tr><td>bevo</td><td>bevi</td><td>beve</td><td>beviamo</td><td>bevete</td><td>bevono</td></tr>
+          </tbody></table></div>
+        </div>
+      </div>
+
+      <!-- ══ REFLEXIVE ══ -->
+      <div class="panel" id="panel-reflexive">
+        <div class="panel-header">
+          <button class="back" onclick="showPanel('home')">&larr;</button>
+          <h2>Verbi Riflessivi</h2>
+        </div>
+        <div class="card">
+          <h3>Lavarsi &mdash; to wash oneself</h3>
+          <p style="color:var(--text-dim);font-size:0.88rem;margin-bottom:8px">Reflexive verbs use <em>essere</em> in compound tenses + reflexive pronoun (mi, ti, si, ci, vi, si).</p>
+          <div class="table-wrap"><table><thead><tr><th>Tempo</th><th>io</th><th>tu</th><th>lui/lei</th><th>noi</th><th>voi</th><th>loro</th></tr></thead><tbody>
+            <tr><td>Presente</td><td>mi lavo</td><td>ti lavi</td><td>si lava</td><td>ci laviamo</td><td>vi lavate</td><td>si lavano</td></tr>
+            <tr><td>Pass. pross.</td><td>mi sono lavato</td><td>ti sei lavato</td><td>si &egrave; lavato</td><td>ci siamo lavati</td><td>vi siete lavati</td><td>si sono lavati</td></tr>
+            <tr><td>Imperfetto</td><td>mi lavavo</td><td>ti lavavi</td><td>si lavava</td><td>ci lavavamo</td><td>vi lavavate</td><td>si lavavano</td></tr>
+            <tr><td>Futuro</td><td>mi laver&ograve;</td><td>ti laverai</td><td>si laver&agrave;</td><td>ci laveremo</td><td>vi laverete</td><td>si laveranno</td></tr>
+            <tr><td>Imperativo</td><td>&mdash;</td><td>lavati!</td><td>si lavi!</td><td>laviamoci!</td><td>lavatevi!</td><td>si lavino!</td></tr>
+          </tbody></table></div>
+          <div class="tip"><strong>Common reflexives:</strong> svegliarsi (wake up), alzarsi (get up), vestirsi (get dressed), sedersi (sit down), chiamarsi (to be called).</div>
+        </div>
+      </div>
+
+      <!-- ══ GAME ══ -->
+      <div class="panel" id="panel-game">
+        <div class="panel-header">
+          <button class="back" onclick="showPanel('home')">&larr;</button>
+          <h2>Quiz</h2>
+        </div>
+
+        <div class="game-hero">
+          <div class="streak">Streak: <b id="g-streak">0</b></div>
+          <div class="game-score">
+            <div class="stat"><div class="stat-val" id="g-correct">0</div><div class="stat-label">Correct</div></div>
+            <div class="stat"><div class="stat-val" id="g-total">0</div><div class="stat-label">Total</div></div>
+            <div class="stat"><div class="stat-val" id="g-pct">0%</div><div class="stat-label">Accuracy</div></div>
+          </div>
+        </div>
+
+        <div class="game-modes">
+          <button class="game-mode-btn active" data-mode="vocab" onclick="setMode('vocab')">
+            <span class="mode-name">Vocabolario</span>
+            <span class="mode-desc">Images &harr; Italian</span>
+          </button>
+          <button class="game-mode-btn" data-mode="conjugation" onclick="setMode('conjugation')">
+            <span class="mode-name">Coniugazioni</span>
+            <span class="mode-desc">Fill in the verb form</span>
+          </button>
+          <button class="game-mode-btn" data-mode="articles" onclick="setMode('articles')">
+            <span class="mode-name">Articoli</span>
+            <span class="mode-desc">Pick the correct article</span>
+          </button>
+          <button class="game-mode-btn" data-mode="numbers" onclick="setMode('numbers')">
+            <span class="mode-name">Numeri</span>
+            <span class="mode-desc">Number &rarr; Italian</span>
+          </button>
+          <button class="game-mode-btn" data-mode="colors" onclick="setMode('colors')">
+            <span class="mode-name">Colori</span>
+            <span class="mode-desc">Color name quiz</span>
+          </button>
+        </div>
+
+        <div class="quiz-area" id="quiz-area"></div>
+      </div>
+
+    </div><!-- /content -->
+  </div>
+</div><!-- /shell -->
+
+<script>
+function showPanel(id) {
+  // Hide all panels
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  // Show target
+  const target = document.getElementById('panel-' + id);
+  if (target) {
+    target.classList.add('active');
+    // Re-trigger animation
+    target.style.animation = 'none';
+    target.offsetHeight;
+    target.style.animation = '';
+  }
+  // Update sidebar active state
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  const navItem = document.querySelector(`.nav-item[data-panel="${id}"]`);
+  if (navItem) navItem.classList.add('active');
+  // Scroll content to top
+  document.getElementById('content').scrollTop = 0;
+  // Close mobile sidebar
+  closeSidebar();
+}
+
+// Sidebar nav clicks
+document.querySelectorAll('[data-panel]').forEach(el => {
+  el.addEventListener('click', (e) => {
+    e.preventDefault();
+    showPanel(el.dataset.panel);
+  });
+});
+
+// Mobile sidebar
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('open');
+}
+function closeSidebar() {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('overlay').classList.remove('open');
+}
+
+// Keyboard navigation
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') showPanel('home');
+});
+
+// ═══════════════════════════════════════
+// QUIZ ENGINE
+// ═══════════════════════════════════════
+const QUIZ = {
+  mode: 'vocab',
+  correct: 0,
+  total: 0,
+  streak: 0,
+  bestStreak: 0,
+  answered: false,
+
+  data: {
+    vocab: [
+      ['lavorare','\ud83d\udcbc','to work'],['mangiare','\ud83c\udf7d\ufe0f','to eat'],['bere','\ud83e\udd64','to drink'],
+      ['venire','\ud83d\udeb6','to come'],['stare','\ud83c\udfe0','to stay'],['amare','\u2764\ufe0f','to love'],
+      ['temere','\ud83d\ude28','to fear'],['sentire','\ud83d\udc42','to hear'],
+      ['gatto','\ud83d\udc31','cat'],['libro','\ud83d\udcd6','book'],['casa','\ud83c\udfe1','house'],
+      ['cena','\ud83c\udf5d','dinner'],['scuola','\ud83c\udfeb','school'],['acqua','\ud83d\udca7','water'],
+      ['caff\u00e8','\u2615','coffee'],['donna','\ud83d\udc69','woman'],['uomo','\ud83d\udc68','man'],
+      ['stella','\u2b50','star'],['amico','\ud83e\udd1d','friend'],['ragazzo','\ud83d\udc66','boy'],
+      ['ragazza','\ud83d\udc67','girl'],['notte','\ud83c\udf19','night'],['sole','\u2600\ufe0f','sun'],
+      ['pane','\ud83c\udf5e','bread'],['vino','\ud83c\udf77','wine'],['pesce','\ud83d\udc1f','fish'],
+      ['fiore','\ud83c\udf3a','flower'],['albero','\ud83c\udf33','tree'],['cane','\ud83d\udc36','dog'],
+      ['uccello','\ud83d\udc26','bird'],['mela','\ud83c\udf4e','apple'],['macchina','\ud83d\ude97','car'],
+      ['treno','\ud83d\ude86','train'],['pioggia','\ud83c\udf27\ufe0f','rain'],['neve','\u2744\ufe0f','snow'],
+      ['montagna','\u26f0\ufe0f','mountain'],['mare','\ud83c\udf0a','sea'],['fuoco','\ud83d\udd25','fire'],
+      ['musica','\ud83c\udfb5','music'],['cuore','\ud83d\udc96','heart'],['chiave','\ud83d\udd11','key'],
+      ['occhio','\ud83d\udc41\ufe0f','eye'],['mano','\u270b','hand'],['pizza','\ud83c\udf55','pizza'],
+      ['gelato','\ud83c\udf66','ice cream'],['formaggio','\ud83e\uddc0','cheese'],['bambino','\ud83d\udc76','baby'],
+      ['re','\ud83d\udc51','king'],['luna','\ud83c\udf15','moon'],['tempo','\u23f0','time'],
+      ['porta','\ud83d\udeaa','door'],['finestra','\ud83e\ude9f','window'],
+    ],
+    conjugation: [
+      {verb:'essere',tense:'Presente',forms:{io:'sono',tu:'sei','lui/lei':'\u00e8',noi:'siamo',voi:'siete',loro:'sono'}},
+      {verb:'avere',tense:'Presente',forms:{io:'ho',tu:'hai','lui/lei':'ha',noi:'abbiamo',voi:'avete',loro:'hanno'}},
+      {verb:'amare',tense:'Presente',forms:{io:'amo',tu:'ami','lui/lei':'ama',noi:'amiamo',voi:'amate',loro:'amano'}},
+      {verb:'amare',tense:'Imperfetto',forms:{io:'amavo',tu:'amavi','lui/lei':'amava',noi:'amavamo',voi:'amavate',loro:'amavano'}},
+      {verb:'amare',tense:'Futuro',forms:{io:'amer\u00f2',tu:'amerai','lui/lei':'amer\u00e0',noi:'ameremo',voi:'amerete',loro:'ameranno'}},
+      {verb:'temere',tense:'Presente',forms:{io:'temo',tu:'temi','lui/lei':'teme',noi:'temiamo',voi:'temete',loro:'temono'}},
+      {verb:'sentire',tense:'Presente',forms:{io:'sento',tu:'senti','lui/lei':'sente',noi:'sentiamo',voi:'sentite',loro:'sentono'}},
+      {verb:'stare',tense:'Presente',forms:{io:'sto',tu:'stai','lui/lei':'sta',noi:'stiamo',voi:'state',loro:'stanno'}},
+      {verb:'stare',tense:'Imperfetto',forms:{io:'stavo',tu:'stavi','lui/lei':'stava',noi:'stavamo',voi:'stavate',loro:'stavano'}},
+      {verb:'venire',tense:'Presente',forms:{io:'vengo',tu:'vieni','lui/lei':'viene',noi:'veniamo',voi:'venite',loro:'vengono'}},
+      {verb:'bere',tense:'Presente',forms:{io:'bevo',tu:'bevi','lui/lei':'beve',noi:'beviamo',voi:'bevete',loro:'bevono'}},
+      {verb:'essere',tense:'Imperfetto',forms:{io:'ero',tu:'eri','lui/lei':'era',noi:'eravamo',voi:'eravate',loro:'erano'}},
+      {verb:'avere',tense:'Imperfetto',forms:{io:'avevo',tu:'avevi','lui/lei':'aveva',noi:'avevamo',voi:'avevate',loro:'avevano'}},
+      {verb:'essere',tense:'Futuro',forms:{io:'sar\u00f2',tu:'sarai','lui/lei':'sar\u00e0',noi:'saremo',voi:'sarete',loro:'saranno'}},
+      {verb:'avere',tense:'Futuro',forms:{io:'avr\u00f2',tu:'avrai','lui/lei':'avr\u00e0',noi:'avremo',voi:'avrete',loro:'avranno'}},
+    ],
+    articles: [
+      ['gatto','il'],['gatta','la'],['studente','lo'],['amica','l\''],['amico','l\''],
+      ['zaino','lo'],['psicologo','lo'],['libro','il'],['donna','la'],['uomo','l\''],
+      ['scuola','la'],['gnomo','lo'],['casa','la'],['treno','il'],['drago','il'],
+      ['ragazzo','il'],['ragazza','la'],['acqua','l\''],['stella','la'],['notte','la'],
+    ],
+    numbers: [
+      [0,'zero'],[1,'uno'],[2,'due'],[3,'tre'],[4,'quattro'],[5,'cinque'],
+      [6,'sei'],[7,'sette'],[8,'otto'],[9,'nove'],[10,'dieci'],
+      [11,'undici'],[12,'dodici'],[13,'tredici'],[14,'quattordici'],[15,'quindici'],
+      [16,'sedici'],[17,'diciassette'],[18,'diciotto'],[19,'diciannove'],[20,'venti'],
+      [21,'ventuno'],[22,'ventidue'],[23,'ventitr\u00e9'],[28,'ventotto'],
+      [30,'trenta'],[40,'quaranta'],[50,'cinquanta'],[60,'sessanta'],
+      [70,'settanta'],[80,'ottanta'],[90,'novanta'],[100,'cento'],[1000,'mille'],
+    ],
+    colors: [
+      ['#1a1a1a','nero'],['#c0392b','rosso'],['#f1c40f','giallo'],['#e8e8e0','bianco'],
+      ['#5dade2','azzurro'],['#7f8c8d','grigio'],['#6d4c41','marrone'],['#e67e22','arancione'],
+      ['#27ae60','verde'],['#1a3c7a','blu'],['#e88da8','rosa'],['#8e44ad','viola'],
+    ],
+  },
+
+  pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; },
+  shuffle(arr) { const a = [...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; },
+
+  updateStats() {
+    document.getElementById('g-correct').textContent = this.correct;
+    document.getElementById('g-total').textContent = this.total;
+    document.getElementById('g-streak').textContent = this.streak;
+    document.getElementById('g-pct').textContent = this.total ? Math.round(this.correct/this.total*100)+'%' : '0%';
+  },
+
+  generate() {
+    this.answered = false;
+    const area = document.getElementById('quiz-area');
+    const gen = this['gen_'+this.mode];
+    if (gen) gen.call(this, area);
+  },
+
+  answer(isCorrect, correctAnswer) {
+    if (this.answered) return;
+    this.answered = true;
+    this.total++;
+    if (isCorrect) {
+      this.correct++;
+      this.streak++;
+    } else {
+      this.streak = 0;
+    }
+    this.updateStats();
+  },
+
+  // ── VOCAB ──
+  gen_vocab(area) {
+    // [italian, emoji, english]
+    const entry = this.pick(this.data.vocab);
+    const italian = entry[0];
+    const emoji = entry[1];
+    const english = entry[2];
+
+    // Two modes: emoji→italian (visual) or italian→emoji (reverse)
+    const mode = Math.random();
+
+    if (mode < 0.6) {
+      // Show emoji, pick italian word
+      let wrongs = this.data.vocab.filter(e => e !== entry).map(e => e[0]);
+      wrongs = this.shuffle(wrongs).slice(0, 3);
+      const options = this.shuffle([italian, ...wrongs]);
+
+      area.innerHTML = `
+        <div class="quiz-prompt">
+          <div class="q-label">Come si dice in italiano?</div>
+          <div style="font-size:4.5rem;line-height:1;margin:12px 0;">${emoji}</div>
+        </div>
+        <div class="quiz-options">${options.map(o =>
+          `<button class="quiz-opt" onclick="quizAnswer(this,'${o.replace(/'/g,"\\'")}','${italian.replace(/'/g,"\\'")}')">${o}</button>`
+        ).join('')}</div>
+        <div class="quiz-feedback" id="quiz-fb"></div>
+      `;
+    } else if (mode < 0.85) {
+      // Show italian word, pick correct emoji
+      let wrongs = this.data.vocab.filter(e => e !== entry).map(e => e[1]);
+      wrongs = this.shuffle(wrongs).slice(0, 3);
+      const options = this.shuffle([emoji, ...wrongs]);
+
+      area.innerHTML = `
+        <div class="quiz-prompt">
+          <div class="q-label">Quale immagine?</div>
+          <div class="q-word">${italian}</div>
+        </div>
+        <div class="quiz-options">${options.map(o =>
+          `<button class="quiz-opt" style="font-size:2.2rem;padding:18px;" onclick="quizAnswer(this,'${o}','${emoji}')">${o}</button>`
+        ).join('')}</div>
+        <div class="quiz-feedback" id="quiz-fb"></div>
+      `;
+    } else {
+      // Type the italian word from emoji prompt
+      area.innerHTML = `
+        <div class="quiz-prompt">
+          <div class="q-label">Scrivi in italiano</div>
+          <div style="font-size:4.5rem;line-height:1;margin:12px 0;">${emoji}</div>
+        </div>
+        <div class="quiz-input-wrap">
+          <input class="quiz-input" id="vocab-input" placeholder="type in Italian..." autocomplete="off" autocapitalize="off" spellcheck="false">
+        </div>
+        <div class="quiz-feedback" id="quiz-fb"></div>
+      `;
+      const input = document.getElementById('vocab-input');
+      input.focus();
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          const val = input.value.trim().toLowerCase();
+          const correct = val === italian.toLowerCase();
+          QUIZ.answer(correct, italian);
+          input.classList.add(correct ? 'correct' : 'wrong');
+          input.disabled = true;
+          const fb = document.getElementById('quiz-fb');
+          fb.innerHTML = correct
+            ? '<span class="correct-text">Corretto!</span>'
+            : `<span class="wrong-text">Sbagliato</span><div class="answer-reveal"><b>${italian}</b></div>`;
+          fb.innerHTML += `<br><button class="quiz-next" onclick="QUIZ.generate()">Prossimo \u2192</button>`;
+        }
+      });
+    }
+  },
+
+  // ── CONJUGATION ──
+  gen_conjugation(area) {
+    const entry = this.pick(this.data.conjugation);
+    const pronouns = Object.keys(entry.forms);
+    const pronoun = this.pick(pronouns);
+    const answer = entry.forms[pronoun];
+
+    area.innerHTML = `
+      <div class="quiz-prompt">
+        <div class="q-label">${entry.tense}</div>
+        <div class="q-word">${entry.verb}</div>
+        <div class="q-hint">${pronoun} ___</div>
+      </div>
+      <div class="quiz-input-wrap">
+        <input class="quiz-input" id="conj-input" placeholder="type the form..." autocomplete="off" autocapitalize="off" spellcheck="false">
+      </div>
+      <div class="quiz-feedback" id="quiz-fb"></div>
+    `;
+    const input = document.getElementById('conj-input');
+    input.focus();
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        const val = input.value.trim().toLowerCase();
+        const correct = val === answer.toLowerCase();
+        QUIZ.answer(correct, answer);
+        input.classList.add(correct ? 'correct' : 'wrong');
+        input.disabled = true;
+        const fb = document.getElementById('quiz-fb');
+        fb.innerHTML = correct
+          ? '<span class="correct-text">Corretto!</span>'
+          : `<span class="wrong-text">Sbagliato</span><div class="answer-reveal">${pronoun} <b>${answer}</b></div>`;
+        fb.innerHTML += `<br><button class="quiz-next" onclick="QUIZ.generate()">Prossimo \u2192</button>`;
+      }
+    });
+  },
+
+  // ── ARTICLES ──
+  gen_articles(area) {
+    const pair = this.pick(this.data.articles);
+    const noun = pair[0];
+    const answer = pair[1];
+    const allArticles = ['il','lo','la','l\'','un','uno','una','un\''];
+    let options = [answer];
+    while (options.length < 4) {
+      const r = this.pick(allArticles);
+      if (!options.includes(r)) options.push(r);
+    }
+    options = this.shuffle(options);
+
+    area.innerHTML = `
+      <div class="quiz-prompt">
+        <div class="q-label">Quale articolo?</div>
+        <div class="q-word">___ ${noun}</div>
+      </div>
+      <div class="quiz-options">${options.map(o =>
+        `<button class="quiz-opt" onclick="quizAnswer(this,'${o.replace(/'/g,"\\'")}','${answer.replace(/'/g,"\\'")}')">${o}</button>`
+      ).join('')}</div>
+      <div class="quiz-feedback" id="quiz-fb"></div>
+    `;
+  },
+
+  // ── NUMBERS ──
+  gen_numbers(area) {
+    const pair = this.pick(this.data.numbers);
+    const num = pair[0];
+    const answer = pair[1];
+
+    area.innerHTML = `
+      <div class="quiz-prompt">
+        <div class="q-label">Scrivi il numero in italiano</div>
+        <div class="q-word">${num.toLocaleString('it-IT')}</div>
+      </div>
+      <div class="quiz-input-wrap">
+        <input class="quiz-input" id="num-input" placeholder="type in Italian..." autocomplete="off" autocapitalize="off" spellcheck="false">
+      </div>
+      <div class="quiz-feedback" id="quiz-fb"></div>
+    `;
+    const input = document.getElementById('num-input');
+    input.focus();
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        const val = input.value.trim().toLowerCase();
+        const correct = val === answer.toLowerCase();
+        QUIZ.answer(correct, answer);
+        input.classList.add(correct ? 'correct' : 'wrong');
+        input.disabled = true;
+        const fb = document.getElementById('quiz-fb');
+        fb.innerHTML = correct
+          ? '<span class="correct-text">Corretto!</span>'
+          : `<span class="wrong-text">Sbagliato</span><div class="answer-reveal">${num} = <b>${answer}</b></div>`;
+        fb.innerHTML += `<br><button class="quiz-next" onclick="QUIZ.generate()">Prossimo \u2192</button>`;
+      }
+    });
+  },
+
+  // ── COLORS ──
+  gen_colors(area) {
+    const pair = this.pick(this.data.colors);
+    const hex = pair[0];
+    const answer = pair[1];
+    let wrongs = this.data.colors.filter(p => p !== pair).map(p => p[1]);
+    wrongs = this.shuffle(wrongs).slice(0, 3);
+    const options = this.shuffle([answer, ...wrongs]);
+
+    area.innerHTML = `
+      <div class="quiz-prompt">
+        <div class="q-label">Che colore \u00e8?</div>
+        <div style="width:80px;height:80px;border-radius:50%;background:${hex};margin:16px auto 0;border:2px solid var(--border-strong);box-shadow:0 0 24px ${hex}44;"></div>
+      </div>
+      <div class="quiz-options">${options.map(o =>
+        `<button class="quiz-opt" onclick="quizAnswer(this,'${o}','${answer}')">${o}</button>`
+      ).join('')}</div>
+      <div class="quiz-feedback" id="quiz-fb"></div>
+    `;
+  },
+};
+
+function quizAnswer(btn, chosen, answer) {
+  if (QUIZ.answered) return;
+  const correct = chosen === answer;
+  QUIZ.answer(correct, answer);
+
+  btn.classList.add(correct ? 'correct' : 'wrong');
+
+  // Highlight correct answer & disable all
+  btn.parentElement.querySelectorAll('.quiz-opt').forEach(b => {
+    b.classList.add('disabled');
+    if (b.textContent === answer || b.textContent.replace(/'/g,"'") === answer) b.classList.add('correct');
+  });
+
+  const fb = document.getElementById('quiz-fb');
+  fb.innerHTML = correct
+    ? '<span class="correct-text">Corretto!</span>'
+    : '<span class="wrong-text">Sbagliato</span>';
+  fb.innerHTML += `<br><button class="quiz-next" onclick="QUIZ.generate()">Prossimo \u2192</button>`;
+}
+
+function setMode(mode) {
+  QUIZ.mode = mode;
+  document.querySelectorAll('.game-mode-btn').forEach(b => b.classList.toggle('active', b.dataset.mode === mode));
+  QUIZ.generate();
+}
+
+// Auto-start quiz when panel opens
+const origShowPanel = showPanel;
+showPanel = function(id) {
+  origShowPanel(id);
+  if (id === 'game') QUIZ.generate();
+};
+</script>
+
+</body>
+</html>

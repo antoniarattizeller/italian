@@ -769,5 +769,13 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
+if ("serviceWorker" in navigator && location.protocol !== "file:") {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./sw.js").catch(() => {
+      // The app still works without offline caching.
+    });
+  });
+}
+
 renderWeekNav();
 render();

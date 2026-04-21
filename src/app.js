@@ -683,28 +683,6 @@ document.addEventListener("click", (event) => {
     route("quiz");
   }
 
-  if (target.dataset.filterWeek) {
-    if (target.checked) {
-      state.quiz.selectedWeekIds.add(target.dataset.filterWeek);
-    } else {
-      state.quiz.selectedWeekIds.delete(target.dataset.filterWeek);
-    }
-    state.quiz.current = null;
-    state.quiz.answered = false;
-    renderQuizBuilder();
-  }
-
-  if (target.dataset.filterTopic) {
-    if (target.checked) {
-      state.quiz.selectedTopicKeys.add(target.dataset.filterTopic);
-    } else {
-      state.quiz.selectedTopicKeys.delete(target.dataset.filterTopic);
-    }
-    state.quiz.current = null;
-    state.quiz.answered = false;
-    renderQuizBuilder();
-  }
-
   if (target.dataset.action === "select-all-quiz") {
     state.quiz.initialized = true;
     state.quiz.selectedWeekIds = new Set(course.weeks.map((week) => week.id));
@@ -741,6 +719,32 @@ document.addEventListener("click", (event) => {
 
   if (target.dataset.deleteNote) {
     deleteNote(target.dataset.deleteNote);
+  }
+});
+
+document.addEventListener("change", (event) => {
+  const target = event.target;
+
+  if (target.dataset.filterWeek) {
+    if (target.checked) {
+      state.quiz.selectedWeekIds.add(target.dataset.filterWeek);
+    } else {
+      state.quiz.selectedWeekIds.delete(target.dataset.filterWeek);
+    }
+    state.quiz.current = null;
+    state.quiz.answered = false;
+    renderQuizBuilder();
+  }
+
+  if (target.dataset.filterTopic) {
+    if (target.checked) {
+      state.quiz.selectedTopicKeys.add(target.dataset.filterTopic);
+    } else {
+      state.quiz.selectedTopicKeys.delete(target.dataset.filterTopic);
+    }
+    state.quiz.current = null;
+    state.quiz.answered = false;
+    renderQuizBuilder();
   }
 });
 

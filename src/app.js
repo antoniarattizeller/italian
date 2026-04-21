@@ -71,7 +71,7 @@ function setTitle(title) {
 }
 
 function updateNav() {
-  document.querySelectorAll("[data-view]").forEach((item) => {
+  document.querySelectorAll(".nav-item[data-view], .bottom-nav-item[data-view]").forEach((item) => {
     item.classList.toggle("active", item.dataset.view === state.view);
   });
 

@@ -31,6 +31,7 @@ body {
   color: var(--text);
   font-family: "DM Sans", system-ui, sans-serif;
   line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
 }
 
 button,
@@ -590,6 +591,54 @@ tr:last-child td {
   display: block;
 }
 
+.bottom-nav {
+  background: rgba(13, 14, 18, 0.96);
+  border-top: 1px solid var(--line-strong);
+  bottom: 0;
+  display: none;
+  gap: 4px;
+  left: 0;
+  padding: 8px 10px calc(8px + env(safe-area-inset-bottom));
+  position: fixed;
+  right: 0;
+  z-index: 45;
+}
+
+.bottom-nav-item {
+  align-items: center;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  color: var(--muted);
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 3px;
+  justify-content: center;
+  min-height: 54px;
+  min-width: 0;
+  padding: 6px 4px;
+}
+
+.bottom-nav-item.active {
+  background: rgba(221, 116, 92, 0.13);
+  border-color: rgba(221, 116, 92, 0.22);
+  color: var(--accent);
+}
+
+.bottom-nav-icon {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.bottom-nav-item span:last-child {
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
 @media (max-width: 960px) {
   .app-shell {
     grid-template-columns: 1fr;
@@ -619,6 +668,37 @@ tr:last-child td {
     padding-right: 18px;
   }
 
+  .content {
+    padding-bottom: 104px;
+  }
+
+  .bottom-nav {
+    display: flex;
+  }
+
+  .card {
+    padding: 18px;
+  }
+
+  .button,
+  .secondary-button,
+  .ghost-button,
+  .quiz-option,
+  .text-input,
+  .note-input {
+    min-height: 46px;
+  }
+
+  .card-actions {
+    align-items: stretch;
+  }
+
+  .card-actions .button,
+  .card-actions .secondary-button,
+  .card-actions .ghost-button {
+    flex: 1 1 160px;
+  }
+
   .grid.two,
   .grid.three,
   .study-layout,
@@ -629,15 +709,29 @@ tr:last-child td {
 
 @media (max-width: 620px) {
   .content {
-    padding: 22px 14px;
+    padding: 20px 14px 104px;
   }
 
   .topbar {
     min-height: 68px;
+    padding-bottom: 12px;
+    padding-top: 12px;
   }
 
   .page-title {
-    font-size: 1.75rem;
+    font-size: 1.7rem;
+  }
+
+  .topic-title {
+    font-size: 1.65rem;
+  }
+
+  .card h3 {
+    font-size: 1.22rem;
+  }
+
+  .page-header {
+    margin-bottom: 18px;
   }
 
   .quiz-options,
@@ -647,5 +741,15 @@ tr:last-child td {
 
   .answer-row {
     flex-direction: column;
+  }
+
+  th,
+  td {
+    padding: 9px 10px;
+  }
+
+  .table-wrap {
+    margin-left: -2px;
+    margin-right: -2px;
   }
 }

@@ -5,9 +5,9 @@ window.COURSE = {
     {
       id: "week-1",
       title: "Week 1",
-      theme: "Unita 0: pronti, partenza, via",
+      theme: "Unità 0: pronti, partenza, via",
       status: "ready",
-      goal: "Introduce yourself, greet people, spell your name, recognize classroom words, and understand the first grammar patterns from Unita 0.",
+      goal: "Introduce yourself, greet people, spell your name, recognize classroom words, and understand the first grammar patterns from Unità 0.",
       outcomes: [
         "Present yourself with name, age, origin, residence, studies, and free-time interests.",
         "Use informal and formal greetings and ask how someone is.",
@@ -28,7 +28,7 @@ window.COURSE = {
               body: [
                 "Ciao, mi chiamo Julia. Ho ventun anni, sono tedesca, abito a Berlino, a Neukolln, ma sono di Buxtehude, vicino ad Amburgo.",
                 "Studio filosofia e latino. Nel tempo libero mi piace leggere e ascoltare la musica.",
-                "You can also say: sono Julia or il mio nome e Julia, but mi chiamo is the most natural starter form."
+                "You can also say: sono Julia or il mio nome è Julia, but mi chiamo is the most natural starter form."
               ]
             },
             {
@@ -43,12 +43,12 @@ window.COURSE = {
           vocab: [
             { it: "mi chiamo", en: "my name is / I am called", de: "ich heisse", note: "Reflexive form of chiamarsi." },
             { it: "sono", en: "I am", de: "ich bin", note: "From essere." },
-            { it: "il mio nome e", en: "my name is", de: "mein Name ist", note: "Understandable, but mi chiamo is more common for introductions." },
+            { it: "il mio nome è", en: "my name is", de: "mein Name ist", note: "Understandable, but mi chiamo is more common for introductions." },
             { it: "ho ventun anni", en: "I am twenty-one years old", de: "ich bin einundzwanzig Jahre alt", note: "Italian uses avere: ho anni." },
             { it: "sono tedesca / tedesco", en: "I am German", de: "ich bin Deutsche / Deutscher", note: "Use -a for feminine, -o for masculine." },
             { it: "abito a Berlino", en: "I live in Berlin", de: "ich wohne in Berlin", note: "Use a with cities." },
             { it: "sono di Buxtehude", en: "I am from Buxtehude", de: "ich komme aus Buxtehude", note: "Use di for origin." },
-            { it: "vicino ad Amburgo", en: "near Hamburg", de: "in der Nahe von Hamburg", note: "ad before a vowel can sound smoother than a." },
+            { it: "vicino ad Amburgo", en: "near Hamburg", de: "in der Nähe von Hamburg", note: "ad before a vowel can sound smoother than a." },
             { it: "studio filosofia", en: "I study philosophy", de: "ich studiere Philosophie", note: "University subject phrase." },
             { it: "nel tempo libero", en: "in my free time", de: "in meiner Freizeit", note: "Useful phrase for hobbies." },
             { it: "mi piace leggere", en: "I like reading", de: "ich lese gern", note: "Mi piace + infinitive." }
@@ -135,7 +135,7 @@ window.COURSE = {
               title: "Come stai?",
               body: [
                 "Informal: Come stai? Formal: Come sta?",
-                "Common answers: molto bene, benissimo, tutto bene, abbastanza bene, cosi cosi, male, molto male.",
+                "Common answers: molto bene, benissimo, tutto bene, abbastanza bene, così così, male, molto male.",
                 "The polite plural or formal plural uses voi: Come state?"
               ]
             }
@@ -147,13 +147,13 @@ window.COURSE = {
             { it: "salve", en: "hello", de: "hallo / guten Tag", note: "Neutral greeting." },
             { it: "arrivederci", en: "goodbye", de: "auf Wiedersehen", note: "Formal or neutral goodbye." },
             { it: "a presto", en: "see you soon", de: "bis bald", note: "Useful closing phrase." },
-            { it: "alla prossima", en: "until next time", de: "bis zum nachsten Mal", note: "Goodbye phrase." },
+            { it: "alla prossima", en: "until next time", de: "bis zum nächsten Mal", note: "Goodbye phrase." },
             { it: "come ti chiami?", en: "what is your name?", de: "wie heisst du?", note: "Informal." },
             { it: "come sta?", en: "how are you?", de: "wie geht es Ihnen?", note: "Formal." },
             { it: "come stai?", en: "how are you?", de: "wie geht es dir?", note: "Informal." },
             { it: "tutto bene", en: "everything is good", de: "alles gut", note: "Common answer." },
             { it: "abbastanza bene", en: "quite well", de: "ziemlich gut", note: "Moderate positive answer." },
-            { it: "cosi cosi", en: "so-so", de: "so lala", note: "Neutral answer." },
+            { it: "così così", en: "so-so", de: "so lala", note: "Neutral answer." },
             { it: "male", en: "badly", de: "schlecht", note: "Negative answer." }
           ],
           examples: [
@@ -161,7 +161,7 @@ window.COURSE = {
             { it: "Mi chiamo Tarik. E tu?", en: "My name is Tarik. And you?", de: "Ich heisse Tarik. Und du?" },
             { it: "Buongiorno, professoressa. Come sta?", en: "Good morning, professor. How are you?", de: "Guten Morgen, Frau Professorin. Wie geht es Ihnen?" },
             { it: "Sto bene, grazie. E voi?", en: "I am well, thank you. And you all?", de: "Mir geht es gut, danke. Und ihr / Sie?" },
-            { it: "Arrivederci, alla prossima!", en: "Goodbye, until next time!", de: "Auf Wiedersehen, bis zum nachsten Mal!" }
+            { it: "Arrivederci, alla prossima!", en: "Goodbye, until next time!", de: "Auf Wiedersehen, bis zum nächsten Mal!" }
           ],
           exercises: [
             {
@@ -187,7 +187,7 @@ window.COURSE = {
               type: "multiple-choice",
               prompt: "Which greeting means 'good evening'?",
               answer: "buonasera",
-              options: ["buonasera", "a presto", "arrivederci", "cosi cosi"]
+              options: ["buonasera", "a presto", "arrivederci", "così così"]
             },
             {
               id: "w1-saluti-formal-how",
@@ -208,7 +208,7 @@ window.COURSE = {
             {
               id: "w1-saluti-so-so",
               type: "multiple-choice",
-              prompt: "What does 'cosi cosi' mean?",
+              prompt: "What does 'così così' mean?",
               answer: "so-so",
               options: ["so-so", "very well", "goodbye", "thank you"]
             }
@@ -325,7 +325,7 @@ window.COURSE = {
           ],
           examples: [
             { it: "Come si scrive zaino?", en: "How do you spell zaino?", de: "Wie schreibt man zaino?" },
-            { it: "Il cellulare e sul tavolo.", en: "The mobile phone is on the table.", de: "Das Handy ist auf dem Tisch." }
+            { it: "Il cellulare è sul tavolo.", en: "The mobile phone is on the table.", de: "Das Handy ist auf dem Tisch." }
           ],
           exercises: [
             {
@@ -386,7 +386,7 @@ window.COURSE = {
               body: [
                 "c + i/e is pronounced like English ch: ciao, arrivederci, cellulare, piacere.",
                 "c + a/o/u or ch is pronounced like k: Carlo, come, cucina, Michele.",
-                "The workbook connects this with German examples: c before i/e like tschuss; ch before i/e like Kaktus."
+                "The workbook connects this with German examples: c before i/e like Tschüss; ch before i/e like Kaktus."
               ]
             },
             {
@@ -402,7 +402,7 @@ window.COURSE = {
             { it: "ciao", en: "hello / bye", de: "hallo / tschuss", note: "c + ia -> ch sound." },
             { it: "arrivederci", en: "goodbye", de: "auf Wiedersehen", note: "ci -> ch sound." },
             { it: "cellulare", en: "mobile phone", de: "Handy", note: "ce -> ch sound." },
-            { it: "piacere", en: "nice to meet you / pleasure", de: "freut mich / Vergnugen", note: "ce -> ch sound." },
+            { it: "piacere", en: "nice to meet you / pleasure", de: "freut mich / Vergnügen", note: "ce -> ch sound." },
             { it: "come", en: "how / as", de: "wie", note: "co -> k sound." },
             { it: "Michele", en: "Michele", de: "Michele", note: "che -> k sound." },
             { it: "Giulia", en: "Giulia", de: "Giulia", note: "gi -> j sound." },
@@ -413,7 +413,7 @@ window.COURSE = {
           examples: [
             { it: "Ciao, piacere!", en: "Hi, nice to meet you!", de: "Hallo, freut mich!" },
             { it: "Michele mangia spaghetti.", en: "Michele eats spaghetti.", de: "Michele isst Spaghetti." },
-            { it: "Giulia e di Genova.", en: "Giulia is from Genoa.", de: "Giulia kommt aus Genua." }
+            { it: "Giulia è di Genova.", en: "Giulia is from Genoa.", de: "Giulia kommt aus Genua." }
           ],
           exercises: [
             {
@@ -474,7 +474,7 @@ window.COURSE = {
               title: "Indicativo presente",
               body: [
                 "chiamarsi: mi chiamo, ti chiami, si chiama, ci chiamiamo, vi chiamate, si chiamano.",
-                "essere: sono, sei, e, siamo, siete, sono.",
+                "essere: sono, sei, è, siamo, siete, sono.",
                 "stare: sto, stai, sta, stiamo, state, stanno."
               ]
             },
@@ -504,14 +504,14 @@ window.COURSE = {
           ],
           examples: [
             { it: "Mi chiamo Stefano. E tu, come ti chiami?", en: "My name is Stefano. And you, what is your name?", de: "Ich heisse Stefano. Und du, wie heisst du?" },
-            { it: "Io sono Elena e lei e Anna.", en: "I am Elena and she is Anna.", de: "Ich bin Elena und sie ist Anna." },
+            { it: "Io sono Elena e lei è Anna.", en: "I am Elena and she is Anna.", de: "Ich bin Elena und sie ist Anna." },
             { it: "Noi stiamo bene, grazie.", en: "We are well, thank you.", de: "Uns geht es gut, danke." },
-            { it: "Lei e il signor Draghi, vero?", en: "You are Mr. Draghi, right?", de: "Sie sind Herr Draghi, oder?" },
+            { it: "Lei è il signor Draghi, vero?", en: "You are Mr. Draghi, right?", de: "Sie sind Herr Draghi, oder?" },
             { it: "Voi siete il signor e la signora Colombo?", en: "Are you Mr. and Mrs. Colombo?", de: "Sind Sie Herr und Frau Colombo?" }
           ],
           exercises: [
             {
-              prompt: "Complete: io ___, tu sei, lui/lei e, noi siamo, voi siete, loro ___.",
+              prompt: "Complete: io ___, tu sei, lui/lei è, noi siamo, voi siete, loro ___.",
               answer: "sono, sono"
             },
             {
@@ -600,12 +600,12 @@ window.COURSE = {
             { it: "bulgaro / bulgara", en: "Bulgarian", de: "bulgarisch", note: "Nationality." },
             { it: "croato / croata", en: "Croatian", de: "kroatisch", note: "Nationality." },
             { it: "cinese", en: "Chinese", de: "chinesisch", note: "Same visible form for masculine/feminine." },
-            { it: "francese", en: "French", de: "franzosisch", note: "Same visible form for masculine/feminine." },
+            { it: "francese", en: "French", de: "französisch", note: "Same visible form for masculine/feminine." },
             { it: "inglese", en: "English", de: "englisch", note: "Same visible form for masculine/feminine." },
             { it: "polacco / polacca", en: "Polish", de: "polnisch", note: "Nationality." },
             { it: "russo / russa", en: "Russian", de: "russisch", note: "Nationality." },
             { it: "spagnolo / spagnola", en: "Spanish", de: "spanisch", note: "Nationality." },
-            { it: "turco / turca", en: "Turkish", de: "turkisch", note: "Nationality." },
+            { it: "turco / turca", en: "Turkish", de: "türkisch", note: "Nationality." },
             { it: "ucraino / ucraina", en: "Ukrainian", de: "ukrainisch", note: "Nationality." },
             { it: "filosofia", en: "philosophy", de: "Philosophie", note: "Subject." },
             { it: "latino", en: "Latin", de: "Latein", note: "Subject." },
@@ -615,19 +615,19 @@ window.COURSE = {
             { it: "informatica", en: "computer science", de: "Informatik", note: "Subject." },
             { it: "economia e commercio", en: "economics and business", de: "Wirtschaftswissenschaften", note: "Subject." },
             { it: "leggere", en: "to read", de: "lesen", note: "Hobby." },
-            { it: "ascoltare la musica", en: "to listen to music", de: "Musik horen", note: "Hobby." },
+            { it: "ascoltare la musica", en: "to listen to music", de: "Musik hören", note: "Hobby." },
             { it: "fare sport", en: "to do sports", de: "Sport machen", note: "Hobby." },
             { it: "incontrare gli amici", en: "to meet friends", de: "Freunde treffen", note: "Hobby." },
             { it: "giocare a tennis", en: "to play tennis", de: "Tennis spielen", note: "Use giocare a for sports/games." },
-            { it: "giocare a calcio", en: "to play football", de: "Fussball spielen", note: "Use giocare a." },
+            { it: "giocare a calcio", en: "to play football", de: "Fußball spielen", note: "Use giocare a." },
             { it: "suonare il piano", en: "to play the piano", de: "Klavier spielen", note: "Use suonare for instruments." },
-            { it: "cucinare per gli amici", en: "to cook for friends", de: "fur Freunde kochen", note: "Hobby." },
+            { it: "cucinare per gli amici", en: "to cook for friends", de: "für Freunde kochen", note: "Hobby." },
             { it: "viaggiare", en: "to travel", de: "reisen", note: "Useful personal learning word." }
           ],
           examples: [
             { it: "Studio informatica.", en: "I study computer science.", de: "Ich studiere Informatik." },
             { it: "Nel tempo libero mi piace viaggiare.", en: "In my free time I like travelling.", de: "In meiner Freizeit reise ich gern." },
-            { it: "Mi piace giocare a calcio.", en: "I like playing football.", de: "Ich spiele gern Fussball." },
+            { it: "Mi piace giocare a calcio.", en: "I like playing football.", de: "Ich spiele gern Fußball." },
             { it: "Mi piace suonare il piano.", en: "I like playing the piano.", de: "Ich spiele gern Klavier." }
           ],
           exercises: [
@@ -706,7 +706,7 @@ window.COURSE = {
       title: "Essere, stare, chiamarsi",
       summary: "The first three verb patterns from Week 1.",
       points: [
-        "essere: sono, sei, e, siamo, siete, sono.",
+        "essere: sono, sei, è, siamo, siete, sono.",
         "stare: sto, stai, sta, stiamo, state, stanno.",
         "chiamarsi: mi chiamo, ti chiami, si chiama, ci chiamiamo, vi chiamate, si chiamano.",
         "Come stai? is informal. Come sta? is formal."

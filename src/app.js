@@ -500,7 +500,11 @@ function shuffle(items) {
 }
 
 function normalizeAnswer(value) {
-  return String(value || "").trim().toLowerCase();
+  return String(value || "")
+    .trim()
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
 }
 
 function isCorrectAnswer(question, value) {

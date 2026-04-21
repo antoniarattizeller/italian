@@ -288,12 +288,13 @@ function renderVocab(vocab = []) {
       <h3>Vocabulary</h3>
       <div class="table-wrap">
         <table>
-          <thead><tr><th>Italian</th><th>English</th><th>Note</th></tr></thead>
+          <thead><tr><th>Italian</th><th>English</th><th>German</th><th>Note</th></tr></thead>
           <tbody>
             ${vocab.map((item) => `
               <tr>
                 <td>${escapeHtml(item.it)}</td>
                 <td>${escapeHtml(item.en)}</td>
+                <td>${escapeHtml(item.de || "")}</td>
                 <td>${escapeHtml(item.note || "")}</td>
               </tr>
             `).join("")}
@@ -312,7 +313,8 @@ function renderExamples(examples = []) {
       ${examples.map((example) => `
         <div class="example">
           <strong>${escapeHtml(example.it)}</strong>
-          <span>${escapeHtml(example.en)}</span>
+          <span>EN: ${escapeHtml(example.en)}</span>
+          ${example.de ? `<span>DE: ${escapeHtml(example.de)}</span>` : ""}
         </div>
       `).join("")}
     </section>

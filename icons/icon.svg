@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Italian Course">
+  <rect width="512" height="512" rx="96" fill="#0d0e12"/>
+  <rect x="52" y="52" width="408" height="408" rx="72" fill="#111318" stroke="#2a2d34" stroke-width="8"/>
+  <path d="M132 136h248v46H132z" fill="#009246"/>
+  <path d="M132 233h248v46H132z" fill="#ede8df"/>
+  <path d="M132 330h248v46H132z" fill="#ce2b37"/>
+  <text x="256" y="293" fill="#dd745c" font-family="Georgia, serif" font-size="124" font-weight="700" text-anchor="middle">It</text>
+</svg>

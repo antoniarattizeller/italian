@@ -1,0 +1,20 @@
+{
+  "name": "Italian Course",
+  "short_name": "Italian",
+  "description": "A week-by-week Italian course with trilingual study notes, quizzes, grammar references, and a personal notebook.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#08090b",
+  "theme_color": "#0d0e12",
+  "categories": ["education", "productivity"],
+  "icons": [
+    {
+      "src": "icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

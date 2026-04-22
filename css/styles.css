@@ -417,6 +417,34 @@ tr:last-child td {
   padding-top: 14px;
 }
 
+.filter-group.compact-first {
+  border-top: 0;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.mode-grid {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 10px 0 12px;
+}
+
+.mode-button {
+  background: var(--panel-2);
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  color: var(--muted);
+  min-height: 42px;
+  padding: 8px;
+}
+
+.mode-button.active {
+  background: rgba(221, 116, 92, 0.13);
+  border-color: rgba(221, 116, 92, 0.28);
+  color: var(--accent);
+}
+
 .check-row {
   align-items: flex-start;
   display: flex;
@@ -519,6 +547,12 @@ tr:last-child td {
   color: var(--danger);
 }
 
+.difficulty-actions {
+  border-top: 1px solid var(--line);
+  margin-top: 16px;
+  padding-top: 14px;
+}
+
 .quiz-stats {
   display: grid;
   gap: 8px;
@@ -551,6 +585,12 @@ tr:last-child td {
   gap: 10px;
 }
 
+.format-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
 .note-textarea {
   min-height: 110px;
   resize: vertical;
@@ -569,8 +609,24 @@ tr:last-child td {
   margin-bottom: 4px;
 }
 
-.note-card p {
+.rich-note p {
+  margin: 8px 0;
   white-space: pre-wrap;
+}
+
+.rich-note ul {
+  margin: 8px 0;
+  padding-left: 20px;
+}
+
+.rich-note code {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  color: var(--accent);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.9em;
+  padding: 1px 5px;
 }
 
 .empty {

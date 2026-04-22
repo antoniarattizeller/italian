@@ -26,9 +26,9 @@ window.COURSE = {
             {
               title: "Modello",
               body: [
-                "Ciao, mi chiamo Julia. Ho ventun anni, sono tedesca, abito a Berlino, a Neukolln, ma sono di Buxtehude, vicino ad Amburgo.",
+                "Ciao, mi chiamo Lucia. Ho ventun anni, sono tedesca, abito a Berlino, a Prenzlauer Berg, ma sono di Verona, vicino a Venezia.",
                 "Studio filosofia e latino. Nel tempo libero mi piace leggere e ascoltare la musica.",
-                "You can also say: sono Julia or il mio nome è Julia, but mi chiamo is the most natural starter form."
+                "You can also say: sono Lucia or il mio nome è Lucia, but mi chiamo is the most natural starter form."
               ]
             },
             {
@@ -36,7 +36,7 @@ window.COURSE = {
               body: [
                 "Italian mi chiamo literally means I call myself. German also uses a verb-based identity phrase: ich heisse. English usually says my name is.",
                 "Italian ho ventun anni uses avere, like German ich bin einundzwanzig Jahre alt is structurally different and English says I am twenty-one.",
-                "Italian abito a Berlino means I live in Berlin. For origin, use sono di Buxtehude."
+                "Italian abito a Berlino means I live in Berlin. For origin, use sono di Verona."
               ]
             }
           ],
@@ -47,40 +47,26 @@ window.COURSE = {
             { it: "ho ventun anni", en: "I am twenty-one years old", de: "ich bin einundzwanzig Jahre alt", note: "Italian uses avere: ho anni." },
             { it: "sono tedesca / tedesco", en: "I am German", de: "ich bin Deutsche / Deutscher", note: "Use -a for feminine, -o for masculine." },
             { it: "abito a Berlino", en: "I live in Berlin", de: "ich wohne in Berlin", note: "Use a with cities." },
-            { it: "sono di Buxtehude", en: "I am from Buxtehude", de: "ich komme aus Buxtehude", note: "Use di for origin." },
-            { it: "vicino ad Amburgo", en: "near Hamburg", de: "in der Nähe von Hamburg", note: "ad before a vowel can sound smoother than a." },
+            { it: "sono di Verona", en: "I am from Verona", de: "ich komme aus Verona", note: "Use di for origin." },
+            { it: "vicino a Venezia", en: "near Venice", de: "in der Nähe von Venedig", note: "Use vicino a for near a place." },
             { it: "studio filosofia", en: "I study philosophy", de: "ich studiere Philosophie", note: "University subject phrase." },
             { it: "nel tempo libero", en: "in my free time", de: "in meiner Freizeit", note: "Useful phrase for hobbies." },
             { it: "mi piace leggere", en: "I like reading", de: "ich lese gern", note: "Mi piace + infinitive." }
           ],
           examples: [
-            { it: "Ciao, mi chiamo Julia.", en: "Hi, my name is Julia.", de: "Hallo, ich heisse Julia." },
+            { it: "Ciao, mi chiamo Lucia.", en: "Hi, my name is Lucia.", de: "Hallo, ich heisse Lucia." },
             { it: "Ho ventun anni.", en: "I am twenty-one years old.", de: "Ich bin einundzwanzig Jahre alt." },
             { it: "Sono tedesca.", en: "I am German.", de: "Ich bin Deutsche." },
-            { it: "Abito a Berlino, ma sono di Buxtehude.", en: "I live in Berlin, but I am from Buxtehude.", de: "Ich wohne in Berlin, aber ich komme aus Buxtehude." },
+            { it: "Abito a Berlino, ma sono di Verona.", en: "I live in Berlin, but I am from Verona.", de: "Ich wohne in Berlin, aber ich komme aus Verona." },
             { it: "Nel tempo libero mi piace leggere.", en: "In my free time I like reading.", de: "In meiner Freizeit lese ich gern." }
-          ],
-          exercises: [
-            {
-              prompt: "Write your own full presentation using name, age, nationality, city, origin, studies, and one hobby.",
-              answer: "Ciao, mi chiamo ___. Ho ___ anni. Sono ___. Abito a ___, ma sono di ___. Studio ___. Nel tempo libero mi piace ___."
-            },
-            {
-              prompt: "Translate to Italian: I live in Berlin, but I am from Hamburg.",
-              answer: "Abito a Berlino, ma sono di Amburgo."
-            },
-            {
-              prompt: "Say three hobbies with mi piace.",
-              answer: "Mi piace leggere. Mi piace ascoltare la musica. Mi piace viaggiare."
-            }
           ],
           questions: [
             {
               id: "w1-presentazioni-mi-chiamo",
               type: "multiple-choice",
-              prompt: "What is the most natural Italian starter phrase for 'My name is Julia'?",
-              answer: "Mi chiamo Julia.",
-              options: ["Mi chiamo Julia.", "Ho Julia.", "Abito Julia.", "Sto Julia."],
+              prompt: "What is the most natural Italian starter phrase for 'My name is Lucia'?",
+              answer: "Mi chiamo Lucia.",
+              options: ["Mi chiamo Lucia.", "Ho Lucia.", "Abito Lucia.", "Sto Lucia."],
               explanation: "Mi chiamo means I call myself and is the normal introduction phrase."
             },
             {
@@ -102,9 +88,9 @@ window.COURSE = {
             {
               id: "w1-presentazioni-origin",
               type: "multiple-choice",
-              prompt: "How do you say 'I am from Buxtehude'?",
-              answer: "Sono di Buxtehude.",
-              options: ["Sono di Buxtehude.", "Abito di Buxtehude.", "Ho Buxtehude.", "Sto a Buxtehude."],
+              prompt: "How do you say 'I am from Verona'?",
+              answer: "Sono di Verona.",
+              options: ["Sono di Verona.", "Abito di Verona.", "Ho Verona.", "Sto a Verona."],
               explanation: "Sono di marks origin."
             },
             {
@@ -114,6 +100,20 @@ window.COURSE = {
               answer: "in my free time",
               options: ["in my free time", "near the city", "at university", "my surname is"],
               explanation: "Nel tempo libero introduces hobbies."
+            },
+            {
+              id: "w1-presentazioni-study",
+              type: "typed",
+              prompt: "Type in Italian: I study philosophy.",
+              answer: "studio filosofia",
+              accepted: ["studio filosofia"]
+            },
+            {
+              id: "w1-presentazioni-hobby",
+              type: "typed",
+              prompt: "Type in Italian: I like reading.",
+              answer: "mi piace leggere",
+              accepted: ["mi piace leggere"]
             }
           ]
         },
@@ -158,20 +158,10 @@ window.COURSE = {
           ],
           examples: [
             { it: "Ciao, come ti chiami?", en: "Hi, what is your name?", de: "Hallo, wie heisst du?" },
-            { it: "Mi chiamo Tarik. E tu?", en: "My name is Tarik. And you?", de: "Ich heisse Tarik. Und du?" },
+            { it: "Mi chiamo Marco. E tu?", en: "My name is Marco. And you?", de: "Ich heisse Marco. Und du?" },
             { it: "Buongiorno, professoressa. Come sta?", en: "Good morning, professor. How are you?", de: "Guten Morgen, Frau Professorin. Wie geht es Ihnen?" },
             { it: "Sto bene, grazie. E voi?", en: "I am well, thank you. And you all?", de: "Mir geht es gut, danke. Und ihr / Sie?" },
             { it: "Arrivederci, alla prossima!", en: "Goodbye, until next time!", de: "Auf Wiedersehen, bis zum nächsten Mal!" }
-          ],
-          exercises: [
-            {
-              prompt: "Create a formal mini-dialogue with buongiorno, come sta, and arrivederci.",
-              answer: "Buongiorno, professoressa. Come sta? Sto bene, grazie. Arrivederci."
-            },
-            {
-              prompt: "Create an informal mini-dialogue with ciao, come stai, and tutto bene.",
-              answer: "Ciao, come stai? Tutto bene, grazie. E tu?"
-            }
           ],
           questions: [
             {
@@ -211,6 +201,20 @@ window.COURSE = {
               prompt: "What does 'così così' mean?",
               answer: "so-so",
               options: ["so-so", "very well", "goodbye", "thank you"]
+            },
+            {
+              id: "w1-saluti-formal-goodbye",
+              type: "typed",
+              prompt: "Type a formal/neutral Italian goodbye.",
+              answer: "arrivederci",
+              accepted: ["arrivederci"]
+            },
+            {
+              id: "w1-saluti-informal-mini",
+              type: "typed",
+              prompt: "Type an informal way to ask: What is your name?",
+              answer: "come ti chiami",
+              accepted: ["come ti chiami", "come ti chiami?"]
             }
           ]
         },
@@ -256,16 +260,6 @@ window.COURSE = {
             { it: "Come ti chiami di cognome?", en: "What is your surname?", de: "Wie heisst du mit Nachnamen?" },
             { it: "Di cognome mi chiamo Rossi.", en: "My surname is Rossi.", de: "Mit Nachnamen heisse ich Rossi." }
           ],
-          exercises: [
-            {
-              prompt: "Spell your first name in Italian letter names.",
-              answer: "Use the alphabet table and say: Si scrive ..."
-            },
-            {
-              prompt: "Ask someone for their surname and spelling.",
-              answer: "Come ti chiami di cognome? Come si scrive?"
-            }
-          ],
           questions: [
             {
               id: "w1-alfabeto-how-spelled",
@@ -294,6 +288,13 @@ window.COURSE = {
               prompt: "What does 'di cognome' refer to?",
               answer: "surname",
               options: ["surname", "first name", "age", "city"]
+            },
+            {
+              id: "w1-alfabeto-it-is-spelled",
+              type: "typed",
+              prompt: "Type in Italian: It is spelled...",
+              answer: "si scrive",
+              accepted: ["si scrive"]
             }
           ]
         },
@@ -301,12 +302,12 @@ window.COURSE = {
           id: "lezione-in-classe",
           title: "A lezione, in classe",
           type: "vocabulary",
-          summary: "Classroom objects and study words from the workbook pages.",
+          summary: "Classroom objects and study words .",
           sections: [
             {
               title: "Oggetti in classe",
               body: [
-                "This topic collects the objects shown in the classroom listening exercise: lavagna, bottiglia, zaino, quaderno, proiettore, penna, libro, cellulare.",
+                "This topic collects classroom objects: lavagna, bottiglia, zaino, quaderno, proiettore, penna, libro, cellulare.",
                 "Use these words to practice spelling and noun gender."
               ]
             }
@@ -326,16 +327,6 @@ window.COURSE = {
           examples: [
             { it: "Come si scrive zaino?", en: "How do you spell zaino?", de: "Wie schreibt man zaino?" },
             { it: "Il cellulare è sul tavolo.", en: "The mobile phone is on the table.", de: "Das Handy ist auf dem Tisch." }
-          ],
-          exercises: [
-            {
-              prompt: "Choose five classroom objects and spell them aloud.",
-              answer: "Example: libro: elle, i, bi, erre, o."
-            },
-            {
-              prompt: "Sort the words into masculine and feminine.",
-              answer: "Masculine: zaino, quaderno, proiettore, libro, cellulare. Feminine: lavagna, bottiglia, penna, classe, lezione."
-            }
           ],
           questions: [
             {
@@ -372,6 +363,13 @@ window.COURSE = {
               prompt: "Which word means 'lesson'?",
               answer: "lezione",
               options: ["lezione", "classe", "penna", "quaderno"]
+            },
+            {
+              id: "w1-classe-gender-sort",
+              type: "multiple-choice",
+              prompt: "Which group contains only masculine classroom nouns?",
+              answer: "zaino, quaderno, libro",
+              options: ["zaino, quaderno, libro", "penna, classe, lezione", "lavagna, bottiglia, penna", "classe, libro, lezione"]
             }
           ]
         },
@@ -386,7 +384,7 @@ window.COURSE = {
               body: [
                 "c + i/e is pronounced like English ch: ciao, arrivederci, cellulare, piacere.",
                 "c + a/o/u or ch is pronounced like k: Carlo, come, cucina, Michele.",
-                "The workbook connects this with German examples: c before i/e like Tschüss; ch before i/e like Kaktus."
+                "For German speakers, c before i/e feels close to the sound in Tschüss; ch before i/e keeps a hard k sound like Kaktus."
               ]
             },
             {
@@ -394,7 +392,7 @@ window.COURSE = {
               body: [
                 "g + i/e is pronounced like English j: Giulia, Genova, buongiorno.",
                 "g + a/o/u or gh is pronounced like hard g: Gabriele, dialogo, guardare, funghi, spaghetti.",
-                "The workbook connects this with German examples: g before i/e like Gin; gh before i/e like Garten."
+                "For German speakers, g before i/e feels close to the sound in Gin; gh before i/e keeps a hard g sound like Garten."
               ]
             }
           ],
@@ -414,16 +412,6 @@ window.COURSE = {
             { it: "Ciao, piacere!", en: "Hi, nice to meet you!", de: "Hallo, freut mich!" },
             { it: "Michele mangia spaghetti.", en: "Michele eats spaghetti.", de: "Michele isst Spaghetti." },
             { it: "Giulia è di Genova.", en: "Giulia is from Genoa.", de: "Giulia kommt aus Genua." }
-          ],
-          exercises: [
-            {
-              prompt: "Sort these by sound: ciao, come, Michele, cellulare.",
-              answer: "ch sound: ciao, cellulare. k sound: come, Michele."
-            },
-            {
-              prompt: "Sort these by sound: Giulia, guardare, funghi, Genova.",
-              answer: "j sound: Giulia, Genova. hard g: guardare, funghi."
-            }
           ],
           questions: [
             {
@@ -453,6 +441,13 @@ window.COURSE = {
               prompt: "In 'funghi', gh sounds like...",
               answer: "hard g",
               options: ["hard g", "j", "ch", "sh"]
+            },
+            {
+              id: "w1-fonetica-cellulare",
+              type: "multiple-choice",
+              prompt: "In 'cellulare', ce sounds like...",
+              answer: "ch",
+              options: ["ch", "k", "hard g", "ts"]
             }
           ]
         },
@@ -503,25 +498,11 @@ window.COURSE = {
             { it: "la lezione", en: "the lesson", de: "die Lektion", note: "Feminine -zione." }
           ],
           examples: [
-            { it: "Mi chiamo Stefano. E tu, come ti chiami?", en: "My name is Stefano. And you, what is your name?", de: "Ich heisse Stefano. Und du, wie heisst du?" },
-            { it: "Io sono Elena e lei è Anna.", en: "I am Elena and she is Anna.", de: "Ich bin Elena und sie ist Anna." },
+            { it: "Mi chiamo Luca. E tu, come ti chiami?", en: "My name is Luca. And you, what is your name?", de: "Ich heisse Luca. Und du, wie heisst du?" },
+            { it: "Io sono Sara e lei è Marta.", en: "I am Sara and she is Marta.", de: "Ich bin Sara und sie ist Marta." },
             { it: "Noi stiamo bene, grazie.", en: "We are well, thank you.", de: "Uns geht es gut, danke." },
-            { it: "Lei è il signor Draghi, vero?", en: "You are Mr. Draghi, right?", de: "Sie sind Herr Draghi, oder?" },
-            { it: "Voi siete il signor e la signora Colombo?", en: "Are you Mr. and Mrs. Colombo?", de: "Sind Sie Herr und Frau Colombo?" }
-          ],
-          exercises: [
-            {
-              prompt: "Complete: io ___, tu sei, lui/lei è, noi siamo, voi siete, loro ___.",
-              answer: "sono, sono"
-            },
-            {
-              prompt: "Complete: io sto, tu ___, lui/lei sta, noi stiamo, voi state, loro ___.",
-              answer: "stai, stanno"
-            },
-            {
-              prompt: "Choose masculine or feminine: zaino, universita, cellulare, soluzione, citta, quaderno, proiettore, arte.",
-              answer: "Masculine: zaino, cellulare, quaderno, proiettore. Feminine: universita, soluzione, citta, arte."
-            }
+            { it: "Lei è il signor Rinaldi, vero?", en: "You are Mr. Rinaldi, right?", de: "Sie sind Herr Rinaldi, oder?" },
+            { it: "Voi siete il signor e la signora Ferri?", en: "Are you Mr. and Mrs. Ferri?", de: "Sind Sie Herr und Frau Ferri?" }
           ],
           questions: [
             {
@@ -572,6 +553,20 @@ window.COURSE = {
               prompt: "Words ending in -zione, like lezione, are usually...",
               answer: "feminine",
               options: ["feminine", "masculine", "verbs", "pronouns"]
+            },
+            {
+              id: "w1-grammar-stare-loro",
+              type: "typed",
+              prompt: "Complete with stare: loro ___",
+              answer: "stanno",
+              accepted: ["stanno"]
+            },
+            {
+              id: "w1-grammar-essere-loro",
+              type: "typed",
+              prompt: "Complete with essere: loro ___",
+              answer: "sono",
+              accepted: ["sono"]
             }
           ]
         },
@@ -630,16 +625,6 @@ window.COURSE = {
             { it: "Mi piace giocare a calcio.", en: "I like playing football.", de: "Ich spiele gern Fußball." },
             { it: "Mi piace suonare il piano.", en: "I like playing the piano.", de: "Ich spiele gern Klavier." }
           ],
-          exercises: [
-            {
-              prompt: "Choose three subjects and build sentences with Studio...",
-              answer: "Studio filosofia. Studio latino. Studio informatica."
-            },
-            {
-              prompt: "Choose five hobbies and build sentences with Mi piace...",
-              answer: "Mi piace leggere. Mi piace viaggiare. Mi piace cucinare. Mi piace nuotare. Mi piace disegnare."
-            }
-          ],
           questions: [
             {
               id: "w1-lessico-philosophy",
@@ -675,15 +660,23 @@ window.COURSE = {
               prompt: "Which phrase means 'to play football'?",
               answer: "giocare a calcio",
               options: ["giocare a calcio", "suonare il piano", "fare spese", "ascoltare la musica"]
+            },
+            {
+              id: "w1-lessico-music",
+              type: "typed",
+              prompt: "Type in Italian: to listen to music",
+              answer: "ascoltare la musica",
+              accepted: ["ascoltare la musica"]
+            },
+            {
+              id: "w1-lessico-piano",
+              type: "typed",
+              prompt: "Type in Italian: to play the piano",
+              answer: "suonare il piano",
+              accepted: ["suonare il piano"]
             }
           ]
         }
-      ],
-      homework: [
-        "Write and rehearse your full personal introduction.",
-        "Spell your first name and surname aloud using Italian letter names.",
-        "Create two dialogues: one informal with ciao and one formal with buongiorno.",
-        "Make a personal list of 10 hobbies or travel phrases and save them in the notebook."
       ]
     }
   ],
@@ -698,7 +691,7 @@ window.COURSE = {
         "lui/lei = he/she = er/sie.",
         "Lei = formal you = Sie.",
         "noi = we = wir; voi = you plural = ihr/Sie; loro = they = sie.",
-        "Italian often omits the pronoun: Mi chiamo Stefano, not Io mi chiamo Stefano every time."
+        "Italian often omits the pronoun: Mi chiamo Luca, not Io mi chiamo Luca every time."
       ]
     },
     {
@@ -715,7 +708,7 @@ window.COURSE = {
     {
       id: "noun-gender",
       title: "Sostantivi singolari",
-      summary: "The first noun gender patterns from the workbook.",
+      summary: "The first noun gender patterns from Week 1.",
       points: [
         "Nouns ending in -o are normally masculine: libro.",
         "Nouns ending in -a are normally feminine: penna.",
@@ -741,10 +734,10 @@ window.COURSE = {
       title: "Presentarsi",
       summary: "Core sentence frames for introducing yourself.",
       points: [
-        "Mi chiamo Julia = My name is Julia = Ich heisse Julia.",
+        "Mi chiamo Lucia = My name is Lucia = Ich heisse Lucia.",
         "Ho ventun anni = I am twenty-one = Ich bin einundzwanzig Jahre alt.",
         "Abito a Berlino = I live in Berlin = Ich wohne in Berlin.",
-        "Sono di Buxtehude = I am from Buxtehude = Ich komme aus Buxtehude.",
+        "Sono di Verona = I am from Verona = Ich komme aus Verona.",
         "Nel tempo libero mi piace leggere = In my free time I like reading = In meiner Freizeit lese ich gern."
       ]
     }

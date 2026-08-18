@@ -1,33 +1,48 @@
-# Italian Course App Structure
+# Italian Study App — A2 Structure
 
-This repo is a static Italian course app. It should work by opening `index.html`
-directly in a browser, without a build step or backend.
+This repo is a static Italian study app. It works by opening `index.html`
+directly in a browser, with no build step and no backend.
 
-## Product Shape
+## What changed (and why)
 
-The app has four learning surfaces:
+The app used to be a **week-by-week, book-guided course**. We are pivoting to a
+**topic-organized A2 study app**: instead of progressing through weeks tied to a
+textbook, you study and practice by **grammar category** (passato prossimo,
+imperfetto, condizionale, presente, articoli, preposizioni, ...) and by
+**vocabulary topic** (time words, locations, the house, travel, ...).
 
-1. **Week-by-week course**
-   - Each week has a title, goal, topics, homework, and quiz pool.
-   - Weeks are the main progression path.
+The learner drives their own path: pick a grammar category or a vocab topic,
+read it, then quiz it — alone or mixed with anything else.
 
-2. **Topic study**
-   - A week contains multiple topics.
-   - A topic can include explanations, grammar notes, vocabulary, examples,
-     dialogue, and exercises.
+The existing **Week 1** content is not discarded. It is **redistributed** into
+the new grammar categories and vocab topics (see *Week 1 migration map*).
+
+## Product shape
+
+Four learning surfaces:
+
+1. **Grammar categories**
+   - One entry per A2 grammar point.
+   - Each has explanation sections, optional conjugation/usage tables, examples,
+     and its own quiz question pool.
+
+2. **Vocabulary topics**
+   - One entry per theme (time words, locations, house, travel, ...).
+   - Each is a word list (`it` / `en` / `de` / note) that auto-feeds the
+     vocabulary quiz. Topics can also carry hand-written questions.
 
 3. **Filtered quizzes**
-   - Quiz by one topic.
-   - Quiz by one week.
-   - Quiz by multiple selected weeks and topics.
-   - Quiz by the full available question pool.
+   - Quiz one grammar category, one vocab topic, several selected, or the whole
+     pool. Modes: **Mixed**, **Grammar only**, **Vocabulary only**, **Numbers**.
 
 4. **Personal notebook**
-   - A local place for phrases, travel vocabulary, personal examples, and notes.
-   - Initial implementation stores entries in `localStorage`.
-   - A future implementation can export/import JSON.
+   - Local place for phrases, travel vocabulary, and personal notes.
+   - Stored in `localStorage`. Personal vocab feeds the vocab quiz.
 
-## File Layout
+A small **Reference** area holds things that are not a category or a topic:
+the alphabet/spelling and pronunciation rules (c/g, etc.).
+
+## File layout
 
 ```text
 index.html
@@ -36,94 +51,210 @@ css/
 src/
   app.js
 content/
-  course.js
+  course.js          # window.COURSE — all study data
 docs/
   PROJECT_STRUCTURE.md
 ```
 
-## Content Model
+## Content model
 
 Course content lives in `content/course.js` as `window.COURSE`.
 
 ```js
-{
-  weeks: [
+window.COURSE = {
+  title: "Italian A2 Study",
+  description: "Study and practice Italian by grammar category and vocabulary topic.",
+
+  grammar: [
     {
-      id: "week-1",
-      title: "Settimana 1",
-      theme: "Pronunciation, greetings, identity",
-      goal: "Introduce yourself and pronounce basic Italian sounds.",
-      topics: [
+      id: "passato-prossimo",
+      title: "Passato prossimo",
+      level: "A2",
+      status: "stub",               // "stub" | "draft" | "ready"
+      summary: "Talking about completed past actions with avere/essere + participle.",
+      sections: [
+        { title: "When to use it", body: ["Short study paragraphs."] }
+      ],
+      tables: [                       // optional — conjugations / usage grids
         {
-          id: "pronunciation",
-          title: "Fonetica",
-          type: "grammar",
-          summary: "Italian spelling is highly regular.",
-          sections: [
-            {
-              title: "Key idea",
-              body: ["Short paragraphs of study text."]
-            }
-          ],
-          vocab: [
-            { it: "ciao", en: "hello / bye", note: "informal" }
-          ],
-          examples: [
-            { it: "Ciao, mi chiamo Luca.", en: "Hi, my name is Luca." }
-          ],
-          exercises: [
-            {
-              prompt: "Translate: Hi, my name is Anna.",
-              answer: "Ciao, mi chiamo Anna."
-            }
-          ],
-          questions: [
-            {
-              type: "multiple-choice",
-              prompt: "What does 'ciao' mean?",
-              answer: "hello / bye",
-              options: ["hello / bye", "thank you", "please", "good night"]
-            }
-          ]
+          title: "Auxiliary + participle",
+          columns: ["Person", "avere", "essere"],
+          rows: [["io", "ho parlato", "sono andato/a"]]
         }
+      ],
+      examples: [
+        { it: "Ieri ho mangiato la pizza.", en: "Yesterday I ate pizza.", de: "Gestern habe ich Pizza gegessen." }
+      ],
+      questions: [
+        { id: "pp-aux-essere", type: "multiple-choice",
+          prompt: "Which auxiliary does 'andare' take?",
+          answer: "essere", options: ["essere", "avere", "stare", "fare"],
+          explanation: "Movement verbs use essere." }
       ]
     }
+  ],
+
+  vocab: [
+    {
+      id: "time-words",
+      title: "Time words",
+      status: "stub",
+      summary: "When something happens: yesterday, soon, before, tomorrow...",
+      words: [
+        { it: "ieri", en: "yesterday", de: "gestern", note: "" },
+        { it: "tra una settimana", en: "in a week", de: "in einer Woche", note: "tra/fra + time = 'in'." }
+      ],
+      questions: []                   // optional hand-written questions
+    }
+  ],
+
+  reference: [
+    {
+      id: "alfabeto",
+      title: "The alphabet & spelling",
+      summary: "21 native letters plus foreign letters; how to spell names.",
+      sections: [ { title: "...", body: ["..."] } ]
+    }
   ]
-}
+};
 ```
 
-## Adding A Week
+### Question types
 
-1. Add a new week object in `content/course.js`.
-2. Give each topic a stable `id`.
-3. Put reusable study material in `sections`, `vocab`, `examples`, and
-   `exercises`.
-4. Put active recall material in `questions`.
-5. Keep each question attached to the topic it tests. The app builds mixed
-   quizzes from those topic pools automatically.
-
-## Question Types
-
-Supported first:
+Supported now:
 
 - `multiple-choice`
-- `typed`
+- `typed` (accent-insensitive; supports an `accepted` array of alternatives)
 
-Likely future additions:
+Auto-generated:
 
-- `article`
-- `conjugation`
-- `listening`
-- `sentence-build`
+- Every `vocab`/topic word with an `it` and an `en`/`de` becomes a typed
+  "write the Italian" question in **Vocabulary** mode.
+- Numbers 0–100 are generated in **Numbers** mode.
 
-## Commit Workflow
+Likely future additions: `conjugation`, `article` (choose il/lo/la/...),
+`sentence-build`, `listening`.
 
-Small commits should follow the learning product stages:
+## A2 grammar categories (scaffold list)
 
-1. Architecture/docs.
-2. Static shell/layout.
-3. Course rendering.
-4. Quiz behavior.
-5. Personal notebook.
-6. New weekly content.
+Create every one as a `stub` first (id + title + summary + empty sections),
+then fill in passes.
 
+**Nouns, articles, adjectives**
+- `articoli` — definite & indefinite articles (the / a: il, lo, la, l', i, gli, le, un, uno, una, un')
+- `nomi-genere-numero` — noun gender and plurals (-o/-a/-e, -zione, -ore)
+- `aggettivi` — adjective agreement and position
+- `possessivi` — possessive adjectives (il mio, la tua, ...)
+- `dimostrativi` — questo / quello
+- `quantificatori` — molto, poco, troppo, tanto, tutto
+
+**Verbs**
+- `presente` — present indicative (regular -are/-ere/-ire)
+- `presente-irregolari` — essere, avere, stare, fare, andare, venire, ...
+- `riflessivi` — reflexive verbs (mi chiamo, mi alzo, ...)
+- `verbi-modali` — potere, dovere, volere
+- `passato-prossimo` — completed past with avere/essere + participle
+- `imperfetto` — habitual/background past
+- `passato-vs-imperfetto` — choosing between the two
+- `futuro` — futuro semplice
+- `condizionale` — condizionale presente (vorrei, potrei, ...)
+- `imperativo` — informal commands (basic)
+- `stare-gerundio` — stare + gerundio (present continuous)
+
+**Little words / structure**
+- `preposizioni-semplici` — di, a, da, in, con, su, per, tra/fra
+- `preposizioni-articolate` — del, al, dal, nel, sul, ...
+- `preposizioni-luogo` — place prepositions (sopra, sotto, davanti a, vicino a, ...)
+- `pronomi-soggetto` — io, tu, lui/lei, noi, voi, loro
+- `pronomi-diretti` — lo, la, li, le, mi, ti, ci, vi
+- `pronomi-indiretti` — gli, le, mi, ti, ci, vi
+- `ci-ne` — ci and ne (basic uses)
+- `ce-ci-sono` — c'è / ci sono
+- `piacere` — mi piace / mi piacciono
+- `comparativi` — più... di, meno... di, come
+- `interrogativi` — chi, che, dove, quando, perché, quanto, come
+
+## A2 vocabulary topics (scaffold list)
+
+- `time-words` — yesterday, late, before, soon, tomorrow, in a week, early, ...
+- `locations` — behind, on top, in front, close to, under, over, next to, ...
+  (pairs with the `preposizioni-luogo` grammar category)
+- `house` — rooms + kitchen items, living room, bathroom, bedroom objects
+- `travel` — station, ticket, luggage, directions, "excuse me, where is...?"
+- `food-drink` — food, drinks, restaurant / ordering
+- `numbers-dates` — numbers, days, months, telling time, dates
+- `family-people` — family members and describing people
+- `body-health` — body parts, at the doctor, basic symptoms
+- `clothing` — clothes and accessories
+- `weather-seasons` — weather, seasons, temperature
+- `jobs` — professions and workplaces
+- `city-directions` — places in town + asking/giving directions
+- `shopping` — shops, money, sizes, "how much is it?"
+- `daily-routine` — everyday actions (pairs with `riflessivi`)
+- `feelings-adjectives` — moods and common descriptive adjectives
+- `colors` — colors (with adjective agreement)
+- `nationalities-languages` — nationalities and languages
+- `hobbies` — free-time activities and sports
+
+## Week 1 migration map
+
+Existing Week 1 topics are redistributed as follows. Nothing is lost.
+
+| Week 1 topic            | Goes to                                                        |
+|-------------------------|----------------------------------------------------------------|
+| `presentazioni`         | vocab `introductions` (new) + phrases in the notebook seed     |
+| `saluti`                | vocab `greetings` (new)                                        |
+| `alfabeto-spelling`     | reference `alfabeto`                                           |
+| `lezione-in-classe`     | vocab `classroom` (new) + grammar `nomi-genere-numero`        |
+| `fonetica-c-g`          | reference `pronuncia-c-g`                                      |
+| `grammatica-base`       | grammar `presente-irregolari` (essere/stare), `riflessivi` (chiamarsi), `pronomi-soggetto`, `nomi-genere-numero` |
+| `lessico-personale`     | vocab `nationalities-languages` + `hobbies`                    |
+
+The current top-level `grammar[]` reference entries (subject pronouns,
+essere/stare/chiamarsi, noun gender, c/g pronunciation, introductions) become
+the seed content for the corresponding new grammar categories and reference
+pages, rather than a flat reference list.
+
+## App changes required (for the code pass — not done yet)
+
+`src/app.js` today is organized around `weeks → topics`. The engine is already
+category-agnostic; the pivot is mostly renaming + two collections instead of
+weeks:
+
+1. Read `course.grammar` and `course.vocab` instead of `course.weeks`.
+2. Replace the week nav / week cards with a **Grammar** list and a **Vocab**
+   list (two sections on Home, two nav entries).
+3. Quiz builder: filter checkboxes become **grammar categories** and **vocab
+   topics** instead of weeks/topics. Keep Mixed / Vocabulary / Numbers modes;
+   add a **Grammar-only** mode.
+4. `courseVocabularyQuestions()` reads `topic.words` from `course.vocab` (and
+   still any `vocab` arrays attached to grammar categories).
+5. Add a **Reference** view for `course.reference`.
+6. Keep the notebook and personal-vocab logic unchanged.
+
+The quiz engine, accent normalization, spaced-repetition re-queue, typed/MC
+input, numbers mode, and notebook all carry over unchanged.
+
+## Build order
+
+1. **Plan** (this document).
+2. **Engine refactor** — weeks → `grammar` + `vocab` + `reference`; rename nav
+   and quiz filters. Migrate Week 1 content into the new collections so nothing
+   regresses.
+3. **Scaffold** — add every grammar category and vocab topic above as a `stub`
+   (id + title + summary), so the full A2 map is navigable.
+4. **Fill in passes** — promote stubs to `draft` then `ready`: sections/tables
+   and examples first, then questions. Start with high-value categories
+   (presente, passato prossimo, imperfetto, articoli, preposizioni) and topics
+   (time-words, locations, house, travel).
+
+## Commit workflow
+
+Small commits, one concern each. Commit the current state **before** changing
+it, so every step of the development is traceable in history:
+
+1. Docs / plan.
+2. Engine refactor (weeks → grammar/vocab/reference).
+3. Scaffold stubs.
+4. Content fill (one or a few categories/topics per commit).
+5. New question types.

@@ -318,6 +318,41 @@ button {
   text-transform: uppercase;
 }
 
+.badge-draft {
+  border-color: #7a5c1e;
+  color: #d9a441;
+}
+
+.badge-stub {
+  border-color: #5a2f2f;
+  color: #c97a7a;
+}
+
+.section-head {
+  margin-bottom: 4px;
+}
+
+.section-head h2 {
+  margin: 0;
+}
+
+.section-head .page-copy {
+  margin-top: 2px;
+}
+
+.nav-stage {
+  margin-bottom: 12px;
+}
+
+.nav-stage-label {
+  color: var(--muted);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.66rem;
+  letter-spacing: 0.04em;
+  margin: 8px 0 4px;
+  text-transform: uppercase;
+}
+
 .topic-list {
   display: grid;
   gap: 8px;

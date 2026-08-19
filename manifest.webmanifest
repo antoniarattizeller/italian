@@ -1,7 +1,7 @@
 {
-  "name": "Italian Course",
-  "short_name": "Italian",
-  "description": "A week-by-week Italian course with trilingual study notes, quizzes, grammar references, and a personal notebook.",
+  "name": "Italian A2 Study",
+  "short_name": "Italian A2",
+  "description": "Study and practice Italian by grammar category and vocabulary topic, with quizzes and a personal notebook.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",

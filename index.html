@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#0d0e12">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-title" content="Italian Course">
+  <meta name="apple-mobile-web-app-title" content="Italian A2">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <title>Italian Course</title>
+  <title>Italian A2 Study</title>
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="icons/icon.svg">
@@ -22,21 +22,23 @@
       <div class="brand">
         <button class="icon-button mobile-only" type="button" data-action="close-sidebar" aria-label="Close navigation">x</button>
         <div>
-          <h1>Italian Course</h1>
-          <p>Structured weekly practice</p>
+          <h1>Italian A2</h1>
+          <p>Study by topic</p>
         </div>
       </div>
 
       <nav class="sidebar-nav" aria-label="Course navigation">
-        <button class="nav-item active" type="button" data-view="home">Course Home</button>
-        <button class="nav-item" type="button" data-view="grammar">Grammar Overview</button>
+        <button class="nav-item active" type="button" data-view="home">Home</button>
+        <button class="nav-item" type="button" data-view="grammar">Grammar</button>
+        <button class="nav-item" type="button" data-view="vocab">Vocabulary</button>
+        <button class="nav-item" type="button" data-view="reference">Reference</button>
         <button class="nav-item" type="button" data-view="quiz">Quiz Builder</button>
         <button class="nav-item" type="button" data-view="notebook">Personal Notebook</button>
       </nav>
 
       <div class="sidebar-section">
-        <div class="sidebar-label">Weeks</div>
-        <div id="week-nav"></div>
+        <div class="sidebar-label">Grammar by stage</div>
+        <div id="unit-nav"></div>
       </div>
     </aside>
 
@@ -45,7 +47,7 @@
         <button class="icon-button mobile-only" type="button" data-action="open-sidebar" aria-label="Open navigation">☰</button>
         <div>
           <div class="eyebrow">Impara l'italiano</div>
-          <h2 id="view-title">Course Home</h2>
+          <h2 id="view-title">Home</h2>
         </div>
       </header>
 
@@ -56,15 +58,19 @@
   <nav class="bottom-nav" aria-label="Phone navigation">
     <button class="bottom-nav-item active" type="button" data-view="home">
       <span class="bottom-nav-icon" aria-hidden="true">⌂</span>
-      <span>Course</span>
-    </button>
-    <button class="bottom-nav-item" type="button" data-view="quiz">
-      <span class="bottom-nav-icon" aria-hidden="true">?</span>
-      <span>Quiz</span>
+      <span>Home</span>
     </button>
     <button class="bottom-nav-item" type="button" data-view="grammar">
       <span class="bottom-nav-icon" aria-hidden="true">Aa</span>
       <span>Grammar</span>
+    </button>
+    <button class="bottom-nav-item" type="button" data-view="vocab">
+      <span class="bottom-nav-icon" aria-hidden="true">▤</span>
+      <span>Vocab</span>
+    </button>
+    <button class="bottom-nav-item" type="button" data-view="quiz">
+      <span class="bottom-nav-icon" aria-hidden="true">?</span>
+      <span>Quiz</span>
     </button>
     <button class="bottom-nav-item" type="button" data-view="notebook">
       <span class="bottom-nav-icon" aria-hidden="true">+</span>

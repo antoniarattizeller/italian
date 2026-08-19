@@ -1,12 +1,10 @@
 const state = {
   view: "home",
-  weekId: null,
-  topicId: null,
+  unitKey: null,
   quiz: {
     initialized: false,
     mode: "mixed",
-    selectedWeekIds: new Set(),
-    selectedTopicKeys: new Set(),
+    selectedUnitKeys: new Set(),
     pool: [],
     deck: [],
     poolKey: "",
@@ -23,7 +21,9 @@ const viewTitle = document.getElementById("view-title");
 const sidebar = document.getElementById("sidebar");
 const overlay = document.getElementById("overlay");
 
-const course = window.COURSE || { weeks: [], grammar: [] };
+const course = window.COURSE || { grammar: [], vocab: [], reference: [], stages: [] };
+
+const KIND_LABEL = { grammar: "Grammar", vocab: "Vocabulary", reference: "Reference" };
 
 function escapeHtml(value) {
   return String(value ?? "")
@@ -34,73 +34,89 @@ function escapeHtml(value) {
     .replace(/'/g, "&#039;");
 }
 
-function slugKey(weekId, topicId) {
-  return `${weekId}:${topicId}`;
+// ---------------------------------------------------------------- Units
+
+function unitsOfKind(kind) {
+  return (course[kind] || []).map((data) => ({
+    kind,
+    id: data.id,
+    key: `${kind}:${data.id}`,
+    data
+  }));
 }
 
-function getWeek(weekId) {
-  return course.weeks.find((week) => week.id === weekId);
+function grammarUnits() {
+  return unitsOfKind("grammar");
 }
 
-function getTopic(weekId, topicId) {
-  return getWeek(weekId)?.topics.find((topic) => topic.id === topicId);
+function vocabUnits() {
+  return unitsOfKind("vocab");
 }
 
-function allTopics() {
-  return course.weeks.flatMap((week) =>
-    week.topics.map((topic) => ({
-      week,
-      topic,
-      key: slugKey(week.id, topic.id)
-    }))
+function referenceUnits() {
+  return unitsOfKind("reference");
+}
+
+function allUnits() {
+  return [...grammarUnits(), ...vocabUnits(), ...referenceUnits()];
+}
+
+function getUnit(key) {
+  return allUnits().find((unit) => unit.key === key);
+}
+
+function unitWords(unit) {
+  return unit.data.words || unit.data.vocab || [];
+}
+
+function grammarStages() {
+  const stages = course.stages && course.stages.length
+    ? course.stages
+    : [...new Set(grammarUnits().map((unit) => unit.data.stage))].sort().map((id) => ({ id, title: `Stage ${id}`, summary: "" }));
+  return stages.map((stage) => ({
+    ...stage,
+    units: grammarUnits().filter((unit) => unit.data.stage === stage.id)
+  }));
+}
+
+// ---------------------------------------------------------------- Question pools
+
+function tagQuestion(question, unit) {
+  return {
+    ...question,
+    unitKey: unit.key,
+    unitKind: unit.kind,
+    unitTitle: unit.data.title,
+    kindLabel: KIND_LABEL[unit.kind] || unit.kind
+  };
+}
+
+function makeVocabQuestion(word, index, unit) {
+  return {
+    id: `vocab-${unit.key}-${index}-${word.it}`,
+    type: "typed",
+    prompt: `Write the Italian for: ${word.en || ""}${word.de ? ` / ${word.de}` : ""}`,
+    answer: stripArticle(word.it),
+    accepted: acceptedVocabAnswers(word.it),
+    explanation: word.note || "",
+    unitKey: unit.key,
+    unitKind: unit.kind,
+    unitTitle: unit.data.title,
+    kindLabel: KIND_LABEL[unit.kind] || unit.kind
+  };
+}
+
+function writtenPool(units = allUnits()) {
+  return units.flatMap((unit) =>
+    (unit.data.questions || []).map((question) => tagQuestion(question, unit))
   );
 }
 
-function baseQuestionPool() {
-  return allTopics().flatMap(({ week, topic, key }) =>
-    (topic.questions || []).map((question) => ({
-      ...question,
-      weekId: week.id,
-      weekTitle: week.title,
-      topicId: topic.id,
-      topicTitle: topic.title,
-      topicKey: key
-    }))
-  );
-}
-
-function questionPool(mode = state.quiz.mode) {
-  const base = baseQuestionPool();
-  const personal = personalVocabularyQuestions();
-
-  if (mode === "vocab") {
-    return [...courseVocabularyQuestions(), ...personal];
-  }
-
-  if (mode === "numbers") {
-    return numberWritingQuestions();
-  }
-
-  return [...base, ...personal];
-}
-
-function courseVocabularyQuestions() {
-  return allTopics().flatMap(({ week, topic, key }) =>
-    (topic.vocab || [])
-      .filter((item) => item.it && (item.en || item.de))
-      .map((item, index) => ({
-        id: `vocab-${week.id}-${topic.id}-${index}-${item.it}`,
-        type: "typed",
-        prompt: `Write the Italian for: ${item.en}${item.de ? ` / ${item.de}` : ""}`,
-        answer: stripArticle(item.it),
-        accepted: acceptedVocabAnswers(item.it),
-        explanation: item.note || "",
-        weekId: week.id,
-        weekTitle: week.title,
-        topicId: topic.id,
-        topicTitle: topic.title,
-        topicKey: key
-      }))
+function autoVocabPool(units = allUnits()) {
+  return units.flatMap((unit) =>
+    unitWords(unit)
+      .filter((word) => word.it && (word.en || word.de))
+      .map((word, index) => makeVocabQuestion(word, index, unit))
   );
 }
 
@@ -112,11 +128,10 @@ function personalVocabularyQuestions() {
     answer: stripArticle(item.it),
     accepted: acceptedVocabAnswers(item.it),
     explanation: item.note || "Personal vocabulary.",
-    weekId: "personal",
-    weekTitle: "Personal",
-    topicId: "personal-vocabulary",
-    topicTitle: "Personal vocabulary",
-    topicKey: "personal:personal-vocabulary"
+    unitKey: "personal",
+    unitKind: "personal",
+    unitTitle: "Personal vocabulary",
+    kindLabel: "Personal"
   }));
 }
 
@@ -140,17 +155,23 @@ function numberWritingQuestions() {
     answer: word,
     accepted: [word],
     explanation: `${number} = ${word}`,
-    weekId: "numbers",
-    weekTitle: "Numbers",
-    topicId: "numbers-writing",
-    topicTitle: "Numbers writing",
-    topicKey: "numbers:numbers-writing"
+    unitKey: "numbers",
+    unitKind: "numbers",
+    unitTitle: "Numbers",
+    kindLabel: "Numbers"
   }));
+}
+
+function questionPool(mode = state.quiz.mode) {
+  if (mode === "numbers") return numberWritingQuestions();
+  if (mode === "vocab") return [...autoVocabPool(), ...personalVocabularyQuestions()];
+  if (mode === "grammar") return writtenPool(grammarUnits());
+  return [...writtenPool(), ...personalVocabularyQuestions()];
 }
 
 function stripArticle(value) {
   return String(value || "")
-    .replace(/^(il|lo|la|l'|un|uno|una|un')\s+/i, "")
+    .replace(/^(il|lo|la|l'|i|gli|le|un|uno|una|un')\s+/i, "")
     .trim();
 }
 
@@ -160,9 +181,16 @@ function acceptedVocabAnswers(value) {
   return [...new Set([raw, clean].filter(Boolean))];
 }
 
+// ---------------------------------------------------------------- Chrome
+
 function setTitle(title) {
   viewTitle.textContent = title;
-  document.title = `${title} - Italian Course`;
+  document.title = `${title} - Italian A2`;
+}
+
+function statusBadge(status) {
+  if (!status || status === "ready") return "";
+  return `<span class="badge badge-${escapeHtml(status)}">${escapeHtml(status)}</span>`;
 }
 
 function updateNav() {
@@ -170,25 +198,30 @@ function updateNav() {
     item.classList.toggle("active", item.dataset.view === state.view);
   });
 
-  document.querySelectorAll("[data-week-id]").forEach((item) => {
-    item.classList.toggle("active", item.dataset.weekId === state.weekId && state.view === "week");
+  document.querySelectorAll("[data-route-unit]").forEach((item) => {
+    item.classList.toggle("active", item.dataset.routeUnit === state.unitKey && state.view === "unit");
   });
 }
 
-function renderWeekNav() {
-  const weekNav = document.getElementById("week-nav");
-  weekNav.innerHTML = course.weeks.map((week) => `
-    <button class="week-nav-item" type="button" data-route-week="${escapeHtml(week.id)}" data-week-id="${escapeHtml(week.id)}">
-      ${escapeHtml(week.title)}
-      <small>${escapeHtml(week.theme)}</small>
-    </button>
+function renderUnitNav() {
+  const nav = document.getElementById("unit-nav");
+  if (!nav) return;
+  nav.innerHTML = grammarStages().map((stage) => `
+    <div class="nav-stage">
+      <div class="nav-stage-label">${escapeHtml(stage.title)}</div>
+      ${stage.units.map((unit) => `
+        <button class="week-nav-item" type="button" data-route-unit="${escapeHtml(unit.key)}">
+          ${escapeHtml(unit.data.title)}
+          <small>${escapeHtml(unit.data.status || "ready")}</small>
+        </button>
+      `).join("")}
+    </div>
   `).join("");
 }
 
 function route(view, params = {}) {
   state.view = view;
-  state.weekId = params.weekId || null;
-  state.topicId = params.topicId || null;
+  state.unitKey = params.unitKey || null;
   closeSidebar();
   render();
 }
@@ -196,33 +229,22 @@ function route(view, params = {}) {
 function render() {
   updateNav();
 
-  if (state.view === "week") {
-    return renderWeek(state.weekId);
-  }
-
-  if (state.view === "topic") {
-    return renderTopic(state.weekId, state.topicId);
-  }
-
-  if (state.view === "grammar") {
-    return renderGrammar();
-  }
-
-  if (state.view === "quiz") {
-    return renderQuizBuilder();
-  }
-
-  if (state.view === "notebook") {
-    return renderNotebook();
-  }
-
+  if (state.view === "unit") return renderUnit(state.unitKey);
+  if (state.view === "grammar") return renderGrammarList();
+  if (state.view === "vocab") return renderVocabList();
+  if (state.view === "reference") return renderReferenceList();
+  if (state.view === "quiz") return renderQuizBuilder();
+  if (state.view === "notebook") return renderNotebook();
   renderHome();
 }
 
+// ---------------------------------------------------------------- Home
+
 function renderHome() {
-  setTitle("Course Home");
-  const totalTopics = allTopics().length;
-  const totalQuestions = baseQuestionPool().length;
+  setTitle("Home");
+  const grammarCount = grammarUnits().length;
+  const vocabCount = vocabUnits().length;
+  const questionCount = writtenPool().length + autoVocabPool().length;
 
   app.innerHTML = `
     <section class="page-header">
@@ -232,147 +254,186 @@ function renderHome() {
 
     <section class="grid three">
       <article class="card">
-        <div class="meta-label">Course</div>
-        <h3>Week-by-week path</h3>
-        <p>Study each week in order, then open individual topics for deeper review.</p>
+        <div class="meta-label">Grammar</div>
+        <h3>${grammarCount} categories</h3>
+        <p>Study grammar in a sensible order, stage by stage.</p>
+        <div class="card-actions"><button class="secondary-button" type="button" data-view="grammar">Open grammar</button></div>
+      </article>
+      <article class="card">
+        <div class="meta-label">Vocabulary</div>
+        <h3>${vocabCount} topics</h3>
+        <p>Learn and quiz words by theme: time, places, house, travel...</p>
+        <div class="card-actions"><button class="secondary-button" type="button" data-view="vocab">Open vocabulary</button></div>
       </article>
       <article class="card">
         <div class="meta-label">Practice</div>
-        <h3>${totalQuestions} questions ready</h3>
-        <p>Quiz one topic, one week, selected topics, or the whole question pool.</p>
-      </article>
-      <article class="card">
-        <div class="meta-label">Notebook</div>
-        <h3>Personal phrases</h3>
-        <p>Store travel phrases, useful words, and things you learn outside the course.</p>
+        <h3>${questionCount} questions</h3>
+        <p>Quiz one category, one topic, several, or everything.</p>
+        <div class="card-actions"><button class="secondary-button" type="button" data-view="quiz">Open quiz</button></div>
       </article>
     </section>
 
-    <section class="section">
-      <div class="grid two">
-        ${course.weeks.map(renderWeekCard).join("")}
-      </div>
-    </section>
-  `;
-}
-
-function renderWeekCard(week) {
-  const topicCount = week.topics.length;
-  const questionCount = week.topics.reduce((sum, topic) => sum + (topic.questions || []).length, 0);
-
-  return `
-    <article class="card week-card">
-      <div>
-        <div class="badge-row">
-          <span class="badge">${escapeHtml(week.status || "ready")}</span>
-          <span class="badge">${topicCount} topics</span>
-          <span class="badge">${questionCount} questions</span>
+    ${grammarStages().map((stage) => `
+      <section class="section">
+        <div class="section-head">
+          <h2>${escapeHtml(stage.title)}</h2>
+          <p class="page-copy">${escapeHtml(stage.summary || "")}</p>
         </div>
-        <h3 class="week-title">${escapeHtml(week.title)}</h3>
-        <p>${escapeHtml(week.theme)}</p>
-      </div>
-      <p>${escapeHtml(week.goal)}</p>
-      <div class="card-actions">
-        <button class="button" type="button" data-route-week="${escapeHtml(week.id)}">Study week</button>
-        <button class="secondary-button" type="button" data-quiz-week="${escapeHtml(week.id)}">Quiz week</button>
-      </div>
-    </article>
-  `;
-}
-
-function renderWeek(weekId) {
-  const week = getWeek(weekId);
-  if (!week) {
-    return renderMissing("Week not found");
-  }
-
-  setTitle(week.title);
-  app.innerHTML = `
-    <section class="page-header">
-      <div class="badge-row">
-        <span class="badge">${escapeHtml(week.status || "ready")}</span>
-        <span class="badge">${week.topics.length} topics</span>
-      </div>
-      <h1 class="page-title">${escapeHtml(week.title)}: ${escapeHtml(week.theme)}</h1>
-      <p class="page-copy">${escapeHtml(week.goal)}</p>
-    </section>
-
-    <section class="grid two">
-      <article class="card">
-        <h3>Outcomes</h3>
-        ${renderList(week.outcomes)}
-      </article>
-    </section>
+        <div class="grid two">
+          ${stage.units.map((unit) => renderUnitCard(unit)).join("")}
+        </div>
+      </section>
+    `).join("")}
 
     <section class="section">
+      <div class="section-head"><h2>Vocabulary topics</h2></div>
       <div class="grid two">
-        ${week.topics.map((topic) => renderTopicCard(week, topic)).join("")}
+        ${vocabUnits().map((unit) => renderUnitCard(unit)).join("")}
       </div>
     </section>
   `;
 }
 
-function renderTopicCard(week, topic) {
-  const questionCount = (topic.questions || []).length;
+function renderUnitCard(unit) {
+  const questionCount = (unit.data.questions || []).length + unitWords(unit).filter((word) => word.it && (word.en || word.de)).length;
   return `
     <article class="card">
       <div class="badge-row">
-        <span class="badge">${escapeHtml(topic.type || "topic")}</span>
+        <span class="badge">${escapeHtml(KIND_LABEL[unit.kind] || unit.kind)}</span>
+        ${statusBadge(unit.data.status)}
         <span class="badge">${questionCount} questions</span>
       </div>
-      <h3>${escapeHtml(topic.title)}</h3>
-      <p>${escapeHtml(topic.summary)}</p>
+      <h3>${escapeHtml(unit.data.title)}</h3>
+      <p>${escapeHtml(unit.data.summary || "")}</p>
       <div class="card-actions">
-        <button class="button" type="button" data-route-topic="${escapeHtml(week.id)}" data-topic-id="${escapeHtml(topic.id)}">Study topic</button>
-        <button class="secondary-button" type="button" data-quiz-topic="${escapeHtml(week.id)}" data-topic-id="${escapeHtml(topic.id)}">Quiz topic</button>
+        <button class="button" type="button" data-route-unit="${escapeHtml(unit.key)}">Study</button>
+        <button class="secondary-button" type="button" data-quiz-unit="${escapeHtml(unit.key)}">Quiz</button>
       </div>
     </article>
   `;
 }
 
-function renderTopic(weekId, topicId) {
-  const week = getWeek(weekId);
-  const topic = getTopic(weekId, topicId);
-  if (!week || !topic) {
-    return renderMissing("Topic not found");
-  }
+// ---------------------------------------------------------------- Lists
 
-  setTitle(topic.title);
+function renderGrammarList() {
+  setTitle("Grammar");
+  app.innerHTML = `
+    <section class="page-header">
+      <h1 class="page-title">Grammar</h1>
+      <p class="page-copy">A2 grammar, ordered for learning. Work through the stages in order.</p>
+    </section>
+    ${grammarStages().map((stage) => `
+      <section class="section">
+        <div class="section-head">
+          <h2>${escapeHtml(stage.title)}</h2>
+          <p class="page-copy">${escapeHtml(stage.summary || "")}</p>
+        </div>
+        <div class="grid two">
+          ${stage.units.map((unit) => renderUnitCard(unit)).join("")}
+        </div>
+      </section>
+    `).join("")}
+  `;
+}
+
+function renderVocabList() {
+  setTitle("Vocabulary");
+  app.innerHTML = `
+    <section class="page-header">
+      <h1 class="page-title">Vocabulary</h1>
+      <p class="page-copy">Learn and practice words by theme.</p>
+    </section>
+    <section class="section">
+      <div class="grid two">
+        ${vocabUnits().map((unit) => renderUnitCard(unit)).join("")}
+      </div>
+    </section>
+  `;
+}
+
+function renderReferenceList() {
+  setTitle("Reference");
+  app.innerHTML = `
+    <section class="page-header">
+      <h1 class="page-title">Reference</h1>
+      <p class="page-copy">The alphabet, spelling, and pronunciation rules.</p>
+    </section>
+    <section class="section">
+      <div class="grid two">
+        ${referenceUnits().map((unit) => renderUnitCard(unit)).join("")}
+      </div>
+    </section>
+  `;
+}
+
+// ---------------------------------------------------------------- Unit detail
+
+function renderUnit(unitKey) {
+  const unit = getUnit(unitKey);
+  if (!unit) return renderMissing("Not found");
+
+  setTitle(unit.data.title);
+  const d = unit.data;
+  const words = unitWords(unit);
+  const hasContent = (d.sections || []).length || words.length || (d.examples || []).length;
+  const questionCount = (d.questions || []).length + words.filter((word) => word.it && (word.en || word.de)).length;
+  const backView = unit.kind === "grammar" ? "grammar" : unit.kind === "vocab" ? "vocab" : "reference";
+
   app.innerHTML = `
     <section class="study-layout">
       <article class="card">
         <div class="badge-row">
-          <span class="badge">${escapeHtml(week.title)}</span>
-          <span class="badge">${escapeHtml(topic.type || "topic")}</span>
+          <span class="badge">${escapeHtml(KIND_LABEL[unit.kind] || unit.kind)}</span>
+          ${statusBadge(d.status)}
         </div>
-        <h1 class="topic-title">${escapeHtml(topic.title)}</h1>
-        <p>${escapeHtml(topic.summary)}</p>
+        <h1 class="topic-title">${escapeHtml(d.title)}</h1>
+        <p>${escapeHtml(d.summary || "")}</p>
 
-        ${(topic.sections || []).map((section) => `
+        ${!hasContent ? `<p class="empty">Content coming soon. This topic is scaffolded and will be filled in.</p>` : ""}
+
+        ${(d.sections || []).map((section) => `
           <section class="section">
             <h3>${escapeHtml(section.title)}</h3>
             ${(section.body || []).map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join("")}
           </section>
         `).join("")}
 
-        ${renderVocab(topic.vocab)}
-        ${renderExamples(topic.examples)}
+        ${renderTables(d.tables)}
+        ${renderWordTable(words)}
+        ${renderExamples(d.examples)}
       </article>
 
       <aside class="card">
-        <h3>Topic practice</h3>
-        <p>Quiz only this topic, or go back to the week and mix it with other material.</p>
+        <h3>Practice</h3>
+        <p>${questionCount} question${questionCount === 1 ? "" : "s"} for this topic.</p>
         <div class="card-actions">
-          <button class="button" type="button" data-quiz-topic="${escapeHtml(week.id)}" data-topic-id="${escapeHtml(topic.id)}">Quiz this topic</button>
-          <button class="ghost-button" type="button" data-route-week="${escapeHtml(week.id)}">Back to week</button>
+          <button class="button" type="button" data-quiz-unit="${escapeHtml(unit.key)}"${questionCount ? "" : " disabled"}>Quiz this topic</button>
+          <button class="ghost-button" type="button" data-view="${backView}">Back</button>
         </div>
       </aside>
     </section>
   `;
 }
 
-function renderVocab(vocab = []) {
-  if (!vocab.length) return "";
+function renderTables(tables = []) {
+  if (!tables || !tables.length) return "";
+  return tables.map((table) => `
+    <section class="section">
+      <h3>${escapeHtml(table.title || "")}</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr>${(table.columns || []).map((col) => `<th>${escapeHtml(col)}</th>`).join("")}</tr></thead>
+          <tbody>
+            ${(table.rows || []).map((row) => `<tr>${row.map((cell) => `<td>${escapeHtml(cell)}</td>`).join("")}</tr>`).join("")}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  `).join("");
+}
+
+function renderWordTable(words = []) {
+  if (!words.length) return "";
   return `
     <section class="section">
       <h3>Vocabulary</h3>
@@ -380,10 +441,10 @@ function renderVocab(vocab = []) {
         <table>
           <thead><tr><th>Italian</th><th>English</th><th>German</th><th>Note</th></tr></thead>
           <tbody>
-            ${vocab.map((item) => `
+            ${words.map((item) => `
               <tr>
                 <td>${escapeHtml(item.it)}</td>
-                <td>${escapeHtml(item.en)}</td>
+                <td>${escapeHtml(item.en || "")}</td>
                 <td>${escapeHtml(item.de || "")}</td>
                 <td>${escapeHtml(item.note || "")}</td>
               </tr>
@@ -396,7 +457,7 @@ function renderVocab(vocab = []) {
 }
 
 function renderExamples(examples = []) {
-  if (!examples.length) return "";
+  if (!examples || !examples.length) return "";
   return `
     <section class="section">
       <h3>Examples</h3>
@@ -411,35 +472,22 @@ function renderExamples(examples = []) {
   `;
 }
 
-function renderList(items = []) {
-  if (!items.length) return `<p class="empty">Nothing added yet.</p>`;
-  return `<ul class="list">${items.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>`;
-}
-
-function renderGrammar() {
-  setTitle("Grammar Overview");
+function renderMissing(message) {
+  setTitle("Not Found");
   app.innerHTML = `
-    <section class="page-header">
-      <h1 class="page-title">Grammar Overview</h1>
-      <p class="page-copy">A reference area for grammar patterns you can use while doing exercises outside the app.</p>
-    </section>
-
-    <section class="grid two">
-      ${course.grammar.map((item) => `
-        <article class="card">
-          <h3>${escapeHtml(item.title)}</h3>
-          <p>${escapeHtml(item.summary)}</p>
-          ${renderList(item.points)}
-        </article>
-      `).join("")}
+    <section class="card">
+      <h1 class="page-title">${escapeHtml(message)}</h1>
+      <button class="button" type="button" data-view="home">Back home</button>
     </section>
   `;
 }
 
+// ---------------------------------------------------------------- Quiz
+
 function renderQuizBuilder() {
   setTitle("Quiz Builder");
   if (!state.quiz.initialized) {
-    course.weeks.forEach((week) => state.quiz.selectedWeekIds.add(week.id));
+    allUnits().forEach((unit) => state.quiz.selectedUnitKeys.add(unit.key));
     state.quiz.initialized = true;
   }
   rebuildQuizPool();
@@ -447,7 +495,7 @@ function renderQuizBuilder() {
   app.innerHTML = `
     <section class="page-header">
       <h1 class="page-title">Quiz Builder</h1>
-      <p class="page-copy">Choose specific weeks and topics, then practice from that question pool.</p>
+      <p class="page-copy">Choose categories and topics, then practice from that question pool.</p>
     </section>
 
     <section class="quiz-builder">
@@ -457,6 +505,7 @@ function renderQuizBuilder() {
           <div class="meta-label">Practice type</div>
           <div class="mode-grid">
             <button class="mode-button ${state.quiz.mode === "mixed" ? "active" : ""}" type="button" data-quiz-mode="mixed">Mixed</button>
+            <button class="mode-button ${state.quiz.mode === "grammar" ? "active" : ""}" type="button" data-quiz-mode="grammar">Grammar</button>
             <button class="mode-button ${state.quiz.mode === "vocab" ? "active" : ""}" type="button" data-quiz-mode="vocab">Vocabulary</button>
             <button class="mode-button ${state.quiz.mode === "numbers" ? "active" : ""}" type="button" data-quiz-mode="numbers">Numbers</button>
           </div>
@@ -465,23 +514,18 @@ function renderQuizBuilder() {
         <button class="ghost-button" type="button" data-action="clear-quiz">Clear</button>
 
         <div class="filter-group">
-          <div class="meta-label">Weeks</div>
-          ${course.weeks.map((week) => `
-            <label class="check-row">
-              <input type="checkbox" data-filter-week="${escapeHtml(week.id)}" ${state.quiz.selectedWeekIds.has(week.id) ? "checked" : ""}>
-              <span>${escapeHtml(week.title)}<small>${escapeHtml(week.theme)}</small></span>
-            </label>
-          `).join("")}
+          <div class="meta-label">Grammar</div>
+          ${grammarUnits().map((unit) => renderFilterRow(unit)).join("")}
         </div>
 
         <div class="filter-group">
-          <div class="meta-label">Topics</div>
-          ${allTopics().map(({ week, topic, key }) => `
-            <label class="check-row">
-              <input type="checkbox" data-filter-topic="${escapeHtml(key)}" ${state.quiz.selectedTopicKeys.has(key) ? "checked" : ""}>
-              <span>${escapeHtml(topic.title)}<small>${escapeHtml(week.title)}</small></span>
-            </label>
-          `).join("")}
+          <div class="meta-label">Vocabulary</div>
+          ${vocabUnits().map((unit) => renderFilterRow(unit)).join("")}
+        </div>
+
+        <div class="filter-group">
+          <div class="meta-label">Reference</div>
+          ${referenceUnits().map((unit) => renderFilterRow(unit)).join("")}
         </div>
       </aside>
 
@@ -492,12 +536,20 @@ function renderQuizBuilder() {
   `;
 }
 
+function renderFilterRow(unit) {
+  return `
+    <label class="check-row">
+      <input type="checkbox" data-filter-unit="${escapeHtml(unit.key)}" ${state.quiz.selectedUnitKeys.has(unit.key) ? "checked" : ""}>
+      <span>${escapeHtml(unit.data.title)}<small>${escapeHtml(unit.data.status || "ready")}</small></span>
+    </label>
+  `;
+}
+
 function rebuildQuizPool() {
   const pool = filteredQuestionPool();
   const poolKey = [
     state.quiz.mode,
-    [...state.quiz.selectedWeekIds].sort().join(","),
-    [...state.quiz.selectedTopicKeys].sort().join(","),
+    [...state.quiz.selectedUnitKeys].sort().join(","),
     pool.map((question) => question.id).sort().join(",")
   ].join("|");
 
@@ -512,7 +564,6 @@ function rebuildQuizPool() {
   }
 
   state.quiz.pool = pool;
-
   if (state.quiz.current && !state.quiz.pool.some((question) => question.id === state.quiz.current.id)) {
     state.quiz.current = null;
     state.quiz.answered = false;
@@ -522,16 +573,9 @@ function rebuildQuizPool() {
 function filteredQuestionPool() {
   const pool = questionPool();
   if (state.quiz.mode === "numbers") return pool;
-
-  const selectedWeeks = state.quiz.selectedWeekIds;
-  const selectedTopics = state.quiz.selectedTopicKeys;
-
-  return pool.filter((question) => {
-    if (question.weekId === "personal") return true;
-    const topicMatch = selectedTopics.has(question.topicKey);
-    const weekMatch = selectedWeeks.has(question.weekId);
-    return topicMatch || weekMatch;
-  });
+  return pool.filter((question) =>
+    question.unitKey === "personal" || state.quiz.selectedUnitKeys.has(question.unitKey)
+  );
 }
 
 function resetQuizDeck() {
@@ -552,7 +596,7 @@ function renderQuizStage() {
   `;
 
   if (!state.quiz.pool.length) {
-    return `${stats}<p class="empty">Select at least one week or topic with quiz questions.</p>`;
+    return `${stats}<p class="empty">Select at least one category or topic with quiz questions.</p>`;
   }
 
   if (!state.quiz.current) {
@@ -563,8 +607,8 @@ function renderQuizStage() {
   return `
     ${stats}
     <div class="badge-row">
-      <span class="badge">${escapeHtml(question.weekTitle)}</span>
-      <span class="badge">${escapeHtml(question.topicTitle)}</span>
+      <span class="badge">${escapeHtml(question.kindLabel || "")}</span>
+      <span class="badge">${escapeHtml(question.unitTitle || "")}</span>
       <span class="badge">${escapeHtml(question.type)}</span>
     </div>
     <div class="quiz-prompt">
@@ -683,12 +727,13 @@ function applyDifficulty(question, difficulty) {
   if (difficulty === "hard") {
     state.quiz.deck.splice(Math.max(1, Math.floor(state.quiz.deck.length / 2)), 0, question);
   }
-
   if (difficulty === "very-hard") {
     state.quiz.deck.splice(Math.max(1, Math.floor(state.quiz.deck.length / 3)), 0, question);
     state.quiz.deck.push(question);
   }
 }
+
+// ---------------------------------------------------------------- Notebook
 
 function renderNotebook() {
   setTitle("Personal Notebook");
@@ -932,15 +977,7 @@ function deleteNote(noteId) {
   document.getElementById("notes-list").innerHTML = renderNotes(notes);
 }
 
-function renderMissing(message) {
-  setTitle("Not Found");
-  app.innerHTML = `
-    <section class="card">
-      <h1 class="page-title">${escapeHtml(message)}</h1>
-      <button class="button" type="button" data-view="home">Back home</button>
-    </section>
-  `;
-}
+// ---------------------------------------------------------------- Sidebar
 
 function openSidebar() {
   sidebar.classList.add("open");
@@ -952,6 +989,8 @@ function closeSidebar() {
   overlay.classList.remove("open");
 }
 
+// ---------------------------------------------------------------- Events
+
 document.addEventListener("click", (event) => {
   const target = event.target.closest("button, input, [data-action]");
   if (!target) return;
@@ -961,45 +1000,28 @@ document.addEventListener("click", (event) => {
 
   if (target.dataset.view) route(target.dataset.view);
 
-  if (target.dataset.routeWeek) {
-    route("week", { weekId: target.dataset.routeWeek });
+  if (target.dataset.routeUnit) {
+    route("unit", { unitKey: target.dataset.routeUnit });
   }
 
-  if (target.dataset.routeTopic) {
-    route("topic", {
-      weekId: target.dataset.routeTopic,
-      topicId: target.dataset.topicId
-    });
-  }
-
-  if (target.dataset.quizWeek) {
+  if (target.dataset.quizUnit) {
     state.quiz.initialized = true;
-    state.quiz.selectedWeekIds = new Set([target.dataset.quizWeek]);
-    state.quiz.selectedTopicKeys = new Set();
-    resetQuizDeck();
-    route("quiz");
-  }
-
-  if (target.dataset.quizTopic) {
-    state.quiz.initialized = true;
-    state.quiz.selectedWeekIds = new Set();
-    state.quiz.selectedTopicKeys = new Set([slugKey(target.dataset.quizTopic, target.dataset.topicId)]);
+    state.quiz.selectedUnitKeys = new Set([target.dataset.quizUnit]);
+    if (target.dataset.quizUnit.startsWith("vocab:")) state.quiz.mode = "vocab";
     resetQuizDeck();
     route("quiz");
   }
 
   if (target.dataset.action === "select-all-quiz") {
     state.quiz.initialized = true;
-    state.quiz.selectedWeekIds = new Set(course.weeks.map((week) => week.id));
-    state.quiz.selectedTopicKeys = new Set();
+    state.quiz.selectedUnitKeys = new Set(allUnits().map((unit) => unit.key));
     resetQuizDeck();
     renderQuizBuilder();
   }
 
   if (target.dataset.action === "clear-quiz") {
     state.quiz.initialized = true;
-    state.quiz.selectedWeekIds = new Set();
-    state.quiz.selectedTopicKeys = new Set();
+    state.quiz.selectedUnitKeys = new Set();
     resetQuizDeck();
     renderQuizBuilder();
   }
@@ -1029,45 +1051,21 @@ document.addEventListener("click", (event) => {
     renderQuizBuilder();
   }
 
-  if (target.dataset.deleteNote) {
-    deleteNote(target.dataset.deleteNote);
-  }
-
-  if (target.dataset.deleteVocab) {
-    deleteVocabulary(target.dataset.deleteVocab);
-  }
-
-  if (target.dataset.editNote) {
-    editNote(target.dataset.editNote);
-  }
-
-  if (target.dataset.action === "cancel-note-edit") {
-    resetNoteForm();
-  }
-
-  if (target.dataset.format) {
-    applyNoteFormat(target.dataset.format);
-  }
+  if (target.dataset.deleteNote) deleteNote(target.dataset.deleteNote);
+  if (target.dataset.deleteVocab) deleteVocabulary(target.dataset.deleteVocab);
+  if (target.dataset.editNote) editNote(target.dataset.editNote);
+  if (target.dataset.action === "cancel-note-edit") resetNoteForm();
+  if (target.dataset.format) applyNoteFormat(target.dataset.format);
 });
 
 document.addEventListener("change", (event) => {
   const target = event.target;
 
-  if (target.dataset.filterWeek) {
+  if (target.dataset.filterUnit) {
     if (target.checked) {
-      state.quiz.selectedWeekIds.add(target.dataset.filterWeek);
+      state.quiz.selectedUnitKeys.add(target.dataset.filterUnit);
     } else {
-      state.quiz.selectedWeekIds.delete(target.dataset.filterWeek);
-    }
-    resetQuizDeck();
-    renderQuizBuilder();
-  }
-
-  if (target.dataset.filterTopic) {
-    if (target.checked) {
-      state.quiz.selectedTopicKeys.add(target.dataset.filterTopic);
-    } else {
-      state.quiz.selectedTopicKeys.delete(target.dataset.filterTopic);
+      state.quiz.selectedUnitKeys.delete(target.dataset.filterUnit);
     }
     resetQuizDeck();
     renderQuizBuilder();
@@ -1102,5 +1100,5 @@ if ("serviceWorker" in navigator && location.protocol !== "file:") {
   });
 }
 
-renderWeekNav();
+renderUnitNav();
 render();

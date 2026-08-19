@@ -375,7 +375,7 @@ function renderUnit(unitKey) {
   setTitle(unit.data.title);
   const d = unit.data;
   const words = unitWords(unit);
-  const hasContent = (d.sections || []).length || words.length || (d.examples || []).length;
+  const hasContent = (d.sections || []).length || words.length || (d.examples || []).length || (d.exercises || []).length;
   const questionCount = (d.questions || []).length + words.filter((word) => word.it && (word.en || word.de)).length;
   const backView = unit.kind === "grammar" ? "grammar" : unit.kind === "vocab" ? "vocab" : "reference";
 
@@ -401,6 +401,7 @@ function renderUnit(unitKey) {
         ${renderTables(d.tables)}
         ${renderWordTable(words)}
         ${renderExamples(d.examples)}
+        ${renderExercises(unit)}
       </article>
 
       <aside class="card">
@@ -464,10 +465,48 @@ function renderExamples(examples = []) {
       ${examples.map((example) => `
         <div class="example">
           <strong>${escapeHtml(example.it)}</strong>
-          <span>EN: ${escapeHtml(example.en)}</span>
+          ${example.en ? `<span>EN: ${escapeHtml(example.en)}</span>` : ""}
           ${example.de ? `<span>DE: ${escapeHtml(example.de)}</span>` : ""}
         </div>
       `).join("")}
+    </section>
+  `;
+}
+
+function revealId(unit, index) {
+  return `reveal-${unit.key}-${index}`.replace(/[^a-z0-9-]/gi, "-");
+}
+
+function renderRevealBlocks(reveal = {}) {
+  if (!reveal) return "";
+  let html = "";
+  (reveal.body || []).forEach((paragraph) => {
+    html += `<p>${escapeHtml(paragraph)}</p>`;
+  });
+  html += renderTables(reveal.tables);
+  html += renderExamples(reveal.examples);
+  return html;
+}
+
+function renderExercises(unit) {
+  const exercises = unit.data.exercises || [];
+  if (!exercises.length) return "";
+  return `
+    <section class="section exercises">
+      <h3>Esercizi — scrivi a mano, poi controlla</h3>
+      <p class="page-copy">Fai ogni esercizio sul tuo quaderno. Poi rivela il suggerimento per confrontare.</p>
+      ${exercises.map((exercise, index) => {
+        const id = revealId(unit, index);
+        return `
+        <div class="exercise-card">
+          <div class="exercise-prompt">${escapeHtml(exercise.prompt)}</div>
+          ${exercise.hint ? `<p class="exercise-hint">Suggerimento: ${escapeHtml(exercise.hint)}</p>` : ""}
+          <button class="secondary-button" type="button" data-toggle-reveal="${id}">Rivela suggerimento</button>
+          <div class="exercise-reveal" id="${id}" hidden>
+            ${renderRevealBlocks(exercise.reveal)}
+          </div>
+        </div>`;
+      }).join("")}
     </section>
   `;
 }
@@ -1049,6 +1088,15 @@ document.addEventListener("click", (event) => {
     state.quiz.total = 0;
     resetQuizDeck();
     renderQuizBuilder();
+  }
+
+  if (target.dataset.toggleReveal) {
+    const revealEl = document.getElementById(target.dataset.toggleReveal);
+    if (revealEl) {
+      const wasHidden = revealEl.hasAttribute("hidden");
+      revealEl.toggleAttribute("hidden", !wasHidden);
+      target.textContent = wasHidden ? "Nascondi suggerimento" : "Rivela suggerimento";
+    }
   }
 
   if (target.dataset.deleteNote) deleteNote(target.dataset.deleteNote);

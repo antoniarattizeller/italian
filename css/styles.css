@@ -353,6 +353,36 @@ button {
   text-transform: uppercase;
 }
 
+.exercise-card {
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  margin-top: 12px;
+  padding: 14px 16px;
+}
+
+.exercise-prompt {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.exercise-hint {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin: 0 0 10px;
+}
+
+.exercise-reveal {
+  border-top: 1px dashed var(--line);
+  margin-top: 12px;
+  padding-top: 4px;
+}
+
+.exercise-reveal[hidden] {
+  display: none;
+}
+
 .topic-list {
   display: grid;
   gap: 8px;

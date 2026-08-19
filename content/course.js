@@ -105,6 +105,32 @@ window.COURSE = {
         { it: "Noi stiamo bene, grazie.", en: "We are well, thank you.", de: "Uns geht es gut, danke." },
         { it: "Ho ventun anni.", en: "I am twenty-one years old.", de: "Ich bin einundzwanzig Jahre alt." }
       ],
+      exercises: [
+        {
+          prompt: "Scrivi tre frasi su di te usando 'essere', 'avere' e 'stare' (una per verbo).",
+          hint: "Per esempio: la tua nazionalità, la tua età, come stai oggi.",
+          reveal: {
+            body: ["Ecco un modello. Le tue frasi possono essere diverse: l'importante è coniugare bene il verbo."],
+            examples: [
+              { it: "Sono italiana e sono di Roma." },
+              { it: "Ho venticinque anni e ho un fratello." },
+              { it: "Oggi sto bene, grazie." }
+            ]
+          }
+        },
+        {
+          prompt: "Coniuga 'avere' al presente per tutte le sei persone, poi rivela per controllare.",
+          reveal: {
+            tables: [
+              {
+                title: "avere — presente",
+                columns: ["Persona", "avere"],
+                rows: [["io", "ho"], ["tu", "hai"], ["lui/lei", "ha"], ["noi", "abbiamo"], ["voi", "avete"], ["loro", "hanno"]]
+              }
+            ]
+          }
+        }
+      ],
       questions: [
         { id: "g-essere-noi", type: "typed", prompt: "Complete with essere: noi ___", answer: "siamo", accepted: ["siamo"] },
         { id: "g-essere-loro", type: "typed", prompt: "Complete with essere: loro ___", answer: "sono", accepted: ["sono"] },

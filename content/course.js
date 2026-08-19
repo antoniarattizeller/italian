@@ -145,6 +145,33 @@ window.COURSE = {
         { id: "g-gender-sort", type: "multiple-choice", prompt: "Which group contains only masculine nouns?", answer: "zaino, quaderno, libro", options: ["zaino, quaderno, libro", "penna, classe, lezione", "lavagna, bottiglia, penna", "classe, libro, lezione"] }
       ]
     },
+    {
+      id: "articoli",
+      title: "Articles (the / a)",
+      stage: 1,
+      level: "A2",
+      status: "stub",
+      summary: "Definite (il, lo, la, l', i, gli, le) and indefinite (un, uno, una, un') articles and how they follow the noun.",
+      sections: []
+    },
+    {
+      id: "presente",
+      title: "Present tense (regular verbs)",
+      stage: 1,
+      level: "A2",
+      status: "stub",
+      summary: "Present indicative of regular -are, -ere, and -ire verbs (parlare, prendere, dormire, capire).",
+      sections: []
+    },
+    {
+      id: "aggettivi",
+      title: "Adjectives & agreement",
+      stage: 1,
+      level: "A2",
+      status: "stub",
+      summary: "Adjective endings agree with the noun in gender and number, and where the adjective goes.",
+      sections: []
+    },
 
     // ---------------------------------------------------------------- Stage 2
     {
@@ -170,6 +197,199 @@ window.COURSE = {
       questions: [
         { id: "g-chiamarsi-loro", type: "typed", prompt: "Complete with chiamarsi: loro ___", answer: "si chiamano", accepted: ["si chiamano"] }
       ]
+    },
+    {
+      id: "verbi-modali",
+      title: "Modal verbs (potere, dovere, volere)",
+      stage: 2,
+      level: "A2",
+      status: "stub",
+      summary: "can / must / want + infinitive: posso, devo, voglio ... plus the polite vorrei.",
+      sections: []
+    },
+    {
+      id: "stare-gerundio",
+      title: "Present continuous (stare + gerundio)",
+      stage: 2,
+      level: "A2",
+      status: "stub",
+      summary: "Describing what is happening right now: sto mangiando, stai leggendo.",
+      sections: []
+    },
+    {
+      id: "piacere",
+      title: "Piacere (to like)",
+      stage: 2,
+      level: "A2",
+      status: "stub",
+      summary: "mi piace + singular/infinitive vs. mi piacciono + plural; and the indirect pronouns it uses.",
+      sections: []
+    },
+    {
+      id: "ce-ci-sono",
+      title: "There is / there are (c'è, ci sono)",
+      stage: 2,
+      level: "A2",
+      status: "stub",
+      summary: "Saying what exists or is present: c'è un problema, ci sono due libri.",
+      sections: []
+    },
+    {
+      id: "possessivi",
+      title: "Possessives (my, your, ...)",
+      stage: 2,
+      level: "A2",
+      status: "stub",
+      summary: "il mio, la tua, i nostri ... — possessives agree with the thing owned and usually take an article.",
+      sections: []
+    },
+    {
+      id: "dimostrativi",
+      title: "Demonstratives (questo / quello)",
+      stage: 2,
+      level: "A2",
+      status: "stub",
+      summary: "this and that, and how questo and quello change form.",
+      sections: []
+    },
+    {
+      id: "quantificatori",
+      title: "Quantifiers (molto, poco, troppo)",
+      stage: 2,
+      level: "A2",
+      status: "stub",
+      summary: "How much / how many: molto, poco, troppo, tanto, tutto — as adverbs and as adjectives.",
+      sections: []
+    },
+    {
+      id: "interrogativi",
+      title: "Question words",
+      stage: 2,
+      level: "A2",
+      status: "stub",
+      summary: "chi, che/cosa, dove, quando, perché, quanto, come, quale.",
+      sections: []
+    },
+
+    // ---------------------------------------------------------------- Stage 3
+    {
+      id: "preposizioni-semplici",
+      title: "Simple prepositions",
+      stage: 3,
+      level: "A2",
+      status: "stub",
+      summary: "di, a, da, in, con, su, per, tra/fra — and their most common uses.",
+      sections: []
+    },
+    {
+      id: "preposizioni-articolate",
+      title: "Combined prepositions",
+      stage: 3,
+      level: "A2",
+      status: "stub",
+      summary: "Preposition + article: del, al, dal, nel, sul, ... and when you need them.",
+      sections: []
+    },
+    {
+      id: "preposizioni-luogo",
+      title: "Place prepositions",
+      stage: 3,
+      level: "A2",
+      status: "stub",
+      summary: "Where things are: sopra, sotto, davanti a, dietro, vicino a, accanto a, tra. (Pairs with the Locations vocab.)",
+      sections: []
+    },
+    {
+      id: "pronomi-diretti",
+      title: "Direct object pronouns",
+      stage: 3,
+      level: "A2",
+      status: "stub",
+      summary: "lo, la, li, le, mi, ti, ci, vi — replacing the direct object (Lo vedo).",
+      sections: []
+    },
+    {
+      id: "pronomi-indiretti",
+      title: "Indirect object pronouns",
+      stage: 3,
+      level: "A2",
+      status: "stub",
+      summary: "gli, le, mi, ti, ci, vi — replacing 'to someone' (Le parlo).",
+      sections: []
+    },
+    {
+      id: "ci-ne",
+      title: "Ci and ne",
+      stage: 3,
+      level: "A2",
+      status: "stub",
+      summary: "The little words ci (there / about it) and ne (of it / of them).",
+      sections: []
+    },
+
+    // ---------------------------------------------------------------- Stage 4
+    {
+      id: "passato-prossimo",
+      title: "Passato prossimo",
+      stage: 4,
+      level: "A2",
+      status: "stub",
+      summary: "Completed past actions with avere/essere + past participle; agreement with essere.",
+      sections: []
+    },
+    {
+      id: "imperfetto",
+      title: "Imperfetto",
+      stage: 4,
+      level: "A2",
+      status: "stub",
+      summary: "Habitual and background past: descriptions, ongoing states, 'used to'.",
+      sections: []
+    },
+    {
+      id: "passato-vs-imperfetto",
+      title: "Passato prossimo vs. imperfetto",
+      stage: 4,
+      level: "A2",
+      status: "stub",
+      summary: "Choosing between the two: completed events vs. background and habits.",
+      sections: []
+    },
+    {
+      id: "futuro",
+      title: "Simple future (futuro semplice)",
+      stage: 4,
+      level: "A2",
+      status: "stub",
+      summary: "Talking about the future: parlerò, prenderai, saremo, and irregular stems.",
+      sections: []
+    },
+    {
+      id: "condizionale",
+      title: "Present conditional",
+      stage: 4,
+      level: "A2",
+      status: "stub",
+      summary: "Would / polite requests: vorrei, potrei, mi piacerebbe.",
+      sections: []
+    },
+    {
+      id: "imperativo",
+      title: "Imperative (informal)",
+      stage: 4,
+      level: "A2",
+      status: "stub",
+      summary: "Giving instructions and suggestions: parla!, prendi!, andiamo!, and negatives.",
+      sections: []
+    },
+    {
+      id: "comparativi",
+      title: "Comparatives",
+      stage: 4,
+      level: "A2",
+      status: "stub",
+      summary: "più... di, meno... di, (così) come — comparing people and things.",
+      sections: []
     }
   ],
 
@@ -316,6 +536,118 @@ window.COURSE = {
         { id: "v-hob-music", type: "typed", prompt: "Type in Italian: to listen to music", answer: "ascoltare la musica", accepted: ["ascoltare la musica"] },
         { id: "v-hob-piano", type: "typed", prompt: "Type in Italian: to play the piano", answer: "suonare il piano", accepted: ["suonare il piano"] }
       ]
+    },
+    {
+      id: "numbers-dates",
+      title: "Numbers, days & dates",
+      status: "stub",
+      summary: "Numbers, days of the week, months, telling the time, and giving dates.",
+      words: []
+    },
+    {
+      id: "time-words",
+      title: "Time words",
+      status: "stub",
+      summary: "When something happens: yesterday, soon, before, tomorrow, in a week, early, late, already...",
+      words: []
+    },
+    {
+      id: "locations",
+      title: "Locations & place words",
+      status: "stub",
+      summary: "Where things are: behind, on top, in front, close to, under, over, next to, between... (Pairs with Place prepositions.)",
+      words: []
+    },
+    {
+      id: "house",
+      title: "The house",
+      status: "stub",
+      summary: "Rooms and objects: kitchen, living room, bathroom, bedroom, and the things in them.",
+      words: []
+    },
+    {
+      id: "family-people",
+      title: "Family & people",
+      status: "stub",
+      summary: "Family members and words to describe people.",
+      words: []
+    },
+    {
+      id: "food-drink",
+      title: "Food, drink & the restaurant",
+      status: "stub",
+      summary: "Food, drinks, meals, and ordering in a café or restaurant.",
+      words: []
+    },
+    {
+      id: "city-directions",
+      title: "The city & directions",
+      status: "stub",
+      summary: "Places in town and how to ask for and give directions.",
+      words: []
+    },
+    {
+      id: "travel",
+      title: "Travel",
+      status: "stub",
+      summary: "Station, ticket, luggage, and useful phrases for finding your way when travelling.",
+      words: []
+    },
+    {
+      id: "shopping",
+      title: "Shopping & money",
+      status: "stub",
+      summary: "Shops, prices, sizes, and 'how much is it?'.",
+      words: []
+    },
+    {
+      id: "clothing",
+      title: "Clothes",
+      status: "stub",
+      summary: "Clothes and accessories.",
+      words: []
+    },
+    {
+      id: "body-health",
+      title: "Body & health",
+      status: "stub",
+      summary: "Body parts, at the doctor, and basic symptoms.",
+      words: []
+    },
+    {
+      id: "weather-seasons",
+      title: "Weather & seasons",
+      status: "stub",
+      summary: "Weather, seasons, and temperature.",
+      words: []
+    },
+    {
+      id: "jobs",
+      title: "Jobs",
+      status: "stub",
+      summary: "Professions and workplaces.",
+      words: []
+    },
+    {
+      id: "daily-routine",
+      title: "Daily routine",
+      status: "stub",
+      summary: "Everyday actions through the day. (Pairs with Reflexive verbs.)",
+      words: []
+    },
+    {
+      id: "colors",
+      title: "Colors",
+      status: "stub",
+      summary: "Colors, and how they agree with the noun.",
+      words: []
+    },
+    {
+      id: "feelings-adjectives",
+      title: "Feelings & descriptions",
+      status: "stub",
+      summary: "Moods and common descriptive adjectives.",
+      words: []
     }
   ],
 

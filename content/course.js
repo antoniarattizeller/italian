@@ -630,9 +630,30 @@ window.COURSE = {
     {
       id: "house",
       title: "The house",
-      status: "stub",
-      summary: "Rooms and objects: kitchen, living room, bathroom, bedroom, and the things in them.",
-      words: []
+      status: "ready",
+      summary: "Le stanze e gli oggetti della casa: cucina, bagno, camera, soggiorno e i mobili.",
+      words: [
+        { it: "la cucina", def: "La stanza dove si prepara e si cucina il cibo.", ex: "In cucina c'è un frigorifero grande.", en: "kitchen", de: "Küche" },
+        { it: "il bagno", def: "La stanza con la doccia, il water e il lavandino.", ex: "Vado in bagno a lavarmi le mani.", en: "bathroom", de: "Bad" },
+        { it: "la camera da letto", def: "La stanza dove si dorme.", ex: "La mia camera da letto è piccola ma luminosa.", en: "bedroom", de: "Schlafzimmer" },
+        { it: "il soggiorno", def: "La stanza dove ci si rilassa, si guarda la TV e si ricevono gli ospiti.", ex: "La sera guardiamo un film in soggiorno.", en: "living room", de: "Wohnzimmer" },
+        { it: "la sala da pranzo", def: "La stanza dove si mangia.", ex: "A Natale mangiamo tutti nella sala da pranzo.", en: "dining room", de: "Esszimmer" },
+        { it: "il corridoio", def: "Lo spazio stretto che collega le stanze.", ex: "Le camere sono in fondo al corridoio.", en: "hallway", de: "Flur" },
+        { it: "il balcone", def: "Lo spazio esterno con una ringhiera, fuori da una stanza.", ex: "In estate faccio colazione sul balcone.", en: "balcony", de: "Balkon" },
+        { it: "il giardino", def: "Lo spazio verde intorno o vicino alla casa.", ex: "I bambini giocano in giardino.", en: "garden", de: "Garten" },
+        { it: "il tavolo", def: "Il mobile con un piano e le gambe, dove si mangia o si lavora.", ex: "Mettiamo i piatti sul tavolo.", en: "table", de: "Tisch" },
+        { it: "la sedia", def: "Il mobile su cui ci si siede.", ex: "Ci sono quattro sedie intorno al tavolo.", en: "chair", de: "Stuhl" },
+        { it: "il letto", def: "Il mobile su cui si dorme.", ex: "La sera vado a letto alle undici.", en: "bed", de: "Bett" },
+        { it: "il divano", def: "Il mobile comodo e morbido dove ci si siede in più persone.", ex: "Mi rilasso sul divano dopo cena.", en: "sofa", de: "Sofa" },
+        { it: "l'armadio", def: "Il mobile alto dove si tengono i vestiti.", ex: "Metto la giacca nell'armadio.", en: "wardrobe", de: "Schrank" },
+        { it: "il frigorifero", def: "L'elettrodomestico freddo dove si conservano i cibi.", ex: "Il latte è nel frigorifero.", en: "fridge", de: "Kühlschrank" },
+        { it: "il forno", def: "L'elettrodomestico caldo dove si cuociono i cibi.", ex: "La pizza è nel forno.", en: "oven", de: "Ofen" },
+        { it: "il lavandino", def: "Il posto con l'acqua dove ci si lava le mani o si lavano i piatti.", ex: "Lavo i piatti nel lavandino.", en: "sink", de: "Waschbecken" },
+        { it: "la doccia", def: "Il posto nel bagno dove ci si lava con l'acqua.", ex: "Faccio la doccia ogni mattina.", en: "shower", de: "Dusche" },
+        { it: "la finestra", def: "L'apertura nel muro con il vetro che fa entrare la luce.", ex: "Apri la finestra, fa caldo.", en: "window", de: "Fenster" },
+        { it: "la porta", def: "L'apertura da cui si entra e si esce da una stanza.", ex: "Chiudi la porta, per favore.", en: "door", de: "Tür" },
+        { it: "la lampada", def: "L'oggetto che dà luce in una stanza.", ex: "Accendo la lampada per leggere.", en: "lamp", de: "Lampe" }
+      ]
     },
     {
       id: "family-people",
@@ -658,9 +679,30 @@ window.COURSE = {
     {
       id: "travel",
       title: "Travel",
-      status: "stub",
-      summary: "Station, ticket, luggage, and useful phrases for finding your way when travelling.",
-      words: []
+      status: "ready",
+      summary: "Stazione, biglietto, valigia e frasi utili per orientarsi in viaggio.",
+      words: [
+        { it: "la stazione", def: "Il luogo da cui partono e arrivano i treni.", ex: "Ci vediamo alla stazione alle nove.", en: "station", de: "Bahnhof" },
+        { it: "l'aeroporto", def: "Il luogo da cui partono e arrivano gli aerei.", ex: "L'aeroporto è lontano dal centro.", en: "airport", de: "Flughafen" },
+        { it: "il treno", def: "Il mezzo di trasporto che va su rotaie.", ex: "Prendo il treno per andare a lavorare.", en: "train", de: "Zug" },
+        { it: "l'aereo", def: "Il mezzo di trasporto che vola nel cielo.", ex: "L'aereo per Roma parte alle sette.", en: "plane", de: "Flugzeug" },
+        { it: "l'autobus", def: "Il mezzo di trasporto pubblico che va su strada.", ex: "Aspetto l'autobus alla fermata.", en: "bus", de: "Bus" },
+        { it: "il biglietto", def: "Il documento che compri per viaggiare o entrare in un posto.", ex: "Ho comprato il biglietto del treno online.", en: "ticket", de: "Fahrkarte" },
+        { it: "il binario", def: "Il posto nella stazione da cui parte il treno.", ex: "Il treno parte dal binario tre.", en: "platform / track", de: "Gleis" },
+        { it: "la fermata", def: "Il punto dove l'autobus si ferma per far salire e scendere le persone.", ex: "Scendo alla prossima fermata.", en: "stop", de: "Haltestelle" },
+        { it: "la valigia", def: "La borsa grande dove metti i vestiti quando viaggi.", ex: "Preparo la valigia prima di partire.", en: "suitcase", de: "Koffer" },
+        { it: "la prenotazione", def: "Quando riservi in anticipo un posto, una camera o un tavolo.", ex: "Ho una prenotazione per due notti.", en: "reservation / booking", de: "Reservierung" },
+        { it: "l'albergo", def: "Il luogo dove dormi quando sei in viaggio.", ex: "Dormiamo in un albergo vicino al mare.", en: "hotel", de: "Hotel" },
+        { it: "la camera", def: "La stanza dell'albergo dove dormi.", ex: "La nostra camera è al secondo piano.", en: "room", de: "Zimmer" },
+        { it: "la mappa", def: "Il disegno di una città o di una zona che aiuta a trovare la strada.", ex: "Guardo la mappa per trovare il museo.", en: "map", de: "Karte" },
+        { it: "il passaporto", def: "Il documento che serve per viaggiare in altri paesi.", ex: "Non dimenticare il passaporto in aeroporto.", en: "passport", de: "Reisepass" },
+        { it: "la partenza", def: "Il momento in cui si parte.", ex: "La partenza è prevista alle otto.", en: "departure", de: "Abfahrt" },
+        { it: "l'arrivo", def: "Il momento in cui si arriva.", ex: "L'arrivo a Napoli è alle dieci.", en: "arrival", de: "Ankunft" },
+        { it: "il ritardo", def: "Quando qualcosa arriva o parte più tardi del previsto.", ex: "Il treno è in ritardo di venti minuti.", en: "delay", de: "Verspätung" },
+        { it: "il volo", def: "Il viaggio che si fa in aereo.", ex: "Il volo dura due ore.", en: "flight", de: "Flug" },
+        { it: "Scusi, dov'è...?", def: "Frase per chiedere gentilmente dove si trova un luogo.", ex: "Scusi, dov'è la stazione?", en: "Excuse me, where is...?", de: "Entschuldigung, wo ist...?" },
+        { it: "A che ora parte?", def: "Frase per chiedere l'orario di partenza.", ex: "A che ora parte il prossimo treno?", en: "What time does it leave?", de: "Wann fährt es ab?" }
+      ]
     },
     {
       id: "shopping",

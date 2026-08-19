@@ -69,6 +69,12 @@ function unitWords(unit) {
   return unit.data.words || unit.data.vocab || [];
 }
 
+// A word can be quizzed if it has an Italian form and something to prompt with:
+// an Italian definition (preferred) or an English/German translation.
+function isQuizableWord(word) {
+  return Boolean(word.it && (word.def || word.en || word.de));
+}
+
 function grammarStages() {
   const stages = course.stages && course.stages.length
     ? course.stages
@@ -92,13 +98,18 @@ function tagQuestion(question, unit) {
 }
 
 function makeVocabQuestion(word, index, unit) {
+  // Prefer an Italian definition (immersion). Fall back to en/de translation.
+  const prompt = word.def
+    ? `Quale parola? ${word.def}`
+    : `Write the Italian for: ${word.en || ""}${word.de ? ` / ${word.de}` : ""}`;
+  const explanation = [word.note, word.ex].filter(Boolean).join(" ");
   return {
     id: `vocab-${unit.key}-${index}-${word.it}`,
     type: "typed",
-    prompt: `Write the Italian for: ${word.en || ""}${word.de ? ` / ${word.de}` : ""}`,
+    prompt,
     answer: stripArticle(word.it),
     accepted: acceptedVocabAnswers(word.it),
-    explanation: word.note || "",
+    explanation,
     unitKey: unit.key,
     unitKind: unit.kind,
     unitTitle: unit.data.title,
@@ -115,7 +126,7 @@ function writtenPool(units = allUnits()) {
 function autoVocabPool(units = allUnits()) {
   return units.flatMap((unit) =>
     unitWords(unit)
-      .filter((word) => word.it && (word.en || word.de))
+      .filter((word) => isQuizableWord(word))
       .map((word, index) => makeVocabQuestion(word, index, unit))
   );
 }
@@ -295,7 +306,7 @@ function renderHome() {
 }
 
 function renderUnitCard(unit) {
-  const questionCount = (unit.data.questions || []).length + unitWords(unit).filter((word) => word.it && (word.en || word.de)).length;
+  const questionCount = (unit.data.questions || []).length + unitWords(unit).filter((word) => isQuizableWord(word)).length;
   return `
     <article class="card">
       <div class="badge-row">
@@ -376,7 +387,7 @@ function renderUnit(unitKey) {
   const d = unit.data;
   const words = unitWords(unit);
   const hasContent = (d.sections || []).length || words.length || (d.examples || []).length || (d.exercises || []).length;
-  const questionCount = (d.questions || []).length + words.filter((word) => word.it && (word.en || word.de)).length;
+  const questionCount = (d.questions || []).length + words.filter((word) => isQuizableWord(word)).length;
   const backView = unit.kind === "grammar" ? "grammar" : unit.kind === "vocab" ? "vocab" : "reference";
 
   app.innerHTML = `
@@ -435,6 +446,28 @@ function renderTables(tables = []) {
 
 function renderWordTable(words = []) {
   if (!words.length) return "";
+
+  // Italian-first layout when definitions exist: lead with the Italian word,
+  // its Italian definition and example. Translation stays as a quiet safety net.
+  const italianFirst = words.some((word) => word.def);
+  if (italianFirst) {
+    return `
+      <section class="section">
+        <h3>Parole</h3>
+        <div class="word-list">
+          ${words.map((item) => `
+            <div class="word-entry">
+              <div class="word-head">${escapeHtml(item.it)}</div>
+              ${item.def ? `<div class="word-def">${escapeHtml(item.def)}</div>` : ""}
+              ${item.ex ? `<div class="word-ex">${escapeHtml(item.ex)}</div>` : ""}
+              ${(item.en || item.de) ? `<div class="word-tr">${escapeHtml([item.en, item.de].filter(Boolean).join(" · "))}</div>` : ""}
+            </div>
+          `).join("")}
+        </div>
+      </section>
+    `;
+  }
+
   return `
     <section class="section">
       <h3>Vocabulary</h3>

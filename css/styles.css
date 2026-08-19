@@ -353,6 +353,44 @@ button {
   text-transform: uppercase;
 }
 
+.word-list {
+  display: grid;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.word-entry {
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 12px 14px;
+}
+
+.word-head {
+  color: var(--accent);
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.word-def {
+  margin-top: 4px;
+}
+
+.word-ex {
+  color: var(--text);
+  font-style: italic;
+  margin-top: 6px;
+  opacity: 0.85;
+}
+
+.word-tr {
+  color: var(--muted);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.75rem;
+  margin-top: 6px;
+  text-transform: uppercase;
+}
+
 .exercise-card {
   background: var(--panel-2);
   border: 1px solid var(--line);

@@ -658,16 +658,57 @@ window.COURSE = {
     {
       id: "family-people",
       title: "Family & people",
-      status: "stub",
-      summary: "Family members and words to describe people.",
-      words: []
+      status: "ready",
+      summary: "I membri della famiglia e le parole per parlare delle persone.",
+      words: [
+        { it: "la famiglia", def: "Il gruppo di persone unite da parentela: genitori, figli e parenti.", ex: "La mia famiglia è numerosa.", en: "family", de: "Familie" },
+        { it: "la madre", def: "Il genitore donna; la mamma.", ex: "Mia madre si chiama Anna.", en: "mother", de: "Mutter" },
+        { it: "il padre", def: "Il genitore uomo; il papà.", ex: "Mio padre lavora in banca.", en: "father", de: "Vater" },
+        { it: "i genitori", def: "La madre e il padre insieme.", ex: "I miei genitori abitano a Torino.", en: "parents", de: "Eltern" },
+        { it: "il figlio", def: "Il bambino maschio rispetto ai genitori.", ex: "Hanno un figlio di dieci anni.", en: "son", de: "Sohn" },
+        { it: "la figlia", def: "La bambina femmina rispetto ai genitori.", ex: "La loro figlia studia medicina.", en: "daughter", de: "Tochter" },
+        { it: "il fratello", def: "Il figlio maschio degli stessi genitori.", ex: "Mio fratello è più grande di me.", en: "brother", de: "Bruder" },
+        { it: "la sorella", def: "La figlia femmina degli stessi genitori.", ex: "Ho una sorella e un fratello.", en: "sister", de: "Schwester" },
+        { it: "il nonno", def: "Il padre della madre o del padre.", ex: "Il nonno racconta belle storie.", en: "grandfather", de: "Großvater" },
+        { it: "la nonna", def: "La madre della madre o del padre.", ex: "La nonna cucina benissimo.", en: "grandmother", de: "Großmutter" },
+        { it: "lo zio", def: "Il fratello della madre o del padre.", ex: "Mio zio vive in Germania.", en: "uncle", de: "Onkel" },
+        { it: "la zia", def: "La sorella della madre o del padre.", ex: "La zia viene a pranzo domenica.", en: "aunt", de: "Tante" },
+        { it: "il cugino", def: "Il figlio dello zio o della zia.", ex: "Gioco a calcio con mio cugino.", en: "cousin", de: "Cousin" },
+        { it: "il marito", def: "L'uomo sposato rispetto alla moglie.", ex: "Suo marito è medico.", en: "husband", de: "Ehemann" },
+        { it: "la moglie", def: "La donna sposata rispetto al marito.", ex: "Mia moglie e io viaggiamo spesso.", en: "wife", de: "Ehefrau" },
+        { it: "il bambino", def: "Una persona di pochi anni.", ex: "Il bambino gioca nel parco.", en: "child", de: "Kind" },
+        { it: "l'amico", def: "Una persona a cui vuoi bene e con cui passi il tempo.", ex: "Esco con i miei amici il sabato.", en: "friend", de: "Freund" },
+        { it: "il ragazzo", def: "Un giovane uomo; può anche significare il fidanzato.", ex: "Quel ragazzo è molto simpatico.", en: "boy / boyfriend", de: "Junge / Freund" },
+        { it: "la ragazza", def: "Una giovane donna; può anche significare la fidanzata.", ex: "La ragazza legge un libro.", en: "girl / girlfriend", de: "Mädchen / Freundin" }
+      ]
     },
     {
       id: "food-drink",
       title: "Food, drink & the restaurant",
-      status: "stub",
-      summary: "Food, drinks, meals, and ordering in a café or restaurant.",
-      words: []
+      status: "ready",
+      summary: "Cibo, bevande, i pasti e come ordinare al bar o al ristorante.",
+      words: [
+        { it: "il cibo", def: "Tutto quello che si mangia.", ex: "Mi piace molto il cibo italiano.", en: "food", de: "Essen" },
+        { it: "l'acqua", def: "La bevanda trasparente che si beve ogni giorno.", ex: "Vorrei una bottiglia d'acqua, per favore.", en: "water", de: "Wasser" },
+        { it: "il caffè", def: "La bevanda calda e scura che molti bevono la mattina.", ex: "Prendo un caffè al bar.", en: "coffee", de: "Kaffee" },
+        { it: "il pane", def: "L'alimento fatto con farina e acqua, cotto al forno.", ex: "Compro il pane fresco ogni mattina.", en: "bread", de: "Brot" },
+        { it: "la pasta", def: "Un piatto tipico italiano fatto di farina, come gli spaghetti.", ex: "Stasera mangiamo la pasta al pomodoro.", en: "pasta", de: "Nudeln" },
+        { it: "la frutta", def: "Gli alimenti dolci che crescono sugli alberi, come le mele.", ex: "Mangio la frutta a colazione.", en: "fruit", de: "Obst" },
+        { it: "la verdura", def: "Le piante che si mangiano, come le carote e gli spinaci.", ex: "La verdura fa bene alla salute.", en: "vegetables", de: "Gemüse" },
+        { it: "la carne", def: "L'alimento che viene dagli animali.", ex: "Non mangio molta carne.", en: "meat", de: "Fleisch" },
+        { it: "il pesce", def: "L'animale che vive nell'acqua e si può mangiare.", ex: "Il venerdì mangiamo il pesce.", en: "fish", de: "Fisch" },
+        { it: "il formaggio", def: "L'alimento fatto con il latte.", ex: "Sulla pasta metto un po' di formaggio.", en: "cheese", de: "Käse" },
+        { it: "il vino", def: "La bevanda alcolica fatta con l'uva.", ex: "Beviamo un bicchiere di vino rosso.", en: "wine", de: "Wein" },
+        { it: "la birra", def: "La bevanda alcolica bionda fatta con i cereali.", ex: "In estate mi piace una birra fredda.", en: "beer", de: "Bier" },
+        { it: "la colazione", def: "Il primo pasto della giornata, la mattina.", ex: "Faccio colazione con caffè e biscotti.", en: "breakfast", de: "Frühstück" },
+        { it: "il pranzo", def: "Il pasto di mezzogiorno.", ex: "A pranzo mangio un panino.", en: "lunch", de: "Mittagessen" },
+        { it: "la cena", def: "Il pasto della sera.", ex: "La cena è pronta alle otto.", en: "dinner", de: "Abendessen" },
+        { it: "il ristorante", def: "Il luogo dove vai a mangiare e paghi per il pasto.", ex: "Stasera andiamo al ristorante.", en: "restaurant", de: "Restaurant" },
+        { it: "il conto", def: "Il foglio che dice quanto devi pagare al ristorante.", ex: "Il conto, per favore!", en: "the bill", de: "Rechnung" },
+        { it: "il cameriere", def: "La persona che prende le ordinazioni e porta i piatti al ristorante.", ex: "Il cameriere è molto gentile.", en: "waiter", de: "Kellner" },
+        { it: "il menù", def: "La lista dei piatti e delle bevande al ristorante.", ex: "Posso vedere il menù?", en: "menu", de: "Speisekarte" },
+        { it: "Vorrei...", def: "Frase gentile per ordinare o chiedere qualcosa.", ex: "Vorrei un caffè e un cornetto.", en: "I would like...", de: "Ich möchte..." }
+      ]
     },
     {
       id: "city-directions",

@@ -798,16 +798,51 @@ window.COURSE = {
     {
       id: "body-health",
       title: "Body & health",
-      status: "stub",
-      summary: "Body parts, at the doctor, and basic symptoms.",
-      words: []
+      status: "ready",
+      summary: "Le parti del corpo, dal dottore e i sintomi di base.",
+      words: [
+        { it: "il corpo", def: "L'insieme di tutte le parti fisiche di una persona.", ex: "Lo sport fa bene al corpo.", en: "body", de: "Körper" },
+        { it: "la testa", def: "La parte superiore del corpo, dove sono gli occhi e la bocca.", ex: "Mi fa male la testa.", en: "head", de: "Kopf" },
+        { it: "gli occhi", def: "Le parti del viso con cui vediamo.", ex: "Ha gli occhi verdi.", en: "eyes", de: "Augen" },
+        { it: "il naso", def: "La parte del viso con cui respiriamo e sentiamo gli odori.", ex: "Con il raffreddore il naso cola.", en: "nose", de: "Nase" },
+        { it: "la bocca", def: "La parte del viso con cui mangiamo e parliamo.", ex: "Apri la bocca, dice il dottore.", en: "mouth", de: "Mund" },
+        { it: "l'orecchio", def: "La parte del corpo con cui sentiamo i suoni.", ex: "Mi fa male un orecchio.", en: "ear", de: "Ohr" },
+        { it: "il braccio", def: "La parte del corpo tra la spalla e la mano.", ex: "Si è rotto un braccio.", en: "arm", de: "Arm" },
+        { it: "la mano", def: "La parte del corpo alla fine del braccio, con le dita.", ex: "Mi lavo le mani prima di mangiare.", en: "hand", de: "Hand" },
+        { it: "la gamba", def: "La parte del corpo con cui camminiamo.", ex: "Dopo la corsa mi fanno male le gambe.", en: "leg", de: "Bein" },
+        { it: "il piede", def: "La parte del corpo alla fine della gamba.", ex: "Ho i piedi freddi.", en: "foot", de: "Fuß" },
+        { it: "lo stomaco", def: "L'organo interno dove va il cibo.", ex: "Ho mal di stomaco.", en: "stomach", de: "Magen" },
+        { it: "la schiena", def: "La parte posteriore del corpo, dalla nuca ai fianchi.", ex: "Lavoro al computer e mi fa male la schiena.", en: "back", de: "Rücken" },
+        { it: "il dottore", def: "La persona che cura i malati; il medico.", ex: "Se stai male, vai dal dottore.", en: "doctor", de: "Arzt" },
+        { it: "la medicina", def: "La sostanza che si prende per guarire.", ex: "Prendo la medicina due volte al giorno.", en: "medicine", de: "Medikament" },
+        { it: "essere malato", def: "Non stare bene di salute.", ex: "Oggi sono malato e resto a letto.", en: "to be ill", de: "krank sein" },
+        { it: "avere mal di...", def: "Sentire dolore in una parte del corpo.", ex: "Ho mal di testa.", en: "to have a ...ache", de: "... schmerzen haben" },
+        { it: "stare bene", def: "Sentirsi in buona salute.", ex: "Grazie, sto bene.", en: "to be well", de: "sich gut fühlen" }
+      ]
     },
     {
       id: "weather-seasons",
       title: "Weather & seasons",
-      status: "stub",
-      summary: "Weather, seasons, and temperature.",
-      words: []
+      status: "ready",
+      summary: "Il tempo, le stagioni e la temperatura.",
+      words: [
+        { it: "il tempo", def: "Le condizioni dell'atmosfera: sole, pioggia, vento.", ex: "Che tempo fa oggi?", en: "weather", de: "Wetter" },
+        { it: "il sole", def: "La stella che dà luce e calore di giorno.", ex: "Oggi c'è il sole.", en: "sun", de: "Sonne" },
+        { it: "la pioggia", def: "L'acqua che cade dal cielo.", ex: "Prendi l'ombrello, c'è la pioggia.", en: "rain", de: "Regen" },
+        { it: "la neve", def: "L'acqua ghiacciata e bianca che cade in inverno.", ex: "In montagna c'è molta neve.", en: "snow", de: "Schnee" },
+        { it: "il vento", def: "L'aria che si muove.", ex: "Oggi c'è vento e fa freddo.", en: "wind", de: "Wind" },
+        { it: "la nuvola", def: "La massa bianca o grigia che si vede nel cielo.", ex: "Ci sono molte nuvole, forse piove.", en: "cloud", de: "Wolke" },
+        { it: "caldo", def: "Quando la temperatura è alta.", ex: "In estate fa molto caldo.", en: "hot / warm", de: "heiß / warm" },
+        { it: "freddo", def: "Quando la temperatura è bassa.", ex: "In inverno fa freddo.", en: "cold", de: "kalt" },
+        { it: "piovere", def: "Cadere dell'acqua dal cielo.", ex: "Domani dovrebbe piovere.", en: "to rain", de: "regnen" },
+        { it: "Fa bel tempo", def: "Frase per dire che il tempo è buono.", ex: "Oggi fa bel tempo, andiamo al mare.", en: "the weather is nice", de: "das Wetter ist schön" },
+        { it: "Fa brutto tempo", def: "Frase per dire che il tempo è cattivo.", ex: "Fa brutto tempo, restiamo a casa.", en: "the weather is bad", de: "das Wetter ist schlecht" },
+        { it: "la stagione", def: "Uno dei quattro periodi dell'anno.", ex: "La mia stagione preferita è l'estate.", en: "season", de: "Jahreszeit" },
+        { it: "la primavera", def: "La stagione dopo l'inverno, quando sbocciano i fiori.", ex: "In primavera il clima è mite.", en: "spring", de: "Frühling" },
+        { it: "l'estate", def: "La stagione più calda dell'anno.", ex: "In estate andiamo al mare.", en: "summer", de: "Sommer" },
+        { it: "l'autunno", def: "La stagione in cui cadono le foglie.", ex: "In autunno piove spesso.", en: "autumn", de: "Herbst" },
+        { it: "l'inverno", def: "La stagione più fredda dell'anno.", ex: "In inverno a volte nevica.", en: "winter", de: "Winter" }
+      ]
     },
     {
       id: "jobs",

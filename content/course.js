@@ -847,9 +847,26 @@ window.COURSE = {
     {
       id: "jobs",
       title: "Jobs",
-      status: "stub",
-      summary: "Professions and workplaces.",
-      words: []
+      status: "ready",
+      summary: "Le professioni e i luoghi di lavoro.",
+      words: [
+        { it: "il lavoro", def: "L'attività che una persona fa per guadagnare soldi.", ex: "Il mio lavoro mi piace molto.", en: "job / work", de: "Arbeit" },
+        { it: "l'insegnante", def: "La persona che insegna a scuola.", ex: "L'insegnante spiega la lezione.", en: "teacher", de: "Lehrer" },
+        { it: "il medico", def: "La persona che cura i malati.", ex: "Il medico visita i pazienti la mattina.", en: "doctor", de: "Arzt" },
+        { it: "l'infermiere", def: "La persona che assiste i malati in ospedale.", ex: "L'infermiere è molto gentile.", en: "nurse", de: "Krankenpfleger" },
+        { it: "l'avvocato", def: "La persona che difende le persone nei tribunali.", ex: "L'avvocato studia il caso.", en: "lawyer", de: "Anwalt" },
+        { it: "l'ingegnere", def: "La persona che progetta macchine, ponti o edifici.", ex: "Mio fratello fa l'ingegnere.", en: "engineer", de: "Ingenieur" },
+        { it: "il commesso", def: "La persona che vende nei negozi.", ex: "Il commesso mi mostra le scarpe.", en: "shop assistant", de: "Verkäufer" },
+        { it: "il cuoco", def: "La persona che cucina in un ristorante.", ex: "Il cuoco prepara un buon risotto.", en: "cook", de: "Koch" },
+        { it: "il poliziotto", def: "La persona che protegge i cittadini e fa rispettare le leggi.", ex: "Il poliziotto dirige il traffico.", en: "police officer", de: "Polizist" },
+        { it: "l'impiegato", def: "La persona che lavora in un ufficio.", ex: "Lavoro come impiegato in banca.", en: "office worker", de: "Angestellter" },
+        { it: "l'operaio", def: "La persona che lavora in una fabbrica.", ex: "Gli operai costruiscono le macchine.", en: "factory worker", de: "Arbeiter" },
+        { it: "il giornalista", def: "La persona che scrive notizie per i giornali o la TV.", ex: "Il giornalista intervista il sindaco.", en: "journalist", de: "Journalist" },
+        { it: "l'ufficio", def: "Il luogo dove si lavora, di solito con scrivanie e computer.", ex: "Vado in ufficio alle nove.", en: "office", de: "Büro" },
+        { it: "l'azienda", def: "L'organizzazione che produce o vende qualcosa; la ditta.", ex: "Lavoro in un'azienda di informatica.", en: "company", de: "Firma" },
+        { it: "lavorare", def: "Fare un'attività per guadagnare soldi.", ex: "Lavoro dal lunedì al venerdì.", en: "to work", de: "arbeiten" },
+        { it: "Che lavoro fai?", def: "Frase per chiedere la professione di qualcuno.", ex: "Che lavoro fai? Sono insegnante.", en: "What's your job?", de: "Was machst du beruflich?" }
+      ]
     },
     {
       id: "daily-routine",
@@ -901,9 +918,26 @@ window.COURSE = {
     {
       id: "feelings-adjectives",
       title: "Feelings & descriptions",
-      status: "stub",
-      summary: "Moods and common descriptive adjectives.",
-      words: []
+      status: "ready",
+      summary: "Gli stati d'animo e gli aggettivi per descrivere le persone.",
+      words: [
+        { it: "felice", def: "Che prova gioia; contento.", ex: "Sono felice di vederti!", en: "happy", de: "glücklich" },
+        { it: "triste", def: "Che prova dispiacere; non contento.", ex: "Oggi sono un po' triste.", en: "sad", de: "traurig" },
+        { it: "contento", def: "Soddisfatto e di buon umore.", ex: "Sono contento del mio lavoro.", en: "glad / pleased", de: "zufrieden" },
+        { it: "stanco", def: "Che ha bisogno di riposo, senza energia.", ex: "Dopo il lavoro sono stanco.", en: "tired", de: "müde" },
+        { it: "arrabbiato", def: "Che prova rabbia.", ex: "È arrabbiato perché è in ritardo.", en: "angry", de: "wütend" },
+        { it: "annoiato", def: "Che si annoia, senza niente di interessante da fare.", ex: "Sono annoiato, non c'è niente da fare.", en: "bored", de: "gelangweilt" },
+        { it: "preoccupato", def: "Che pensa con ansia a un problema.", ex: "Sono preoccupato per l'esame.", en: "worried", de: "besorgt" },
+        { it: "nervoso", def: "Agitato, teso.", ex: "Prima di parlare in pubblico sono nervoso.", en: "nervous", de: "nervös" },
+        { it: "tranquillo", def: "Calmo, senza preoccupazioni.", ex: "Oggi sono tranquillo, non ho fretta.", en: "calm", de: "ruhig" },
+        { it: "simpatico", def: "Piacevole e gentile nel comportamento.", ex: "Il tuo amico è molto simpatico.", en: "likeable / nice", de: "sympathisch" },
+        { it: "gentile", def: "Che tratta gli altri con cortesia.", ex: "La commessa è stata molto gentile.", en: "kind", de: "freundlich" },
+        { it: "bravo", def: "Capace, che fa bene una cosa.", ex: "Sei molto bravo a cucinare.", en: "good / skilled", de: "tüchtig" },
+        { it: "innamorato", def: "Che prova amore per qualcuno.", ex: "Marco è innamorato di Lucia.", en: "in love", de: "verliebt" },
+        { it: "di buon umore", def: "Che si sente allegro e positivo.", ex: "Stamattina sono di buon umore.", en: "in a good mood", de: "gut gelaunt" },
+        { it: "avere fame", def: "Sentire il bisogno di mangiare.", ex: "Ho fame, mangiamo qualcosa?", en: "to be hungry", de: "Hunger haben" },
+        { it: "avere sete", def: "Sentire il bisogno di bere.", ex: "Ho sete, vorrei dell'acqua.", en: "to be thirsty", de: "Durst haben" }
+      ]
     }
   ],
 

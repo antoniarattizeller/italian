@@ -566,9 +566,37 @@ window.COURSE = {
     {
       id: "numbers-dates",
       title: "Numbers, days & dates",
-      status: "stub",
-      summary: "Numbers, days of the week, months, telling the time, and giving dates.",
-      words: []
+      status: "ready",
+      summary: "I giorni, i mesi, l'ora e le date. (Per i numeri 0-100 usa la modalità 'Numbers' nel quiz.)",
+      words: [
+        { it: "lunedì", def: "Il primo giorno della settimana.", ex: "Il lunedì comincia la scuola.", en: "Monday", de: "Montag" },
+        { it: "martedì", def: "Il giorno dopo lunedì.", ex: "Martedì ho una riunione.", en: "Tuesday", de: "Dienstag" },
+        { it: "mercoledì", def: "Il giorno a metà settimana, dopo martedì.", ex: "Mercoledì vado in palestra.", en: "Wednesday", de: "Mittwoch" },
+        { it: "giovedì", def: "Il giorno dopo mercoledì.", ex: "Giovedì sera esco con gli amici.", en: "Thursday", de: "Donnerstag" },
+        { it: "venerdì", def: "L'ultimo giorno della settimana lavorativa.", ex: "Venerdì finisco di lavorare presto.", en: "Friday", de: "Freitag" },
+        { it: "sabato", def: "Il primo giorno del fine settimana.", ex: "Il sabato dormo di più.", en: "Saturday", de: "Samstag" },
+        { it: "domenica", def: "Il giorno di riposo, alla fine della settimana.", ex: "La domenica pranziamo dai nonni.", en: "Sunday", de: "Sonntag" },
+        { it: "la settimana", def: "Il periodo di sette giorni.", ex: "Questa settimana lavoro molto.", en: "week", de: "Woche" },
+        { it: "il mese", def: "Uno dei dodici periodi dell'anno.", ex: "Gennaio è il primo mese dell'anno.", en: "month", de: "Monat" },
+        { it: "l'anno", def: "Il periodo di dodici mesi.", ex: "L'anno prossimo vado in Italia.", en: "year", de: "Jahr" },
+        { it: "gennaio", def: "Il primo mese dell'anno.", ex: "Il mio compleanno è a gennaio.", en: "January", de: "Januar" },
+        { it: "febbraio", def: "Il secondo mese, il più corto.", ex: "Febbraio ha ventotto giorni.", en: "February", de: "Februar" },
+        { it: "marzo", def: "Il terzo mese; comincia la primavera.", ex: "A marzo le giornate si allungano.", en: "March", de: "März" },
+        { it: "aprile", def: "Il quarto mese dell'anno.", ex: "Ad aprile piove spesso.", en: "April", de: "April" },
+        { it: "maggio", def: "Il quinto mese dell'anno.", ex: "A maggio ci sono molti fiori.", en: "May", de: "Mai" },
+        { it: "giugno", def: "Il sesto mese; comincia l'estate.", ex: "A giugno finisce la scuola.", en: "June", de: "Juni" },
+        { it: "luglio", def: "Il settimo mese, in piena estate.", ex: "A luglio vado in vacanza.", en: "July", de: "Juli" },
+        { it: "agosto", def: "L'ottavo mese; molti italiani sono in ferie.", ex: "Ad agosto le città sono vuote.", en: "August", de: "August" },
+        { it: "settembre", def: "Il nono mese; comincia l'autunno.", ex: "A settembre ricomincia la scuola.", en: "September", de: "September" },
+        { it: "ottobre", def: "Il decimo mese dell'anno.", ex: "A ottobre fa più fresco.", en: "October", de: "Oktober" },
+        { it: "novembre", def: "L'undicesimo mese dell'anno.", ex: "A novembre cadono le foglie.", en: "November", de: "November" },
+        { it: "dicembre", def: "Il dodicesimo mese; c'è il Natale.", ex: "A dicembre fa freddo.", en: "December", de: "Dezember" },
+        { it: "Che ore sono?", def: "Frase per chiedere l'orario.", ex: "Che ore sono? Sono le tre.", en: "What time is it?", de: "Wie spät ist es?" },
+        { it: "mezzogiorno", def: "Le dodici del giorno.", ex: "Pranziamo a mezzogiorno.", en: "noon", de: "Mittag" },
+        { it: "mezzanotte", def: "Le dodici della notte.", ex: "La festa finisce a mezzanotte.", en: "midnight", de: "Mitternacht" },
+        { it: "e mezza", def: "Trenta minuti dopo l'ora.", ex: "Sono le due e mezza.", en: "half past", de: "halb" },
+        { it: "un quarto", def: "Quindici minuti.", ex: "Sono le tre e un quarto.", en: "a quarter", de: "Viertel" }
+      ]
     },
     {
       id: "time-words",
@@ -767,9 +795,27 @@ window.COURSE = {
     {
       id: "shopping",
       title: "Shopping & money",
-      status: "stub",
-      summary: "Shops, prices, sizes, and 'how much is it?'.",
-      words: []
+      status: "ready",
+      summary: "I soldi, i prezzi, le taglie e come si paga nei negozi.",
+      words: [
+        { it: "i soldi", def: "Il denaro che si usa per comprare le cose.", ex: "Non ho soldi con me oggi.", en: "money", de: "Geld" },
+        { it: "l'euro", def: "La moneta usata in Italia e in molti paesi europei.", ex: "Il caffè costa un euro.", en: "euro", de: "Euro" },
+        { it: "il prezzo", def: "Quanto costa una cosa.", ex: "Il prezzo è troppo alto.", en: "price", de: "Preis" },
+        { it: "Quanto costa?", def: "Frase per chiedere il prezzo di qualcosa.", ex: "Quanto costa questa maglietta?", en: "How much is it?", de: "Wie viel kostet das?" },
+        { it: "costare", def: "Avere un certo prezzo.", ex: "Queste scarpe costano cinquanta euro.", en: "to cost", de: "kosten" },
+        { it: "comprare", def: "Prendere qualcosa pagando dei soldi.", ex: "Compro il pane in panetteria.", en: "to buy", de: "kaufen" },
+        { it: "pagare", def: "Dare i soldi per qualcosa.", ex: "Pago con la carta.", en: "to pay", de: "bezahlen" },
+        { it: "la carta di credito", def: "La tessera che si usa per pagare senza contanti.", ex: "Posso pagare con la carta di credito?", en: "credit card", de: "Kreditkarte" },
+        { it: "i contanti", def: "I soldi in banconote e monete.", ex: "Preferisco pagare in contanti.", en: "cash", de: "Bargeld" },
+        { it: "lo sconto", def: "La riduzione del prezzo.", ex: "C'è uno sconto del venti percento.", en: "discount", de: "Rabatt" },
+        { it: "i saldi", def: "Il periodo in cui i negozi vendono a prezzi più bassi.", ex: "Compro i vestiti durante i saldi.", en: "the sales", de: "Schlussverkauf" },
+        { it: "caro", def: "Che costa molto.", ex: "Questo ristorante è troppo caro.", en: "expensive", de: "teuer" },
+        { it: "economico", def: "Che costa poco.", ex: "Ho trovato un hotel economico.", en: "cheap", de: "günstig" },
+        { it: "la taglia", def: "La misura di un vestito.", ex: "Che taglia porta?", en: "size (clothes)", de: "Größe" },
+        { it: "la cassa", def: "Il posto nel negozio dove si paga.", ex: "Pago alla cassa.", en: "checkout / till", de: "Kasse" },
+        { it: "lo scontrino", def: "Il foglio che dimostra che hai pagato.", ex: "Vuole lo scontrino?", en: "receipt", de: "Kassenbon" },
+        { it: "il mercato", def: "Il luogo all'aperto dove si comprano frutta, verdura e altro.", ex: "Il sabato vado al mercato.", en: "market", de: "Markt" }
+      ]
     },
     {
       id: "clothing",

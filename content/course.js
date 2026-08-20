@@ -713,9 +713,28 @@ window.COURSE = {
     {
       id: "city-directions",
       title: "The city & directions",
-      status: "stub",
-      summary: "Places in town and how to ask for and give directions.",
-      words: []
+      status: "ready",
+      summary: "I luoghi della città e come chiedere e dare indicazioni stradali.",
+      words: [
+        { it: "la città", def: "Un luogo grande dove vivono molte persone, con case, negozi e strade.", ex: "Roma è una città bellissima.", en: "city", de: "Stadt" },
+        { it: "il centro", def: "La parte centrale della città, di solito con i negozi principali.", ex: "Il museo è in centro.", en: "city centre", de: "Zentrum" },
+        { it: "la strada", def: "Il percorso dove passano le macchine e le persone.", ex: "Attraversa la strada con attenzione.", en: "street / road", de: "Straße" },
+        { it: "la piazza", def: "Uno spazio aperto in città, circondato da edifici.", ex: "Ci incontriamo in piazza alle cinque.", en: "square", de: "Platz" },
+        { it: "il negozio", def: "Il luogo dove si comprano le cose.", ex: "Il negozio apre alle nove.", en: "shop", de: "Geschäft" },
+        { it: "il supermercato", def: "Il grande negozio dove si compra il cibo e altro.", ex: "Vado al supermercato a fare la spesa.", en: "supermarket", de: "Supermarkt" },
+        { it: "la banca", def: "Il luogo dove si tengono e si gestiscono i soldi.", ex: "Devo andare in banca stamattina.", en: "bank", de: "Bank" },
+        { it: "la farmacia", def: "Il negozio dove si comprano le medicine.", ex: "La farmacia è accanto al bar.", en: "pharmacy", de: "Apotheke" },
+        { it: "l'ospedale", def: "Il luogo dove si curano i malati.", ex: "L'ospedale è fuori città.", en: "hospital", de: "Krankenhaus" },
+        { it: "la chiesa", def: "L'edificio dove le persone pregano.", ex: "La chiesa in piazza è molto antica.", en: "church", de: "Kirche" },
+        { it: "il museo", def: "Il luogo dove si vedono opere d'arte e oggetti storici.", ex: "Domenica visitiamo il museo.", en: "museum", de: "Museum" },
+        { it: "il parco", def: "Uno spazio verde in città dove si passeggia e ci si rilassa.", ex: "Corro al parco la mattina.", en: "park", de: "Park" },
+        { it: "il semaforo", def: "Il segnale con le luci rosse, gialle e verdi che regola il traffico.", ex: "Gira a destra al semaforo.", en: "traffic light", de: "Ampel" },
+        { it: "l'incrocio", def: "Il punto dove due strade si incontrano.", ex: "All'incrocio vai dritto.", en: "crossroads", de: "Kreuzung" },
+        { it: "dritto", def: "Senza girare, in avanti.", ex: "Vai sempre dritto fino alla piazza.", en: "straight on", de: "geradeaus" },
+        { it: "girare", def: "Cambiare direzione, a destra o a sinistra.", ex: "Devi girare a sinistra qui.", en: "to turn", de: "abbiegen" },
+        { it: "Dov'è...?", def: "Frase per chiedere dove si trova qualcosa.", ex: "Dov'è la fermata dell'autobus?", en: "Where is...?", de: "Wo ist...?" },
+        { it: "Come arrivo a...?", def: "Frase per chiedere la strada per un luogo.", ex: "Come arrivo alla stazione, per favore?", en: "How do I get to...?", de: "Wie komme ich zu...?" }
+      ]
     },
     {
       id: "travel",
@@ -783,9 +802,26 @@ window.COURSE = {
     {
       id: "daily-routine",
       title: "Daily routine",
-      status: "stub",
-      summary: "Everyday actions through the day. (Pairs with Reflexive verbs.)",
-      words: []
+      status: "ready",
+      summary: "Le azioni di ogni giorno, dalla mattina alla sera. (Va insieme a 'Reflexive verbs'.)",
+      words: [
+        { it: "svegliarsi", def: "Aprire gli occhi e smettere di dormire.", ex: "Mi sveglio alle sette ogni mattina.", en: "to wake up", de: "aufwachen" },
+        { it: "alzarsi", def: "Uscire dal letto e mettersi in piedi.", ex: "Mi alzo subito dopo la sveglia.", en: "to get up", de: "aufstehen" },
+        { it: "lavarsi", def: "Pulirsi il corpo con l'acqua.", ex: "Mi lavo con l'acqua calda.", en: "to wash oneself", de: "sich waschen" },
+        { it: "farsi la doccia", def: "Lavarsi il corpo sotto la doccia.", ex: "Mi faccio la doccia ogni mattina.", en: "to have a shower", de: "duschen" },
+        { it: "lavarsi i denti", def: "Pulirsi i denti con lo spazzolino.", ex: "Mi lavo i denti dopo i pasti.", en: "to brush one's teeth", de: "Zähne putzen" },
+        { it: "pettinarsi", def: "Sistemarsi i capelli con il pettine.", ex: "Mi pettino davanti allo specchio.", en: "to comb one's hair", de: "sich kämmen" },
+        { it: "vestirsi", def: "Mettersi i vestiti.", ex: "Mi vesto in fretta la mattina.", en: "to get dressed", de: "sich anziehen" },
+        { it: "fare colazione", def: "Mangiare il primo pasto della giornata.", ex: "Faccio colazione alle otto.", en: "to have breakfast", de: "frühstücken" },
+        { it: "andare al lavoro", def: "Recarsi nel luogo dove si lavora.", ex: "Vado al lavoro in bici.", en: "to go to work", de: "zur Arbeit gehen" },
+        { it: "pranzare", def: "Mangiare il pasto di mezzogiorno.", ex: "Pranzo con i colleghi all'una.", en: "to have lunch", de: "zu Mittag essen" },
+        { it: "tornare a casa", def: "Rientrare nella propria casa.", ex: "Torno a casa alle sei.", en: "to go back home", de: "nach Hause zurückkehren" },
+        { it: "fare la spesa", def: "Comprare il cibo e le cose per la casa.", ex: "Il sabato faccio la spesa.", en: "to do the grocery shopping", de: "einkaufen" },
+        { it: "cenare", def: "Mangiare il pasto della sera.", ex: "Ceniamo insieme alle otto.", en: "to have dinner", de: "zu Abend essen" },
+        { it: "riposarsi", def: "Fermarsi per recuperare le forze.", ex: "Dopo pranzo mi riposo un po'.", en: "to rest", de: "sich ausruhen" },
+        { it: "andare a letto", def: "Andare a dormire.", ex: "Vado a letto verso le undici.", en: "to go to bed", de: "ins Bett gehen" },
+        { it: "addormentarsi", def: "Cominciare a dormire.", ex: "Mi addormento subito la sera.", en: "to fall asleep", de: "einschlafen" }
+      ]
     },
     {
       id: "colors",

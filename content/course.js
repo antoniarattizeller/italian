@@ -774,9 +774,26 @@ window.COURSE = {
     {
       id: "clothing",
       title: "Clothes",
-      status: "stub",
-      summary: "Clothes and accessories.",
-      words: []
+      status: "ready",
+      summary: "I vestiti e gli accessori che indossiamo.",
+      words: [
+        { it: "i vestiti", def: "Le cose che indossiamo per coprire il corpo.", ex: "Metto i vestiti nell'armadio.", en: "clothes", de: "Kleidung" },
+        { it: "la maglietta", def: "Un indumento leggero per la parte superiore del corpo, con maniche corte.", ex: "In estate porto una maglietta.", en: "t-shirt", de: "T-Shirt" },
+        { it: "la camicia", def: "Un indumento elegante per la parte superiore, con i bottoni.", ex: "Per il lavoro indosso una camicia.", en: "shirt", de: "Hemd" },
+        { it: "il maglione", def: "Un indumento caldo, spesso di lana, per l'inverno.", ex: "Metto il maglione quando fa freddo.", en: "sweater", de: "Pullover" },
+        { it: "i pantaloni", def: "L'indumento che copre le gambe.", ex: "Questi pantaloni sono troppo lunghi.", en: "trousers", de: "Hose" },
+        { it: "la gonna", def: "L'indumento che copre dalla vita alle gambe.", ex: "Porta una gonna nera.", en: "skirt", de: "Rock" },
+        { it: "il vestito", def: "Un abito in un unico pezzo, o un completo elegante.", ex: "Ho comprato un vestito per la festa.", en: "dress / suit", de: "Kleid / Anzug" },
+        { it: "la giacca", def: "L'indumento che si mette sopra gli altri per uscire.", ex: "Fa freddo, prendi la giacca.", en: "jacket", de: "Jacke" },
+        { it: "il cappotto", def: "Un indumento lungo e caldo per l'inverno.", ex: "In inverno porto un cappotto pesante.", en: "coat", de: "Mantel" },
+        { it: "le scarpe", def: "Quello che si indossa ai piedi.", ex: "Queste scarpe sono molto comode.", en: "shoes", de: "Schuhe" },
+        { it: "i calzini", def: "Quello che si mette ai piedi sotto le scarpe.", ex: "Ho perso un calzino.", en: "socks", de: "Socken" },
+        { it: "il cappello", def: "Quello che si mette sulla testa.", ex: "Con il sole porto un cappello.", en: "hat", de: "Hut" },
+        { it: "la sciarpa", def: "Quello che si mette intorno al collo per non avere freddo.", ex: "In inverno uso una sciarpa di lana.", en: "scarf", de: "Schal" },
+        { it: "i guanti", def: "Quello che si mette sulle mani per il freddo.", ex: "Con la neve porto i guanti.", en: "gloves", de: "Handschuhe" },
+        { it: "gli occhiali", def: "Quello che si mette sugli occhi per vedere meglio o per il sole.", ex: "Non trovo i miei occhiali.", en: "glasses", de: "Brille" },
+        { it: "indossare", def: "Avere addosso un vestito; portare.", ex: "Oggi indosso una camicia bianca.", en: "to wear", de: "tragen" }
+      ]
     },
     {
       id: "body-health",
@@ -826,9 +843,25 @@ window.COURSE = {
     {
       id: "colors",
       title: "Colors",
-      status: "stub",
-      summary: "Colors, and how they agree with the noun.",
-      words: []
+      status: "ready",
+      summary: "I colori e come si accordano con il nome. (Va insieme a 'Adjectives & agreement'.)",
+      words: [
+        { it: "il colore", def: "La qualità di ciò che vediamo: rosso, blu, verde e così via.", ex: "Di che colore è la tua macchina?", en: "colour", de: "Farbe" },
+        { it: "rosso", def: "Il colore del sangue e delle fragole.", ex: "Ho una maglietta rossa.", en: "red", de: "rot" },
+        { it: "blu", def: "Il colore del cielo sereno e del mare.", ex: "Il suo cappotto è blu.", en: "blue", de: "blau" },
+        { it: "azzurro", def: "Un blu chiaro, come il cielo di giorno.", ex: "La maglia della nazionale italiana è azzurra.", en: "light blue", de: "hellblau" },
+        { it: "verde", def: "Il colore dell'erba e delle foglie.", ex: "Le mele verdi sono un po' acide.", en: "green", de: "grün" },
+        { it: "giallo", def: "Il colore del sole e dei limoni.", ex: "Ho comprato dei fiori gialli.", en: "yellow", de: "gelb" },
+        { it: "arancione", def: "Il colore delle arance e delle carote.", ex: "Indossa una giacca arancione.", en: "orange", de: "orange" },
+        { it: "rosa", def: "Il colore chiaro tra il rosso e il bianco.", ex: "La sua camera è rosa.", en: "pink", de: "rosa" },
+        { it: "viola", def: "Il colore tra il blu e il rosso, come la lavanda.", ex: "Le ho regalato una sciarpa viola.", en: "purple", de: "lila" },
+        { it: "marrone", def: "Il colore della terra e del legno.", ex: "Ho gli occhi marroni.", en: "brown", de: "braun" },
+        { it: "grigio", def: "Il colore tra il bianco e il nero, come le nuvole.", ex: "Il cielo è grigio oggi.", en: "grey", de: "grau" },
+        { it: "nero", def: "Il colore più scuro, come la notte.", ex: "Porto spesso scarpe nere.", en: "black", de: "schwarz" },
+        { it: "bianco", def: "Il colore della neve e del latte.", ex: "Il muro della cucina è bianco.", en: "white", de: "weiß" },
+        { it: "chiaro", def: "Un colore con molta luce, tenue.", ex: "Preferisco i colori chiari.", en: "light (shade)", de: "hell" },
+        { it: "scuro", def: "Un colore con poca luce, intenso.", ex: "Ha i capelli scuri.", en: "dark (shade)", de: "dunkel" }
+      ]
     },
     {
       id: "feelings-adjectives",

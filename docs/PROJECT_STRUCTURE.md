@@ -25,11 +25,20 @@ Four learning surfaces:
    - One entry per A2 grammar point.
    - Each has explanation sections, optional conjugation/usage tables, examples,
      and its own quiz question pool.
+   - **Do-it-by-hand exercises.** A category can carry an `exercises[]` list.
+     Each exercise shows an Italian prompt to do on paper (handwriting supports
+     learning), plus a hidden `reveal` (paragraphs, a table, and/or example
+     sentences) that unhides on click for self-checking. The app guides; the
+     learning happens in the learner's own notebook.
 
 2. **Vocabulary topics**
    - One entry per theme (time words, locations, house, travel, ...).
-   - Each is a word list (`it` / `en` / `de` / note) that auto-feeds the
-     vocabulary quiz. Topics can also carry hand-written questions.
+   - Each is a word list that auto-feeds the vocabulary quiz. Topics can also
+     carry hand-written questions.
+   - **Italian-first (immersion).** A word carries an Italian definition (`def`)
+     and an Italian example (`ex`); the study view leads with those and the
+     vocab quiz prompts in Italian ("Quale parola? <definizione>"). `en`/`de`
+     stay only as a small safety net. Words with only `en`/`de` still work.
 
 3. **Filtered quizzes**
    - Quiz one grammar category, one vocab topic, several selected, or the whole
@@ -85,6 +94,16 @@ window.COURSE = {
       examples: [
         { it: "Ieri ho mangiato la pizza.", en: "Yesterday I ate pizza.", de: "Gestern habe ich Pizza gegessen." }
       ],
+      exercises: [                     // optional — do by hand, then reveal
+        {
+          prompt: "Scrivi tre frasi al passato prossimo su ieri.",
+          hint: "Pensa a cosa hai fatto: mangiare, andare, vedere...",
+          reveal: {                     // any of: body[], tables[], examples[]
+            body: ["Un modello; le tue frasi possono essere diverse."],
+            examples: [{ it: "Ieri sono andato al cinema con un amico." }]
+          }
+        }
+      ],
       questions: [
         { id: "pp-aux-essere", type: "multiple-choice",
           prompt: "Which auxiliary does 'andare' take?",
@@ -101,8 +120,9 @@ window.COURSE = {
       status: "stub",
       summary: "When something happens: yesterday, soon, before, tomorrow...",
       words: [
-        { it: "ieri", en: "yesterday", de: "gestern", note: "" },
-        { it: "tra una settimana", en: "in a week", de: "in einer Woche", note: "tra/fra + time = 'in'." }
+        // Italian-first: def + ex are Italian; en/de are the safety net.
+        { it: "ieri", def: "Il giorno prima di oggi.", ex: "Ieri sono rimasto a casa.", en: "yesterday", de: "gestern" },
+        { it: "tra una settimana", def: "Dopo sette giorni da oggi.", ex: "Tra una settimana parto.", en: "in a week", de: "in einer Woche" }
       ],
       questions: []                   // optional hand-written questions
     }

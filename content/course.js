@@ -778,36 +778,265 @@ window.COURSE = {
       title: "Possessives (my, your, ...)",
       stage: 2,
       level: "A2",
-      status: "stub",
+      status: "ready",
       summary: "il mio, la tua, i nostri ... — possessives agree with the thing owned and usually take an article.",
-      sections: []
+      sections: [
+        {
+          title: "Article + possessive + noun",
+          body: [
+            "A possessive agrees with the thing owned, not with the owner, and usually takes the definite article: il mio libro, la mia casa, i miei amici, le mie amiche.",
+            "The forms are mio, tuo, suo, nostro, vostro, loro. All change like -o adjectives (mio/mia/miei/mie) except loro, which never changes: il loro libro, la loro casa, i loro amici.",
+            "suo/sua means his, her, or your (formal) — it agrees with the thing, not the owner: la sua macchina can be his or her car."
+          ]
+        },
+        {
+          title: "The family exception",
+          body: [
+            "With a singular family member you drop the article: mio padre, mia madre, tua sorella, suo fratello.",
+            "But keep the article in the plural (i miei fratelli), with loro (il loro padre), and with an added adjective (la mia sorella piccola)."
+          ]
+        }
+      ],
+      tables: [
+        {
+          title: "Possessive forms",
+          columns: ["Owner", "m.sg", "f.sg", "m.pl", "f.pl"],
+          rows: [
+            ["my", "mio", "mia", "miei", "mie"],
+            ["your (tu)", "tuo", "tua", "tuoi", "tue"],
+            ["his/her/your", "suo", "sua", "suoi", "sue"],
+            ["our", "nostro", "nostra", "nostri", "nostre"],
+            ["your (voi)", "vostro", "vostra", "vostri", "vostre"],
+            ["their", "loro", "loro", "loro", "loro"]
+          ]
+        }
+      ],
+      examples: [
+        { it: "Il mio libro è sul tavolo e le mie penne sono nello zaino.", en: "My book is on the table and my pens are in the backpack.", de: "Mein Buch ist auf dem Tisch und meine Stifte sind im Rucksack." },
+        { it: "Mia sorella abita con i suoi amici.", en: "My sister lives with her friends.", de: "Meine Schwester wohnt mit ihren Freunden." },
+        { it: "La loro casa è grande.", en: "Their house is big.", de: "Ihr Haus ist groß." }
+      ],
+      exercises: [
+        {
+          prompt: "Completa con l'articolo e il possessivo giusti: ___ (my) libri, ___ (your, tu) casa, ___ (our) amici, ___ (my) madre.",
+          reveal: {
+            body: ["i miei libri, la tua casa, i nostri amici, mia madre (senza articolo: familiare singolare)."]
+          }
+        },
+        {
+          prompt: "Scrivi tre frasi sulla tua famiglia usando i possessivi (ricorda l'eccezione dei familiari).",
+          reveal: {
+            examples: [
+              { it: "Mia madre si chiama Anna." },
+              { it: "I miei fratelli sono più grandi di me." },
+              { it: "La nostra casa è vicino al centro." }
+            ]
+          }
+        }
+      ],
+      questions: [
+        { id: "g-poss-libri", type: "typed", prompt: "Say 'my books' (with article).", answer: "i miei libri", accepted: ["i miei libri"] },
+        { id: "g-poss-agree", type: "multiple-choice", prompt: "A possessive agrees with...", answer: "the thing owned", options: ["the thing owned", "the owner", "nothing", "the verb"], explanation: "la sua macchina agrees with macchina." },
+        { id: "g-poss-family", type: "multiple-choice", prompt: "Which is correct?", answer: "mia madre", options: ["mia madre", "la mia madre", "mie madre", "il mia madre"], explanation: "Singular family member drops the article." },
+        { id: "g-poss-loro", type: "multiple-choice", prompt: "How does 'loro' (their) change for gender/number?", answer: "it never changes", options: ["it never changes", "loro/lora/lori/lore", "like mio", "only in plural"], explanation: "loro is invariable." }
+      ]
     },
     {
       id: "dimostrativi",
       title: "Demonstratives (questo / quello)",
       stage: 2,
       level: "A2",
-      status: "stub",
+      status: "ready",
       summary: "this and that, and how questo and quello change form.",
-      sections: []
+      sections: [
+        {
+          title: "questo (this)",
+          body: [
+            "questo points to something near the speaker. It has four forms like an -o adjective: questo, questa, questi, queste.",
+            "Questo libro, questa casa, questi ragazzi, queste ragazze.",
+            "Before a vowel, questo/questa often shorten to quest': quest'anno, quest'amica."
+          ]
+        },
+        {
+          title: "quello (that)",
+          body: [
+            "quello points to something far from the speaker. Before a noun it changes like the definite article (il/lo/la/l'/i/gli/le).",
+            "quel libro (il), quello studente (lo), quell'amico (l'), quella casa (la), quei libri (i), quegli studenti (gli), quelle case (le).",
+            "So the first letters of the next word decide the form, exactly like articles."
+          ]
+        }
+      ],
+      tables: [
+        {
+          title: "quello before a noun",
+          columns: ["Like article", "Demonstrative", "Example"],
+          rows: [
+            ["il", "quel", "quel libro"],
+            ["lo", "quello", "quello zaino"],
+            ["l' (m)", "quell'", "quell'amico"],
+            ["la", "quella", "quella casa"],
+            ["i", "quei", "quei libri"],
+            ["gli", "quegli", "quegli studenti"],
+            ["le", "quelle", "quelle case"]
+          ]
+        }
+      ],
+      examples: [
+        { it: "Questo caffè è buono, ma quel dolce è troppo dolce.", en: "This coffee is good, but that cake is too sweet.", de: "Dieser Kaffee ist gut, aber jener Kuchen ist zu süß." },
+        { it: "Quegli studenti sono simpatici.", en: "Those students are nice.", de: "Jene Studenten sind sympathisch." }
+      ],
+      exercises: [
+        {
+          prompt: "Completa con la forma giusta di 'quello': ___ zaino, ___ amici, ___ casa, ___ studenti, ___ libro.",
+          reveal: {
+            body: ["quello zaino, quegli amici, quella casa, quegli studenti, quel libro."]
+          }
+        },
+        {
+          prompt: "In un negozio, indica quattro oggetti usando 'questo' (vicino) e 'quello' (lontano).",
+          reveal: {
+            examples: [
+              { it: "Vorrei questa maglietta, non quella." },
+              { it: "Mi piacciono questi pantaloni e quelle scarpe." }
+            ]
+          }
+        }
+      ],
+      questions: [
+        { id: "g-dim-questi", type: "typed", prompt: "Say 'these boys' (questo + ragazzi).", answer: "questi ragazzi", accepted: ["questi ragazzi"] },
+        { id: "g-dim-zaino", type: "multiple-choice", prompt: "Choose: ___ zaino (that).", answer: "quello", options: ["quello", "quel", "quegli", "quella"], explanation: "z takes lo, so quello." },
+        { id: "g-dim-studenti", type: "multiple-choice", prompt: "Choose: ___ studenti (those).", answer: "quegli", options: ["quegli", "quei", "quelli", "quelle"], explanation: "gli -> quegli." },
+        { id: "g-dim-libro", type: "multiple-choice", prompt: "Choose: ___ libro (that).", answer: "quel", options: ["quel", "quello", "quell'", "quei"], explanation: "il -> quel." }
+      ]
     },
     {
       id: "quantificatori",
       title: "Quantifiers (molto, poco, troppo)",
       stage: 2,
       level: "A2",
-      status: "stub",
+      status: "ready",
       summary: "How much / how many: molto, poco, troppo, tanto, tutto — as adverbs and as adjectives.",
-      sections: []
+      sections: [
+        {
+          title: "Adjective vs. adverb",
+          body: [
+            "molto, poco, troppo, tanto can be adjectives OR adverbs, and this decides whether they change.",
+            "As an adjective (before a noun) they agree: molti libri, molta acqua, troppe persone, poche idee.",
+            "As an adverb (with a verb or an adjective) they never change: mangio molto, è troppo caro, lavoro poco, sono tanto stanca."
+          ]
+        },
+        {
+          title: "tutto",
+          body: [
+            "tutto (all/whole) agrees and is followed by the article: tutto il giorno, tutta la notte, tutti i giorni, tutte le settimane.",
+            "tutti/tutte alone can mean 'everybody': Tutti sono qui."
+          ]
+        }
+      ],
+      tables: [
+        {
+          title: "molto",
+          columns: ["Use", "Form", "Example"],
+          rows: [
+            ["adjective + noun", "agrees", "molti amici, molta fame"],
+            ["adverb + verb", "invariable", "studio molto"],
+            ["adverb + adjective", "invariable", "molto bello"]
+          ]
+        }
+      ],
+      examples: [
+        { it: "Ho molti amici, ma poco tempo libero.", en: "I have many friends, but little free time.", de: "Ich habe viele Freunde, aber wenig Freizeit." },
+        { it: "Questo ristorante è troppo caro.", en: "This restaurant is too expensive.", de: "Dieses Restaurant ist zu teuer." },
+        { it: "Studio tutti i giorni.", en: "I study every day.", de: "Ich lerne jeden Tag." }
+      ],
+      exercises: [
+        {
+          prompt: "Accorda se serve: Ho (molto) ___ amici. Bevo (poco) ___ acqua. Sono (troppo) ___ stanca. Ci sono (tanto) ___ persone.",
+          reveal: {
+            body: ["Ho molti amici (aggettivo, accorda). Bevo poca acqua (aggettivo). Sono troppo stanca (avverbio, invariabile). Ci sono tante persone (aggettivo)."]
+          }
+        },
+        {
+          prompt: "Scrivi due frasi con 'molto' come aggettivo e due con 'molto' come avverbio.",
+          reveal: {
+            examples: [
+              { it: "Ho molti libri e molte penne. (aggettivo)" },
+              { it: "Mangio molto e dormo molto. (avverbio)" }
+            ]
+          }
+        }
+      ],
+      questions: [
+        { id: "g-quant-amici", type: "typed", prompt: "Agree: (molto) ___ amici", answer: "molti", accepted: ["molti"] },
+        { id: "g-quant-acqua", type: "typed", prompt: "Agree: (poco) ___ acqua", answer: "poca", accepted: ["poca"] },
+        { id: "g-quant-adverb", type: "multiple-choice", prompt: "In 'è troppo caro', does 'troppo' change?", answer: "no, it's an adverb", options: ["no, it's an adverb", "yes, troppa", "yes, troppi", "yes, troppe"], explanation: "With an adjective it's an invariable adverb." },
+        { id: "g-quant-tutto", type: "typed", prompt: "Say 'every day' (tutto + giorno).", answer: "tutti i giorni", accepted: ["tutti i giorni"] }
+      ]
     },
     {
       id: "interrogativi",
       title: "Question words",
       stage: 2,
       level: "A2",
-      status: "stub",
+      status: "ready",
       summary: "chi, che/cosa, dove, quando, perché, quanto, come, quale.",
-      sections: []
+      sections: [
+        {
+          title: "The question words",
+          body: [
+            "chi = who; che / che cosa / cosa = what; dove = where; quando = when; come = how; perché = why (and also 'because').",
+            "quanto and quale change when they go with a noun: quanto agrees (quanti anni, quanta acqua), quale becomes quali in the plural (quale libro, quali libri).",
+            "dove + è becomes dov'è: Dov'è la stazione?"
+          ]
+        }
+      ],
+      tables: [
+        {
+          title: "Question words",
+          columns: ["Italian", "English", "Example"],
+          rows: [
+            ["chi", "who", "Chi è?"],
+            ["che / cosa", "what", "Cosa fai?"],
+            ["dove", "where", "Dove abiti?"],
+            ["quando", "when", "Quando parti?"],
+            ["perché", "why", "Perché studi italiano?"],
+            ["come", "how", "Come stai?"],
+            ["quanto", "how much/many", "Quanti anni hai?"],
+            ["quale", "which", "Quale preferisci?"]
+          ]
+        }
+      ],
+      examples: [
+        { it: "Dove abiti e con chi?", en: "Where do you live and with whom?", de: "Wo wohnst du und mit wem?" },
+        { it: "Quanti anni hai?", en: "How old are you?", de: "Wie alt bist du?" },
+        { it: "Perché studi l'italiano? Perché mi piace.", en: "Why do you study Italian? Because I like it.", de: "Warum lernst du Italienisch? Weil es mir gefällt." }
+      ],
+      exercises: [
+        {
+          prompt: "Scrivi la parola interrogativa giusta: ___ ti chiami? ___ abiti? ___ anni hai? ___ studi italiano?",
+          reveal: {
+            body: ["Come ti chiami? Dove abiti? Quanti anni hai? Perché studi italiano?"]
+          }
+        },
+        {
+          prompt: "Immagina di conoscere una persona nuova: scrivi cinque domande per fare la sua conoscenza.",
+          reveal: {
+            examples: [
+              { it: "Come ti chiami?" },
+              { it: "Di dove sei?" },
+              { it: "Che lavoro fai?" },
+              { it: "Quanti anni hai?" },
+              { it: "Cosa ti piace fare nel tempo libero?" }
+            ]
+          }
+        }
+      ],
+      questions: [
+        { id: "g-int-who", type: "multiple-choice", prompt: "Which word means 'who'?", answer: "chi", options: ["chi", "che", "come", "dove"] },
+        { id: "g-int-age", type: "typed", prompt: "Ask 'How old are you?' in Italian.", answer: "quanti anni hai", accepted: ["quanti anni hai", "quanti anni hai?"] },
+        { id: "g-int-where", type: "typed", prompt: "Ask 'Where do you live?' (informal).", answer: "dove abiti", accepted: ["dove abiti", "dove abiti?"] },
+        { id: "g-int-quale", type: "multiple-choice", prompt: "What is the plural of 'quale'?", answer: "quali", options: ["quali", "quale", "quanti", "quelli"] }
+      ]
     },
 
     // ---------------------------------------------------------------- Stage 3

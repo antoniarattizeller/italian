@@ -516,36 +516,262 @@ window.COURSE = {
       title: "Modal verbs (potere, dovere, volere)",
       stage: 2,
       level: "A2",
-      status: "stub",
+      status: "ready",
       summary: "can / must / want + infinitive: posso, devo, voglio ... plus the polite vorrei.",
-      sections: []
+      sections: [
+        {
+          title: "Modal + infinitive",
+          body: [
+            "Modal verbs are followed directly by another verb in the infinitive: posso andare, devo studiare, voglio mangiare.",
+            "potere = can / to be able to / may. dovere = must / to have to. volere = to want.",
+            "All three are irregular in the present tense."
+          ]
+        },
+        {
+          title: "Being polite",
+          body: [
+            "For polite requests, use the conditional vorrei (I would like) instead of voglio (I want): Vorrei un caffè.",
+            "potere is also used to ask permission politely: Posso entrare? (May I come in?)"
+          ]
+        }
+      ],
+      tables: [
+        {
+          title: "Present tense",
+          columns: ["Person", "potere", "dovere", "volere"],
+          rows: [
+            ["io", "posso", "devo", "voglio"],
+            ["tu", "puoi", "devi", "vuoi"],
+            ["lui/lei", "può", "deve", "vuole"],
+            ["noi", "possiamo", "dobbiamo", "vogliamo"],
+            ["voi", "potete", "dovete", "volete"],
+            ["loro", "possono", "devono", "vogliono"]
+          ]
+        }
+      ],
+      examples: [
+        { it: "Non posso venire stasera, devo studiare.", en: "I can't come tonight, I have to study.", de: "Ich kann heute Abend nicht kommen, ich muss lernen." },
+        { it: "Vogliamo prenotare un tavolo per due.", en: "We want to book a table for two.", de: "Wir möchten einen Tisch für zwei reservieren." },
+        { it: "Scusi, posso pagare con la carta?", en: "Excuse me, can I pay by card?", de: "Entschuldigung, kann ich mit Karte zahlen?" }
+      ],
+      exercises: [
+        {
+          prompt: "Coniuga 'potere', 'dovere' e 'volere' al presente per tutte le persone.",
+          reveal: {
+            tables: [
+              {
+                title: "Modello",
+                columns: ["Persona", "potere", "dovere", "volere"],
+                rows: [["io", "posso", "devo", "voglio"], ["tu", "puoi", "devi", "vuoi"], ["lui/lei", "può", "deve", "vuole"], ["noi", "possiamo", "dobbiamo", "vogliamo"], ["voi", "potete", "dovete", "volete"], ["loro", "possono", "devono", "vogliono"]]
+              }
+            ]
+          }
+        },
+        {
+          prompt: "Scrivi tre frasi: una cosa che vuoi fare, una che devi fare e una che non puoi fare oggi.",
+          reveal: {
+            examples: [
+              { it: "Oggi voglio andare al cinema." },
+              { it: "Devo finire un lavoro importante." },
+              { it: "Non posso uscire perché piove." }
+            ]
+          }
+        }
+      ],
+      questions: [
+        { id: "g-modal-potere-io", type: "typed", prompt: "Complete with potere: io ___", answer: "posso", accepted: ["posso"] },
+        { id: "g-modal-dovere-noi", type: "typed", prompt: "Complete with dovere: noi ___", answer: "dobbiamo", accepted: ["dobbiamo"] },
+        { id: "g-modal-volere-loro", type: "typed", prompt: "Complete with volere: loro ___", answer: "vogliono", accepted: ["vogliono"] },
+        { id: "g-modal-after", type: "multiple-choice", prompt: "What form follows a modal verb?", answer: "the infinitive", options: ["the infinitive", "the gerund", "the past participle", "another conjugated verb"], explanation: "posso andare, devo studiare." },
+        { id: "g-modal-polite", type: "multiple-choice", prompt: "What is the polite way to say 'I want a coffee'?", answer: "Vorrei un caffè.", options: ["Vorrei un caffè.", "Voglio un caffè.", "Devo un caffè.", "Posso un caffè."], explanation: "vorrei is the polite conditional." }
+      ]
     },
     {
       id: "stare-gerundio",
       title: "Present continuous (stare + gerundio)",
       stage: 2,
       level: "A2",
-      status: "stub",
+      status: "ready",
       summary: "Describing what is happening right now: sto mangiando, stai leggendo.",
-      sections: []
+      sections: [
+        {
+          title: "How to form it",
+          body: [
+            "Use stare in the present + the gerundio to say what is happening right now: Sto mangiando = I am eating.",
+            "Gerundio endings: -are verbs -> -ando (parlare -> parlando); -ere and -ire verbs -> -endo (prendere -> prendendo, dormire -> dormendo).",
+            "A few are irregular: fare -> facendo, bere -> bevendo, dire -> dicendo."
+          ]
+        },
+        {
+          title: "When to use it",
+          body: [
+            "Use it only for an action in progress at this moment: Cosa stai facendo? Sto lavorando.",
+            "For habits or general facts, use the normal present instead: Lavoro in banca (not sto lavorando)."
+          ]
+        }
+      ],
+      tables: [
+        {
+          title: "stare + gerundio",
+          columns: ["Person", "stare", "example"],
+          rows: [
+            ["io", "sto", "sto parlando"],
+            ["tu", "stai", "stai leggendo"],
+            ["lui/lei", "sta", "sta dormendo"],
+            ["noi", "stiamo", "stiamo mangiando"],
+            ["voi", "state", "state facendo"],
+            ["loro", "stanno", "stanno bevendo"]
+          ]
+        }
+      ],
+      examples: [
+        { it: "Cosa stai facendo? Sto studiando.", en: "What are you doing? I'm studying.", de: "Was machst du gerade? Ich lerne." },
+        { it: "I bambini stanno dormendo, non fare rumore.", en: "The children are sleeping, don't make noise.", de: "Die Kinder schlafen, mach keinen Lärm." }
+      ],
+      exercises: [
+        {
+          prompt: "Trasforma al presente continuo (stare + gerundio): io (mangiare), tu (leggere), noi (dormire), loro (fare).",
+          reveal: {
+            body: ["sto mangiando, stai leggendo, stiamo dormendo, stanno facendo."]
+          }
+        },
+        {
+          prompt: "Guarda fuori dalla finestra (o immagina una scena) e scrivi tre frasi su cosa stanno facendo le persone.",
+          reveal: {
+            examples: [
+              { it: "Un uomo sta camminando con il cane." },
+              { it: "Due bambini stanno giocando a palla." },
+              { it: "Una signora sta parlando al telefono." }
+            ]
+          }
+        }
+      ],
+      questions: [
+        { id: "g-ger-mangiare", type: "typed", prompt: "Give the gerundio of 'mangiare'.", answer: "mangiando", accepted: ["mangiando"] },
+        { id: "g-ger-prendere", type: "typed", prompt: "Give the gerundio of 'prendere'.", answer: "prendendo", accepted: ["prendendo"] },
+        { id: "g-ger-io-parlare", type: "typed", prompt: "Say 'I am speaking' (stare + gerundio).", answer: "sto parlando", accepted: ["sto parlando"] },
+        { id: "g-ger-fare", type: "multiple-choice", prompt: "What is the gerundio of the irregular verb 'fare'?", answer: "facendo", options: ["facendo", "fando", "faciendo", "facente"] }
+      ]
     },
     {
       id: "piacere",
       title: "Piacere (to like)",
       stage: 2,
       level: "A2",
-      status: "stub",
-      summary: "mi piace + singular/infinitive vs. mi piacciono + plural; and the indirect pronouns it uses.",
-      sections: []
+      status: "ready",
+      summary: "mi piace + singular/infinitive vs. mi piacciono + plural; and the pronouns it uses.",
+      sections: [
+        {
+          title: "A different way of thinking",
+          body: [
+            "piacere does not work like English 'to like'. It means 'to be pleasing to': Mi piace il caffè literally means 'Coffee is pleasing to me'.",
+            "So the thing you like is the subject, and the verb agrees with it: mi piace + singular or infinitive, mi piacciono + plural.",
+            "Mi piace la pizza. Mi piace viaggiare. Mi piacciono i libri."
+          ]
+        },
+        {
+          title: "Who likes it",
+          body: [
+            "The person who likes is shown by an indirect pronoun: mi, ti, gli (to him), le (to her), ci, vi, gli (to them).",
+            "With a name, use a: A Marco piace il calcio = Gli piace il calcio.",
+            "Negative: Non mi piace il freddo. To agree: Anche a me! To disagree: A me no."
+          ]
+        }
+      ],
+      tables: [
+        {
+          title: "mi piace / mi piacciono",
+          columns: ["Likes what", "Verb", "Example"],
+          rows: [
+            ["one thing", "piace", "Mi piace la musica."],
+            ["an action", "piace", "Mi piace ballare."],
+            ["many things", "piacciono", "Mi piacciono i gatti."]
+          ]
+        }
+      ],
+      examples: [
+        { it: "Mi piace il caffè, ma non mi piacciono i dolci.", en: "I like coffee, but I don't like sweets.", de: "Ich mag Kaffee, aber ich mag keine Süßigkeiten." },
+        { it: "Ti piace viaggiare?", en: "Do you like travelling?", de: "Reist du gern?" },
+        { it: "A Marco piacciono i film italiani.", en: "Marco likes Italian films.", de: "Marco mag italienische Filme." }
+      ],
+      exercises: [
+        {
+          prompt: "Completa con 'piace' o 'piacciono': Mi ___ la pizza. Mi ___ gli spaghetti. Ti ___ leggere. Non mi ___ le verdure.",
+          reveal: {
+            body: ["Mi piace la pizza. Mi piacciono gli spaghetti. Ti piace leggere. Non mi piacciono le verdure."]
+          }
+        },
+        {
+          prompt: "Scrivi tre cose che ti piacciono e due che non ti piacciono.",
+          reveal: {
+            examples: [
+              { it: "Mi piace la musica italiana." },
+              { it: "Mi piacciono i viaggi e i libri." },
+              { it: "Non mi piace il freddo e non mi piacciono i ragni." }
+            ]
+          }
+        }
+      ],
+      questions: [
+        { id: "g-piace-pizza", type: "multiple-choice", prompt: "Choose: Mi ___ la pizza.", answer: "piace", options: ["piace", "piacciono", "piaci", "piaccio"], explanation: "Singular thing -> piace." },
+        { id: "g-piace-libri", type: "multiple-choice", prompt: "Choose: Mi ___ i libri.", answer: "piacciono", options: ["piacciono", "piace", "piaci", "piacete"], explanation: "Plural thing -> piacciono." },
+        { id: "g-piace-infinitive", type: "typed", prompt: "Say 'I like to travel'.", answer: "mi piace viaggiare", accepted: ["mi piace viaggiare"] },
+        { id: "g-piace-marco", type: "multiple-choice", prompt: "'A Marco piace il calcio' can be shortened to...", answer: "Gli piace il calcio.", options: ["Gli piace il calcio.", "Le piace il calcio.", "Mi piace il calcio.", "Ci piace il calcio."], explanation: "gli = to him." }
+      ]
     },
     {
       id: "ce-ci-sono",
       title: "There is / there are (c'è, ci sono)",
       stage: 2,
       level: "A2",
-      status: "stub",
+      status: "ready",
       summary: "Saying what exists or is present: c'è un problema, ci sono due libri.",
-      sections: []
+      sections: [
+        {
+          title: "c'è and ci sono",
+          body: [
+            "Use c'è (short for ci è) + a singular thing: C'è un problema. In cucina c'è un frigorifero.",
+            "Use ci sono + a plural thing: Ci sono due libri. In classe ci sono venti studenti.",
+            "They say that something exists or is present in a place."
+          ]
+        },
+        {
+          title: "Questions and negatives",
+          body: [
+            "Question: C'è un bagno qui? Ci sono domande?",
+            "Negative: Non c'è tempo. Non ci sono problemi.",
+            "Don't confuse c'è (there is) with è (it is): C'è un gatto (there is a cat) vs. È un gatto (it is a cat)."
+          ]
+        }
+      ],
+      examples: [
+        { it: "Nel frigorifero c'è del latte e ci sono tre uova.", en: "In the fridge there is some milk and there are three eggs.", de: "Im Kühlschrank ist Milch und es sind drei Eier." },
+        { it: "Scusi, c'è una farmacia qui vicino?", en: "Excuse me, is there a pharmacy near here?", de: "Entschuldigung, gibt es hier in der Nähe eine Apotheke?" },
+        { it: "Oggi non ci sono lezioni.", en: "Today there are no lessons.", de: "Heute gibt es keinen Unterricht." }
+      ],
+      exercises: [
+        {
+          prompt: "Completa con 'c'è' o 'ci sono': In camera ___ un letto. Sul tavolo ___ due bicchieri. ___ un problema. Non ___ molte persone.",
+          reveal: {
+            body: ["In camera c'è un letto. Sul tavolo ci sono due bicchieri. C'è un problema. Non ci sono molte persone."]
+          }
+        },
+        {
+          prompt: "Descrivi la tua cucina: scrivi tre frasi con 'c'è' e 'ci sono'.",
+          reveal: {
+            examples: [
+              { it: "In cucina c'è un grande frigorifero." },
+              { it: "Ci sono quattro sedie intorno al tavolo." },
+              { it: "Non c'è la lavastoviglie." }
+            ]
+          }
+        }
+      ],
+      questions: [
+        { id: "g-ce-sing", type: "multiple-choice", prompt: "Choose: ___ un problema.", answer: "C'è", options: ["C'è", "Ci sono", "È", "Ci ha"], explanation: "Singular -> c'è." },
+        { id: "g-ce-plur", type: "multiple-choice", prompt: "Choose: ___ due libri sul tavolo.", answer: "Ci sono", options: ["Ci sono", "C'è", "È", "Sono"], explanation: "Plural -> ci sono." },
+        { id: "g-ce-neg", type: "typed", prompt: "Say 'there is no time' in Italian.", answer: "non c'è tempo", accepted: ["non c'è tempo"] }
+      ]
     },
     {
       id: "possessivi",

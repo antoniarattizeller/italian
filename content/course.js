@@ -64,6 +64,14 @@ window.COURSE = {
         { it: "Lei è il signor Rinaldi, vero?", en: "You are Mr. Rinaldi, right?", de: "Sie sind Herr Rinaldi, oder?" },
         { it: "Voi siete il signor e la signora Ferri?", en: "Are you Mr. and Mrs. Ferri?", de: "Sind Sie Herr und Frau Ferri?" }
       ],
+      exercises: [
+        {
+          prompt: "Scrivi il pronome soggetto giusto: ___ sono Anna (I), ___ siete studenti (you all), ___ è mia sorella (she), ___ siamo amici (we).",
+          reveal: {
+            body: ["io sono Anna, voi siete studenti, lei è mia sorella, noi siamo amici.", "Ricorda: spesso in italiano il pronome si può togliere, perché il verbo mostra già la persona."]
+          }
+        }
+      ],
       questions: [
         { id: "g-pron-io", type: "multiple-choice", prompt: "What does 'io' mean?", answer: "I", options: ["I", "you", "we", "they"] },
         { id: "g-pron-formal-you", type: "multiple-choice", prompt: "Which pronoun is formal singular 'you'?", answer: "Lei", options: ["Lei", "tu", "io", "loro"] }
@@ -74,7 +82,7 @@ window.COURSE = {
       title: "Present: essere, avere, stare",
       stage: 1,
       level: "A2",
-      status: "draft",
+      status: "ready",
       summary: "The three most important irregular verbs in the present tense.",
       sections: [
         {
@@ -143,16 +151,38 @@ window.COURSE = {
       title: "Noun gender & number",
       stage: 1,
       level: "A2",
-      status: "draft",
-      summary: "Masculine/feminine endings, useful patterns, and how to spot gender.",
+      status: "ready",
+      summary: "Masculine/feminine endings, useful patterns, and how singular nouns become plural.",
       sections: [
         {
           title: "Singular gender",
           body: [
             "Nouns ending in -o are normally masculine: libro.",
             "Nouns ending in -a are normally feminine: penna.",
-            "Nouns ending in -e can be masculine or feminine: studente, lezione.",
+            "Nouns ending in -e can be masculine or feminine: studente (m), lezione (f).",
             "Useful patterns: -zione words are usually feminine (lezione, soluzione); -ore words are usually masculine (proiettore)."
+          ]
+        },
+        {
+          title: "Making the plural",
+          body: [
+            "Masculine -o becomes -i: libro -> libri.",
+            "Feminine -a becomes -e: penna -> penne.",
+            "Nouns in -e (either gender) become -i: studente -> studenti, lezione -> lezioni.",
+            "Nouns with a final stressed vowel (città) or foreign words (bar, sport) do not change in the plural: la città -> le città."
+          ]
+        }
+      ],
+      tables: [
+        {
+          title: "Singular to plural",
+          columns: ["Ending", "Singular", "Plural"],
+          rows: [
+            ["-o (m)", "il libro", "i libri"],
+            ["-a (f)", "la penna", "le penne"],
+            ["-e (m)", "lo studente", "gli studenti"],
+            ["-e (f)", "la lezione", "le lezioni"],
+            ["stressed vowel", "la città", "le città"]
           ]
         }
       ],
@@ -163,12 +193,24 @@ window.COURSE = {
         { it: "la lezione", en: "the lesson", de: "die Lektion", note: "Feminine -zione." }
       ],
       examples: [
-        { it: "Il libro è sul tavolo.", en: "The book is on the table.", de: "Das Buch ist auf dem Tisch." }
+        { it: "Il libro è sul tavolo; i libri sono nello zaino.", en: "The book is on the table; the books are in the backpack.", de: "Das Buch ist auf dem Tisch; die Bücher sind im Rucksack." },
+        { it: "Le lezioni cominciano alle nove.", en: "The lessons start at nine.", de: "Der Unterricht beginnt um neun." }
+      ],
+      exercises: [
+        {
+          prompt: "Metti al plurale (con l'articolo): il libro, la penna, lo studente, la lezione, la città.",
+          reveal: {
+            body: ["i libri, le penne, gli studenti, le lezioni, le città."],
+            examples: [{ it: "Le città italiane sono belle." }]
+          }
+        }
       ],
       questions: [
         { id: "g-gender-libro", type: "multiple-choice", prompt: "What is the usual gender of nouns ending in -o, like libro?", answer: "masculine", options: ["masculine", "feminine", "always plural", "formal"] },
         { id: "g-gender-zione", type: "multiple-choice", prompt: "Words ending in -zione, like lezione, are usually...", answer: "feminine", options: ["feminine", "masculine", "verbs", "pronouns"] },
-        { id: "g-gender-sort", type: "multiple-choice", prompt: "Which group contains only masculine nouns?", answer: "zaino, quaderno, libro", options: ["zaino, quaderno, libro", "penna, classe, lezione", "lavagna, bottiglia, penna", "classe, libro, lezione"] }
+        { id: "g-plural-penna", type: "typed", prompt: "Give the plural of 'la penna' (with article).", answer: "le penne", accepted: ["le penne"] },
+        { id: "g-plural-lezione", type: "typed", prompt: "Give the plural of 'la lezione' (with article).", answer: "le lezioni", accepted: ["le lezioni"] },
+        { id: "g-plural-citta", type: "multiple-choice", prompt: "What is the plural of 'città'?", answer: "città", options: ["città", "cittàe", "cittài", "citte"], explanation: "Nouns with a final stressed vowel don't change." }
       ]
     },
     {
@@ -176,27 +218,228 @@ window.COURSE = {
       title: "Articles (the / a)",
       stage: 1,
       level: "A2",
-      status: "stub",
-      summary: "Definite (il, lo, la, l', i, gli, le) and indefinite (un, uno, una, un') articles and how they follow the noun.",
-      sections: []
+      status: "ready",
+      summary: "Definite (il, lo, la, l', i, gli, le) and indefinite (un, uno, una, un') articles and how they change with the next word.",
+      sections: [
+        {
+          title: "The definite article (the)",
+          body: [
+            "Italian has seven words for 'the'. The form depends on gender, number, and the first sound of the next word.",
+            "Masculine: il before most consonants (il libro); lo before s+consonant, z, gn, ps, y (lo studente, lo zaino); l' before a vowel (l'amico).",
+            "Masculine plural: i (i libri); gli where the singular was lo or l' (gli studenti, gli amici).",
+            "Feminine: la before a consonant (la casa); l' before a vowel (l'amica). Plural is always le (le case, le amiche)."
+          ]
+        },
+        {
+          title: "The indefinite article (a / an)",
+          body: [
+            "Masculine: un before a vowel or most consonants (un amico, un libro); uno before s+consonant, z, gn, ps, y (uno studente, uno zaino).",
+            "Feminine: una before a consonant (una casa); un' before a vowel (un'amica).",
+            "The indefinite article has no plural; for 'some' Italian uses di + article (dei, degli, delle) or just the bare noun."
+          ]
+        }
+      ],
+      tables: [
+        {
+          title: "Definite article",
+          columns: ["", "Masculine", "Feminine"],
+          rows: [
+            ["before consonant", "il (il libro)", "la (la casa)"],
+            ["before s+cons., z...", "lo (lo zaino)", "la (la stazione)"],
+            ["before vowel", "l' (l'amico)", "l' (l'amica)"],
+            ["plural", "i / gli", "le"]
+          ]
+        },
+        {
+          title: "Indefinite article",
+          columns: ["", "Masculine", "Feminine"],
+          rows: [
+            ["before consonant", "un (un libro)", "una (una casa)"],
+            ["before s+cons., z...", "uno (uno zaino)", "una (una studentessa)"],
+            ["before vowel", "un (un amico)", "un' (un'amica)"]
+          ]
+        }
+      ],
+      examples: [
+        { it: "Il libro è sul tavolo, e lo zaino è per terra.", en: "The book is on the table, and the backpack is on the floor.", de: "Das Buch ist auf dem Tisch, und der Rucksack ist auf dem Boden." },
+        { it: "Gli studenti leggono un libro.", en: "The students are reading a book.", de: "Die Studenten lesen ein Buch." },
+        { it: "Vorrei un caffè e un'acqua, per favore.", en: "I would like a coffee and a water, please.", de: "Ich möchte einen Kaffee und ein Wasser, bitte." }
+      ],
+      exercises: [
+        {
+          prompt: "Scrivi l'articolo determinativo (il, lo, la, l', i, gli, le) davanti a queste parole: ___ zaino, ___ amico, ___ studente, ___ casa, ___ amiche, ___ libri.",
+          reveal: {
+            body: ["lo zaino, l'amico, lo studente, la casa, le amiche, i libri."],
+            examples: [{ it: "Gli amici di Marco sono simpatici." }]
+          }
+        },
+        {
+          prompt: "Scrivi l'articolo indeterminativo (un, uno, una, un') davanti a: ___ libro, ___ zaino, ___ amica, ___ studentessa.",
+          reveal: {
+            body: ["un libro, uno zaino, un'amica, una studentessa."]
+          }
+        }
+      ],
+      questions: [
+        { id: "g-art-zaino", type: "multiple-choice", prompt: "Which definite article goes with 'zaino'?", answer: "lo", options: ["lo", "il", "l'", "gli"], explanation: "z takes lo." },
+        { id: "g-art-amico", type: "multiple-choice", prompt: "Which definite article goes with 'amico'?", answer: "l'", options: ["l'", "il", "lo", "la"], explanation: "Before a vowel, il/lo become l'." },
+        { id: "g-art-plural-libro", type: "typed", prompt: "Give the plural with article of 'il libro'.", answer: "i libri", accepted: ["i libri"] },
+        { id: "g-art-plural-studente", type: "typed", prompt: "Give the plural with article of 'lo studente'.", answer: "gli studenti", accepted: ["gli studenti"] },
+        { id: "g-art-indef-studente", type: "multiple-choice", prompt: "Which indefinite article goes with 'studente'?", answer: "uno", options: ["uno", "un", "una", "un'"], explanation: "s+consonant takes uno." },
+        { id: "g-art-indef-amica", type: "multiple-choice", prompt: "Which indefinite article goes with 'amica'?", answer: "un'", options: ["un'", "una", "un", "uno"], explanation: "Feminine before a vowel takes un'." }
+      ]
     },
     {
       id: "presente",
       title: "Present tense (regular verbs)",
       stage: 1,
       level: "A2",
-      status: "stub",
+      status: "ready",
       summary: "Present indicative of regular -are, -ere, and -ire verbs (parlare, prendere, dormire, capire).",
-      sections: []
+      sections: [
+        {
+          title: "Three groups",
+          body: [
+            "Italian verbs end in -are, -ere, or -ire. To conjugate, drop the ending and add the endings for that group and person.",
+            "-are (parlare): parlo, parli, parla, parliamo, parlate, parlano.",
+            "-ere (prendere): prendo, prendi, prende, prendiamo, prendete, prendono.",
+            "-ire (dormire): dormo, dormi, dorme, dormiamo, dormite, dormono."
+          ]
+        },
+        {
+          title: "The -isc- group",
+          body: [
+            "Many -ire verbs add -isc- in all singular forms and the third person plural: capire -> capisco, capisci, capisce, capiamo, capite, capiscono.",
+            "Other common -isc- verbs: finire (to finish), preferire (to prefer), pulire (to clean).",
+            "The present tense also covers English 'I do / I am doing': parlo = I speak, I do speak, I am speaking."
+          ]
+        }
+      ],
+      tables: [
+        {
+          title: "Regular present endings",
+          columns: ["Person", "-are (parlare)", "-ere (prendere)", "-ire (dormire)"],
+          rows: [
+            ["io", "parlo", "prendo", "dormo"],
+            ["tu", "parli", "prendi", "dormi"],
+            ["lui/lei", "parla", "prende", "dorme"],
+            ["noi", "parliamo", "prendiamo", "dormiamo"],
+            ["voi", "parlate", "prendete", "dormite"],
+            ["loro", "parlano", "prendono", "dormono"]
+          ]
+        }
+      ],
+      examples: [
+        { it: "Parlo italiano e studio ogni giorno.", en: "I speak Italian and I study every day.", de: "Ich spreche Italienisch und lerne jeden Tag." },
+        { it: "Prendiamo un caffè al bar.", en: "We have a coffee at the bar.", de: "Wir trinken einen Kaffee in der Bar." },
+        { it: "I bambini dormono e non capiscono.", en: "The children are sleeping and don't understand.", de: "Die Kinder schlafen und verstehen nicht." }
+      ],
+      exercises: [
+        {
+          prompt: "Coniuga 'mangiare', 'scrivere' e 'dormire' al presente per tutte le sei persone. Poi rivela per controllare.",
+          reveal: {
+            tables: [
+              {
+                title: "Modello",
+                columns: ["Persona", "mangiare", "scrivere", "dormire"],
+                rows: [
+                  ["io", "mangio", "scrivo", "dormo"],
+                  ["tu", "mangi", "scrivi", "dormi"],
+                  ["lui/lei", "mangia", "scrive", "dorme"],
+                  ["noi", "mangiamo", "scriviamo", "dormiamo"],
+                  ["voi", "mangiate", "scrivete", "dormite"],
+                  ["loro", "mangiano", "scrivono", "dormono"]
+                ]
+              }
+            ]
+          }
+        },
+        {
+          prompt: "Scrivi tre frasi su una tua giornata usando verbi regolari al presente (per esempio: lavorare, leggere, partire).",
+          hint: "Una frase con -are, una con -ere e una con -ire.",
+          reveal: {
+            examples: [
+              { it: "La mattina lavoro in ufficio." },
+              { it: "Il pomeriggio leggo un libro." },
+              { it: "La sera parto per la palestra." }
+            ]
+          }
+        }
+      ],
+      questions: [
+        { id: "g-pres-parlare-noi", type: "typed", prompt: "Complete: noi (parlare) ___", answer: "parliamo", accepted: ["parliamo"] },
+        { id: "g-pres-prendere-loro", type: "typed", prompt: "Complete: loro (prendere) ___", answer: "prendono", accepted: ["prendono"] },
+        { id: "g-pres-dormire-tu", type: "typed", prompt: "Complete: tu (dormire) ___", answer: "dormi", accepted: ["dormi"] },
+        { id: "g-pres-capire-io", type: "typed", prompt: "Complete: io (capire) ___", answer: "capisco", accepted: ["capisco"] },
+        { id: "g-pres-are-loro", type: "multiple-choice", prompt: "What is the loro ending for regular -are verbs?", answer: "-ano", options: ["-ano", "-ono", "-ete", "-iamo"], explanation: "parlano, mangiano, lavorano." }
+      ]
     },
     {
       id: "aggettivi",
       title: "Adjectives & agreement",
       stage: 1,
       level: "A2",
-      status: "stub",
+      status: "ready",
       summary: "Adjective endings agree with the noun in gender and number, and where the adjective goes.",
-      sections: []
+      sections: [
+        {
+          title: "Two kinds of adjective",
+          body: [
+            "Adjectives agree with the noun in gender and number.",
+            "Adjectives ending in -o have four forms: -o (m.sg), -a (f.sg), -i (m.pl), -e (f.pl): alto, alta, alti, alte.",
+            "Adjectives ending in -e have two forms: -e (singular, both genders), -i (plural, both genders): grande, grandi."
+          ]
+        },
+        {
+          title: "Position",
+          body: [
+            "Most adjectives go after the noun: una macchina rossa, un libro interessante.",
+            "A few very common ones usually go before the noun: bello, brutto, buono, cattivo, grande, piccolo, giovane, vecchio, nuovo.",
+            "Colours, shapes, and nationalities always follow the noun: una bandiera italiana, un tavolo rotondo."
+          ]
+        }
+      ],
+      tables: [
+        {
+          title: "Agreement",
+          columns: ["", "Masculine", "Feminine"],
+          rows: [
+            ["singular (-o type)", "alto", "alta"],
+            ["plural (-o type)", "alti", "alte"],
+            ["singular (-e type)", "grande", "grande"],
+            ["plural (-e type)", "grandi", "grandi"]
+          ]
+        }
+      ],
+      examples: [
+        { it: "Un ragazzo alto e una ragazza alta.", en: "A tall boy and a tall girl.", de: "Ein großer Junge und ein großes Mädchen." },
+        { it: "Le case sono grandi e nuove.", en: "The houses are big and new.", de: "Die Häuser sind groß und neu." },
+        { it: "Ho una macchina rossa italiana.", en: "I have a red Italian car.", de: "Ich habe ein rotes italienisches Auto." }
+      ],
+      exercises: [
+        {
+          prompt: "Accorda l'aggettivo tra parentesi: le case (bello) ___, i ragazzi (italiano) ___, una macchina (verde) ___, due libri (interessante) ___.",
+          reveal: {
+            body: ["le case belle, i ragazzi italiani, una macchina verde, due libri interessanti."],
+            examples: [{ it: "Le ragazze italiane sono simpatiche." }]
+          }
+        },
+        {
+          prompt: "Descrivi la tua stanza con tre aggettivi, facendo attenzione all'accordo.",
+          reveal: {
+            examples: [
+              { it: "La mia stanza è piccola ma luminosa." },
+              { it: "Ho due finestre grandi e una lampada gialla." }
+            ]
+          }
+        }
+      ],
+      questions: [
+        { id: "g-adj-case-belle", type: "typed", prompt: "Agree the adjective: le case (bello) ___", answer: "belle", accepted: ["belle"] },
+        { id: "g-adj-ragazzi-it", type: "typed", prompt: "Agree the adjective: i ragazzi (italiano) ___", answer: "italiani", accepted: ["italiani"] },
+        { id: "g-adj-e-type", type: "multiple-choice", prompt: "How many forms does an -e adjective like 'grande' have?", answer: "two", options: ["two", "four", "one", "three"], explanation: "grande / grandi." },
+        { id: "g-adj-position", type: "multiple-choice", prompt: "Where does a colour adjective normally go?", answer: "after the noun", options: ["after the noun", "before the noun", "either, no change", "it never changes"], explanation: "una macchina rossa." }
+      ]
     },
 
     // ---------------------------------------------------------------- Stage 2
@@ -205,23 +448,67 @@ window.COURSE = {
       title: "Reflexive verbs",
       stage: 2,
       level: "A2",
-      status: "draft",
-      summary: "Verbs like chiamarsi and alzarsi that use mi/ti/si/ci/vi/si.",
+      status: "ready",
+      summary: "Verbs like chiamarsi and alzarsi that use the pronouns mi/ti/si/ci/vi/si.",
       sections: [
         {
           title: "How they work",
           body: [
-            "Reflexive verbs pair a reflexive pronoun with the verb: mi chiamo = I call myself.",
-            "chiamarsi: mi chiamo, ti chiami, si chiama, ci chiamiamo, vi chiamate, si chiamano.",
-            "The same pattern drives daily-routine verbs like alzarsi (to get up) and svegliarsi (to wake up)."
+            "A reflexive verb pairs a reflexive pronoun with the verb: the action comes back to the subject. Mi chiamo = I call myself.",
+            "The reflexive pronouns are mi, ti, si, ci, vi, si. They go before the verb: mi alzo, ti alzi, si alza...",
+            "In the infinitive the pronoun is attached at the end and the -e drops: alzarsi, svegliarsi, lavarsi.",
+            "This pattern drives most daily-routine verbs (see the Daily routine vocabulary)."
+          ]
+        }
+      ],
+      tables: [
+        {
+          title: "alzarsi (to get up)",
+          columns: ["Person", "Reflexive present"],
+          rows: [
+            ["io", "mi alzo"],
+            ["tu", "ti alzi"],
+            ["lui/lei", "si alza"],
+            ["noi", "ci alziamo"],
+            ["voi", "vi alzate"],
+            ["loro", "si alzano"]
           ]
         }
       ],
       examples: [
-        { it: "Mi chiamo Luca. E tu, come ti chiami?", en: "My name is Luca. And you, what is your name?", de: "Ich heisse Luca. Und du, wie heisst du?" }
+        { it: "Mi chiamo Luca. E tu, come ti chiami?", en: "My name is Luca. And you, what is your name?", de: "Ich heisse Luca. Und du, wie heisst du?" },
+        { it: "La mattina mi sveglio alle sette e mi alzo subito.", en: "In the morning I wake up at seven and get up right away.", de: "Morgens wache ich um sieben auf und stehe sofort auf." },
+        { it: "I bambini si lavano le mani prima di cena.", en: "The children wash their hands before dinner.", de: "Die Kinder waschen sich vor dem Abendessen die Hände." }
+      ],
+      exercises: [
+        {
+          prompt: "Coniuga 'svegliarsi' al presente per tutte le sei persone.",
+          reveal: {
+            tables: [
+              {
+                title: "svegliarsi",
+                columns: ["Persona", "svegliarsi"],
+                rows: [["io", "mi sveglio"], ["tu", "ti svegli"], ["lui/lei", "si sveglia"], ["noi", "ci svegliamo"], ["voi", "vi svegliate"], ["loro", "si svegliano"]]
+              }
+            ]
+          }
+        },
+        {
+          prompt: "Descrivi la tua mattina con quattro verbi riflessivi (svegliarsi, alzarsi, lavarsi, vestirsi).",
+          reveal: {
+            examples: [
+              { it: "Mi sveglio alle sette." },
+              { it: "Mi alzo e mi lavo." },
+              { it: "Poi mi vesto e faccio colazione." }
+            ]
+          }
+        }
       ],
       questions: [
-        { id: "g-chiamarsi-loro", type: "typed", prompt: "Complete with chiamarsi: loro ___", answer: "si chiamano", accepted: ["si chiamano"] }
+        { id: "g-chiamarsi-loro", type: "typed", prompt: "Complete with chiamarsi: loro ___", answer: "si chiamano", accepted: ["si chiamano"] },
+        { id: "g-refl-alzarsi-io", type: "typed", prompt: "Complete with alzarsi: io ___", answer: "mi alzo", accepted: ["mi alzo"] },
+        { id: "g-refl-lavarsi-noi", type: "typed", prompt: "Complete with lavarsi: noi ci ___", answer: "laviamo", accepted: ["laviamo", "ci laviamo"] },
+        { id: "g-refl-pronoun", type: "multiple-choice", prompt: "Which reflexive pronoun goes with 'tu'?", answer: "ti", options: ["ti", "mi", "si", "vi"] }
       ]
     },
     {

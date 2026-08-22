@@ -1427,63 +1427,466 @@ window.COURSE = {
       title: "Passato prossimo",
       stage: 4,
       level: "A2",
-      status: "stub",
+      status: "ready",
       summary: "Completed past actions with avere/essere + past participle; agreement with essere.",
-      sections: []
+      sections: [
+        {
+          title: "How to form it",
+          body: [
+            "passato prossimo = present of avere or essere + past participle. It describes a completed action: Ieri ho mangiato una pizza.",
+            "Regular participles: -are -> -ato (parlato), -ere -> -uto (creduto), -ire -> -ito (dormito).",
+            "Most verbs use avere and the participle does not change: ho parlato, abbiamo mangiato."
+          ]
+        },
+        {
+          title: "Verbs with essere",
+          body: [
+            "Verbs of movement or change of state use essere: andare, venire, arrivare, partire, uscire, entrare, tornare, restare, nascere, morire, and all reflexive verbs.",
+            "With essere the participle agrees with the subject: Maria è andata, i ragazzi sono usciti, noi siamo partiti.",
+            "Common irregular participles: fare -> fatto, essere -> stato, prendere -> preso, vedere -> visto, leggere -> letto, scrivere -> scritto, dire -> detto, bere -> bevuto, aprire -> aperto, mettere -> messo, venire -> venuto, rimanere -> rimasto."
+          ]
+        }
+      ],
+      tables: [
+        {
+          title: "avere vs. essere",
+          columns: ["Auxiliary", "Example", "Participle agrees?"],
+          rows: [
+            ["avere", "ho mangiato, hai visto", "no"],
+            ["essere (movement)", "sono andato/a", "yes, with subject"],
+            ["essere (reflexive)", "mi sono alzato/a", "yes, with subject"]
+          ]
+        }
+      ],
+      examples: [
+        { it: "Ieri ho mangiato al ristorante con gli amici.", en: "Yesterday I ate at the restaurant with friends.", de: "Gestern habe ich mit Freunden im Restaurant gegessen." },
+        { it: "Maria è andata a Roma e ha visto il Colosseo.", en: "Maria went to Rome and saw the Colosseum.", de: "Maria ist nach Rom gefahren und hat das Kolosseum gesehen." },
+        { it: "Ci siamo alzati presto e siamo partiti.", en: "We got up early and left.", de: "Wir sind früh aufgestanden und losgefahren." }
+      ],
+      exercises: [
+        {
+          prompt: "Metti al passato prossimo: io (mangiare), tu (andare), lei (partire), noi (fare), loro (vedere).",
+          reveal: {
+            body: ["ho mangiato, sei andato/a, è partita, abbiamo fatto, hanno visto.", "Ricorda: andare e partire usano essere (participio concorda); mangiare, fare e vedere usano avere."]
+          }
+        },
+        {
+          prompt: "Racconta cosa hai fatto ieri in cinque frasi al passato prossimo.",
+          reveal: {
+            examples: [
+              { it: "Ieri mi sono svegliato alle otto." },
+              { it: "Ho fatto colazione e sono andato al lavoro." },
+              { it: "A pranzo ho mangiato un panino." },
+              { it: "Il pomeriggio ho visto un amico." },
+              { it: "La sera sono tornato a casa e ho letto un libro." }
+            ]
+          }
+        }
+      ],
+      questions: [
+        { id: "g-pp-aux-andare", type: "multiple-choice", prompt: "Which auxiliary does 'andare' take?", answer: "essere", options: ["essere", "avere", "stare", "fare"], explanation: "Movement verbs use essere." },
+        { id: "g-pp-part-parlare", type: "typed", prompt: "Give the past participle of 'parlare'.", answer: "parlato", accepted: ["parlato"] },
+        { id: "g-pp-part-fare", type: "typed", prompt: "Give the (irregular) past participle of 'fare'.", answer: "fatto", accepted: ["fatto"] },
+        { id: "g-pp-agree", type: "multiple-choice", prompt: "'Maria (andare)' in passato prossimo =", answer: "è andata", options: ["è andata", "è andato", "ha andato", "ha andata"], explanation: "essere + agreement with feminine subject." },
+        { id: "g-pp-avere", type: "typed", prompt: "Say 'I ate' (mangiare, io).", answer: "ho mangiato", accepted: ["ho mangiato"] }
+      ]
     },
     {
       id: "imperfetto",
       title: "Imperfetto",
       stage: 4,
       level: "A2",
-      status: "stub",
+      status: "ready",
       summary: "Habitual and background past: descriptions, ongoing states, 'used to'.",
-      sections: []
+      sections: [
+        {
+          title: "When to use it",
+          body: [
+            "The imperfetto describes the past without a clear end: habits ('used to'), descriptions, ongoing background, and age/time/weather in the past.",
+            "Da bambino giocavo a calcio. Era una bella giornata e faceva caldo. Avevo dieci anni."
+          ]
+        },
+        {
+          title: "How to form it",
+          body: [
+            "Take the stem and add: -are -> -avo, -avi, -ava, -avamo, -avate, -avano (parlavo); -ere -> -evo... (prendevo); -ire -> -ivo... (dormivo).",
+            "essere is irregular: ero, eri, era, eravamo, eravate, erano.",
+            "fare -> facevo, bere -> bevevo, dire -> dicevo (they use the old longer stem)."
+          ]
+        }
+      ],
+      tables: [
+        {
+          title: "Imperfetto endings",
+          columns: ["Person", "-are (parlare)", "-ere (prendere)", "-ire (dormire)"],
+          rows: [
+            ["io", "parlavo", "prendevo", "dormivo"],
+            ["tu", "parlavi", "prendevi", "dormivi"],
+            ["lui/lei", "parlava", "prendeva", "dormiva"],
+            ["noi", "parlavamo", "prendevamo", "dormivamo"],
+            ["voi", "parlavate", "prendevate", "dormivate"],
+            ["loro", "parlavano", "prendevano", "dormivano"]
+          ]
+        }
+      ],
+      examples: [
+        { it: "Da bambino giocavo a calcio ogni giorno.", en: "As a child I used to play football every day.", de: "Als Kind spielte ich jeden Tag Fußball." },
+        { it: "Era una bella giornata e c'era il sole.", en: "It was a nice day and it was sunny.", de: "Es war ein schöner Tag und die Sonne schien." },
+        { it: "Quando ero piccola, abitavamo al mare.", en: "When I was little, we lived by the sea.", de: "Als ich klein war, wohnten wir am Meer." }
+      ],
+      exercises: [
+        {
+          prompt: "Metti all'imperfetto: io (parlare), tu (avere), lui (essere), noi (dormire), loro (fare).",
+          reveal: {
+            body: ["parlavo, avevi, era, dormivamo, facevano."]
+          }
+        },
+        {
+          prompt: "Descrivi com'era la tua vita quando avevi dieci anni: dove abitavi, cosa ti piaceva fare, com'era la tua scuola (cinque frasi).",
+          reveal: {
+            examples: [
+              { it: "Quando avevo dieci anni, abitavo in campagna." },
+              { it: "Ogni estate andavo dai nonni." },
+              { it: "Mi piaceva leggere e giocare fuori." },
+              { it: "La mia scuola era piccola e tranquilla." }
+            ]
+          }
+        }
+      ],
+      questions: [
+        { id: "g-imp-parlare-io", type: "typed", prompt: "Imperfetto: io (parlare) ___", answer: "parlavo", accepted: ["parlavo"] },
+        { id: "g-imp-essere-lui", type: "typed", prompt: "Imperfetto: lui (essere) ___", answer: "era", accepted: ["era"] },
+        { id: "g-imp-fare-noi", type: "typed", prompt: "Imperfetto: noi (fare) ___", answer: "facevamo", accepted: ["facevamo"] },
+        { id: "g-imp-use", type: "multiple-choice", prompt: "Which is a typical use of the imperfetto?", answer: "a habit in the past ('used to')", options: ["a habit in the past ('used to')", "a single completed action", "a future plan", "a command"], explanation: "Habits, descriptions, background." }
+      ]
     },
     {
       id: "passato-vs-imperfetto",
       title: "Passato prossimo vs. imperfetto",
       stage: 4,
       level: "A2",
-      status: "stub",
+      status: "ready",
       summary: "Choosing between the two: completed events vs. background and habits.",
-      sections: []
+      sections: [
+        {
+          title: "The core difference",
+          body: [
+            "passato prossimo = a completed event, something that happened (and finished): Ieri ho visto un film.",
+            "imperfetto = background, description, or habit, something that was going on or used to happen: Da bambino guardavo molti film.",
+            "Ask yourself: is it 'what happened' (passato prossimo) or 'what was going on / how things were' (imperfetto)?"
+          ]
+        },
+        {
+          title: "Together in one story",
+          body: [
+            "Very often the imperfetto sets the scene and the passato prossimo is the event that interrupts it: Mentre mangiavo, è arrivato Marco.",
+            "Guardavo la TV (background) quando è suonato il telefono (event).",
+            "Signal words: often with imperfetto -> sempre, ogni giorno, di solito, mentre; often with passato prossimo -> ieri, poi, all'improvviso, una volta."
+          ]
+        }
+      ],
+      examples: [
+        { it: "Mentre camminavo, ho incontrato un vecchio amico.", en: "While I was walking, I met an old friend.", de: "Während ich ging, traf ich einen alten Freund." },
+        { it: "Era tardi e pioveva, così sono tornato a casa.", en: "It was late and raining, so I went back home.", de: "Es war spät und es regnete, also ging ich nach Hause." },
+        { it: "Da piccola andavo al mare ogni estate; l'anno scorso invece sono andata in montagna.", en: "As a child I went to the sea every summer; last year, though, I went to the mountains.", de: "Als Kind fuhr ich jeden Sommer ans Meer; letztes Jahr aber in die Berge." }
+      ],
+      exercises: [
+        {
+          prompt: "Scegli il tempo giusto: Mentre (leggere) ___, (suonare) ___ il telefono. Ieri (essere) ___ stanco e (andare) ___ a letto presto.",
+          reveal: {
+            body: ["Mentre leggevo (imperfetto, azione in corso), è suonato il telefono (passato prossimo, evento). Ieri ero stanco (imperfetto, stato) e sono andato a letto presto (passato prossimo, evento)."]
+          }
+        },
+        {
+          prompt: "Racconta un piccolo episodio del passato: usa l'imperfetto per lo sfondo e il passato prossimo per l'evento (quattro frasi).",
+          reveal: {
+            examples: [
+              { it: "Era una bella giornata di primavera." },
+              { it: "Camminavo nel parco e ascoltavo la musica." },
+              { it: "All'improvviso ho visto un vecchio amico." },
+              { it: "Ci siamo fermati a prendere un caffè." }
+            ]
+          }
+        }
+      ],
+      questions: [
+        { id: "g-pvi-event", type: "multiple-choice", prompt: "'Yesterday I saw a film' uses...", answer: "passato prossimo", options: ["passato prossimo", "imperfetto", "futuro", "presente"], explanation: "A single completed event." },
+        { id: "g-pvi-habit", type: "multiple-choice", prompt: "'As a child I used to play outside' uses...", answer: "imperfetto", options: ["imperfetto", "passato prossimo", "condizionale", "imperativo"], explanation: "A past habit." },
+        { id: "g-pvi-combo", type: "multiple-choice", prompt: "'Mentre ___, è arrivato Marco.' Which fits the gap?", answer: "mangiavo", options: ["mangiavo", "ho mangiato", "mangerò", "mangio"], explanation: "Background action -> imperfetto." }
+      ]
     },
     {
       id: "futuro",
       title: "Simple future (futuro semplice)",
       stage: 4,
       level: "A2",
-      status: "stub",
+      status: "ready",
       summary: "Talking about the future: parlerò, prenderai, saremo, and irregular stems.",
-      sections: []
+      sections: [
+        {
+          title: "How to form it",
+          body: [
+            "Endings are the same for all verbs: -ò, -ai, -à, -emo, -ete, -anno.",
+            "The -are and -ere stems both end in -er-: parlare -> parler-, prendere -> prender-. So parlerò, parlerai, parlerà, parleremo, parlerete, parleranno.",
+            "The -ire stem ends in -ir-: dormire -> dormirò.",
+            "The future can also express a guess about the present: Saranno le tre (It's probably three o'clock)."
+          ]
+        },
+        {
+          title: "Irregular stems",
+          body: [
+            "Many common verbs have a short irregular stem, but the same endings: essere -> sar-, avere -> avr-, andare -> andr-, fare -> far-, venire -> verr-, potere -> potr-, dovere -> dovr-, volere -> vorr-, vedere -> vedr-.",
+            "So: sarò, avrò, andrò, farò, verrò, potrò, dovrò, vorrò, vedrò."
+          ]
+        }
+      ],
+      tables: [
+        {
+          title: "Future endings & irregular stems",
+          columns: ["Person", "parlare", "essere (sar-)", "avere (avr-)"],
+          rows: [
+            ["io", "parlerò", "sarò", "avrò"],
+            ["tu", "parlerai", "sarai", "avrai"],
+            ["lui/lei", "parlerà", "sarà", "avrà"],
+            ["noi", "parleremo", "saremo", "avremo"],
+            ["voi", "parlerete", "sarete", "avrete"],
+            ["loro", "parleranno", "saranno", "avranno"]
+          ]
+        }
+      ],
+      examples: [
+        { it: "Domani partirò per Roma e resterò una settimana.", en: "Tomorrow I'll leave for Rome and stay a week.", de: "Morgen fahre ich nach Rom und bleibe eine Woche." },
+        { it: "L'anno prossimo andremo in vacanza in Sicilia.", en: "Next year we'll go on holiday to Sicily.", de: "Nächstes Jahr fahren wir nach Sizilien in den Urlaub." },
+        { it: "Quando avrò tempo, ti chiamerò.", en: "When I have time, I'll call you.", de: "Wenn ich Zeit habe, rufe ich dich an." }
+      ],
+      exercises: [
+        {
+          prompt: "Metti al futuro: io (parlare), tu (essere), lei (avere), noi (andare), loro (fare).",
+          reveal: {
+            body: ["parlerò, sarai, avrà, andremo, faranno."]
+          }
+        },
+        {
+          prompt: "Scrivi cinque frasi sui tuoi progetti per il prossimo anno (viaggi, studio, lavoro).",
+          reveal: {
+            examples: [
+              { it: "L'anno prossimo studierò di più." },
+              { it: "Andrò in Italia in estate." },
+              { it: "Cambierò lavoro, forse." },
+              { it: "Imparerò a cucinare meglio." }
+            ]
+          }
+        }
+      ],
+      questions: [
+        { id: "g-fut-parlare-io", type: "typed", prompt: "Future: io (parlare) ___", answer: "parlerò", accepted: ["parlerò", "parlero"] },
+        { id: "g-fut-essere-loro", type: "typed", prompt: "Future: loro (essere) ___", answer: "saranno", accepted: ["saranno"] },
+        { id: "g-fut-andare-noi", type: "typed", prompt: "Future: noi (andare) ___", answer: "andremo", accepted: ["andremo"] },
+        { id: "g-fut-ending", type: "multiple-choice", prompt: "What is the io future ending?", answer: "-ò", options: ["-ò", "-ei", "-avo", "-o"], explanation: "parlerò, sarò, avrò." }
+      ]
     },
     {
       id: "condizionale",
       title: "Present conditional",
       stage: 4,
       level: "A2",
-      status: "stub",
+      status: "ready",
       summary: "Would / polite requests: vorrei, potrei, mi piacerebbe.",
-      sections: []
+      sections: [
+        {
+          title: "How to form it",
+          body: [
+            "The present conditional means 'would'. It uses the SAME stem as the future, with the endings -ei, -esti, -ebbe, -emmo, -este, -ebbero.",
+            "parlare -> parlerei, parleresti, parlerebbe, parleremmo, parlereste, parlerebbero. prendere -> prenderei. dormire -> dormirei.",
+            "The irregular stems are the same as the future: essere -> sarei, avere -> avrei, volere -> vorrei, potere -> potrei, dovere -> dovrei, fare -> farei, andare -> andrei."
+          ]
+        },
+        {
+          title: "What it's for",
+          body: [
+            "Polite requests and wishes: Vorrei un caffè. Potrei avere il conto? Mi piacerebbe visitare Roma.",
+            "Advice and softening: Dovresti riposare. Al tuo posto, parlerei con lei.",
+            "It is the polite, softer alternative to the plain present (voglio -> vorrei)."
+          ]
+        }
+      ],
+      tables: [
+        {
+          title: "Conditional endings & irregular stems",
+          columns: ["Person", "parlare", "volere (vorr-)", "potere (potr-)"],
+          rows: [
+            ["io", "parlerei", "vorrei", "potrei"],
+            ["tu", "parleresti", "vorresti", "potresti"],
+            ["lui/lei", "parlerebbe", "vorrebbe", "potrebbe"],
+            ["noi", "parleremmo", "vorremmo", "potremmo"],
+            ["voi", "parlereste", "vorreste", "potreste"],
+            ["loro", "parlerebbero", "vorrebbero", "potrebbero"]
+          ]
+        }
+      ],
+      examples: [
+        { it: "Vorrei un tavolo per due, per favore.", en: "I would like a table for two, please.", de: "Ich hätte gern einen Tisch für zwei, bitte." },
+        { it: "Scusi, potrei avere il conto?", en: "Excuse me, could I have the bill?", de: "Entschuldigung, könnte ich die Rechnung haben?" },
+        { it: "Mi piacerebbe imparare a suonare la chitarra.", en: "I would like to learn to play the guitar.", de: "Ich würde gern Gitarre spielen lernen." }
+      ],
+      exercises: [
+        {
+          prompt: "Metti al condizionale: io (volere), tu (potere), lei (dovere), noi (essere), loro (parlare).",
+          reveal: {
+            body: ["vorrei, potresti, dovrebbe, saremmo, parlerebbero."]
+          }
+        },
+        {
+          prompt: "Sei al ristorante. Scrivi tre richieste gentili al cameriere usando il condizionale.",
+          reveal: {
+            examples: [
+              { it: "Vorrei vedere il menù, per favore." },
+              { it: "Potrei avere un bicchiere d'acqua?" },
+              { it: "Mi porterebbe il conto, per cortesia?" }
+            ]
+          }
+        }
+      ],
+      questions: [
+        { id: "g-cond-volere-io", type: "typed", prompt: "Conditional: io (volere) ___", answer: "vorrei", accepted: ["vorrei"] },
+        { id: "g-cond-potere-tu", type: "typed", prompt: "Conditional: tu (potere) ___", answer: "potresti", accepted: ["potresti"] },
+        { id: "g-cond-parlare-lui", type: "typed", prompt: "Conditional: lui (parlare) ___", answer: "parlerebbe", accepted: ["parlerebbe"] },
+        { id: "g-cond-use", type: "multiple-choice", prompt: "'Vorrei un caffè' is more polite than...", answer: "Voglio un caffè", options: ["Voglio un caffè", "Ho un caffè", "Sono un caffè", "Faccio un caffè"], explanation: "Conditional softens the request." }
+      ]
     },
     {
       id: "imperativo",
       title: "Imperative (informal)",
       stage: 4,
       level: "A2",
-      status: "stub",
+      status: "ready",
       summary: "Giving instructions and suggestions: parla!, prendi!, andiamo!, and negatives.",
-      sections: []
+      sections: [
+        {
+          title: "tu, noi, voi",
+          body: [
+            "The informal imperative gives orders, instructions, and suggestions to people you address as tu / noi / voi.",
+            "tu: -are verbs end in -a (Parla!), while -ere and -ire end in -i (Prendi! Dormi!).",
+            "noi = 'let's': -iamo (Parliamo! Andiamo!). voi: -ate / -ete / -ite (Parlate! Prendete! Dormite!)."
+          ]
+        },
+        {
+          title: "Negatives and irregulars",
+          body: [
+            "Negative tu = non + the infinitive: Non parlare! Non correre! Non toccare!",
+            "Negative noi/voi just add non: Non parlate!",
+            "A few irregular tu forms: essere -> sii, avere -> abbi, andare -> va' (or vai), fare -> fa' (fai), dare -> da' (dai), stare -> sta' (stai), dire -> di'."
+          ]
+        }
+      ],
+      tables: [
+        {
+          title: "Informal imperative",
+          columns: ["Person", "-are (parlare)", "-ere (prendere)", "-ire (dormire)"],
+          rows: [
+            ["tu", "parla!", "prendi!", "dormi!"],
+            ["noi", "parliamo!", "prendiamo!", "dormiamo!"],
+            ["voi", "parlate!", "prendete!", "dormite!"],
+            ["tu (negative)", "non parlare!", "non prendere!", "non dormire!"]
+          ]
+        }
+      ],
+      examples: [
+        { it: "Marco, chiudi la porta e ascolta!", en: "Marco, close the door and listen!", de: "Marco, schließ die Tür und hör zu!" },
+        { it: "Andiamo al parco! Fa bel tempo.", en: "Let's go to the park! The weather is nice.", de: "Gehen wir in den Park! Das Wetter ist schön." },
+        { it: "Non parlare così in fretta, per favore.", en: "Don't speak so fast, please.", de: "Sprich bitte nicht so schnell." }
+      ],
+      exercises: [
+        {
+          prompt: "Dai l'ordine (tu): (parlare) più piano, (prendere) l'ombrello, (aprire) la finestra. Poi mettili al negativo.",
+          reveal: {
+            body: ["Parla più piano! Prendi l'ombrello! Apri la finestra!", "Negativo: Non parlare! Non prendere l'ombrello! Non aprire la finestra!"]
+          }
+        },
+        {
+          prompt: "Scrivi tre consigli a un amico che va in Italia, usando l'imperativo informale.",
+          reveal: {
+            examples: [
+              { it: "Visita Roma e Firenze!" },
+              { it: "Mangia la vera pizza napoletana!" },
+              { it: "Non dimenticare di prenotare l'albergo!" }
+            ]
+          }
+        }
+      ],
+      questions: [
+        { id: "g-imper-parla", type: "typed", prompt: "Give the tu imperative of 'parlare'.", answer: "parla", accepted: ["parla", "parla!"] },
+        { id: "g-imper-prendi", type: "typed", prompt: "Give the tu imperative of 'prendere'.", answer: "prendi", accepted: ["prendi", "prendi!"] },
+        { id: "g-imper-neg", type: "multiple-choice", prompt: "How do you say 'Don't speak!' (tu)?", answer: "Non parlare!", options: ["Non parlare!", "Non parli!", "Non parla!", "Non parlate!"], explanation: "Negative tu = non + infinitive." },
+        { id: "g-imper-noi", type: "typed", prompt: "Say \"Let's go!\" (andare, noi).", answer: "andiamo", accepted: ["andiamo", "andiamo!"] }
+      ]
     },
     {
       id: "comparativi",
       title: "Comparatives",
       stage: 4,
       level: "A2",
-      status: "stub",
+      status: "ready",
       summary: "più... di, meno... di, (così) come — comparing people and things.",
-      sections: []
+      sections: [
+        {
+          title: "More, less, equal",
+          body: [
+            "More: più + adjective + di. Less: meno + adjective + di. Marco è più alto di Luca. Oggi sono meno stanco di ieri.",
+            "Equal: (così)... come or (tanto)... quanto. Anna è (così) alta come Marco. The così/tanto is optional.",
+            "Use di before nouns, pronouns, and numbers."
+          ]
+        },
+        {
+          title: "di vs. che, and irregulars",
+          body: [
+            "Use che (not di) when you compare two of the same kind directly: two verbs, two adjectives, or two nouns after the same verb. Studio più che parlo. È più simpatico che intelligente.",
+            "Irregular comparatives: buono -> migliore (better), cattivo -> peggiore (worse); the adverbs bene -> meglio, male -> peggio.",
+            "Questo caffè è migliore di quello. Oggi sto meglio di ieri."
+          ]
+        }
+      ],
+      tables: [
+        {
+          title: "Comparisons",
+          columns: ["Type", "Structure", "Example"],
+          rows: [
+            ["more", "più ... di", "più alto di Luca"],
+            ["less", "meno ... di", "meno caro di ieri"],
+            ["equal", "(così) ... come", "alto come Marco"],
+            ["irregular", "migliore / peggiore", "migliore di questo"]
+          ]
+        }
+      ],
+      examples: [
+        { it: "Milano è più grande di Verona.", en: "Milan is bigger than Verona.", de: "Mailand ist größer als Verona." },
+        { it: "Questo ristorante è meno caro di quello.", en: "This restaurant is less expensive than that one.", de: "Dieses Restaurant ist weniger teuer als jenes." },
+        { it: "Anna è brava come Marco, ma oggi sta meglio di lui.", en: "Anna is as good as Marco, but today she's better than him.", de: "Anna ist so gut wie Marco, aber heute geht es ihr besser als ihm." }
+      ],
+      exercises: [
+        {
+          prompt: "Completa con 'di', 'che' o 'come': Marco è più alto ___ Luca. Studio più ___ dormo. Sei gentile ___ tua sorella.",
+          reveal: {
+            body: ["Marco è più alto di Luca (nomi/pronomi -> di). Studio più che dormo (due verbi -> che). Sei gentile come tua sorella (uguaglianza -> come)."]
+          }
+        },
+        {
+          prompt: "Confronta due città che conosci: scrivi tre frasi (più... di, meno... di, come).",
+          reveal: {
+            examples: [
+              { it: "Roma è più grande di Firenze." },
+              { it: "Firenze è meno caotica di Roma." },
+              { it: "Firenze è bella come Roma." }
+            ]
+          }
+        }
+      ],
+      questions: [
+        { id: "g-comp-di", type: "multiple-choice", prompt: "'Marco è più alto ___ Luca.'", answer: "di", options: ["di", "che", "come", "quanto"], explanation: "Before a name/pronoun use di." },
+        { id: "g-comp-che", type: "multiple-choice", prompt: "'Studio più ___ parlo.' (two verbs)", answer: "che", options: ["che", "di", "come", "quanto"], explanation: "Comparing two verbs -> che." },
+        { id: "g-comp-migliore", type: "multiple-choice", prompt: "What is the irregular comparative of 'buono'?", answer: "migliore", options: ["migliore", "più buono", "meglio", "buonissimo"], explanation: "buono -> migliore (adjective)." },
+        { id: "g-comp-equal", type: "typed", prompt: "Complete for equality: Anna è alta ___ Marco.", answer: "come", accepted: ["come"] }
+      ]
     }
   ],
 

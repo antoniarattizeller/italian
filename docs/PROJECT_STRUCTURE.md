@@ -257,16 +257,24 @@ input, numbers mode, and notebook all carry over unchanged.
 
 ## Build order
 
-1. **Plan** (this document).
+1. **Plan** (this document). ✅
 2. **Engine refactor** — weeks → `grammar` + `vocab` + `reference`; rename nav
-   and quiz filters. Migrate Week 1 content into the new collections so nothing
-   regresses.
-3. **Scaffold** — add every grammar category and vocab topic above as a `stub`
-   (id + title + summary), so the full A2 map is navigable.
-4. **Fill in passes** — promote stubs to `draft` then `ready`: sections/tables
-   and examples first, then questions. Start with high-value categories
-   (presente, passato prossimo, imperfetto, articoli, preposizioni) and topics
-   (time-words, locations, house, travel).
+   and quiz filters; migrate Week 1 content. ✅ Later added do-it-by-hand
+   exercises and Italian-first vocab (`def`/`ex`).
+3. **Scaffold** — every grammar category and vocab topic as a `stub`. ✅
+4. **Fill in passes** — promote stubs to `ready` with sections/tables, Italian
+   examples, exercises, and questions. ✅
+   - Vocabulary: all 21 topics filled, Italian-first.
+   - Grammar: all 28 categories filled across the four stages, each with a
+     table where relevant, by-hand exercises, and quiz questions.
+
+### What's left / next ideas
+
+- Reference pages (alfabeto, pronuncia-c-g) could gain by-hand exercises too.
+- New question types from the list below (`conjugation`, `article`,
+  `sentence-build`, `listening`).
+- Optional: audio, progress tracking, spaced-repetition tuning, export/import
+  of the personal notebook.
 
 ## Commit workflow
 

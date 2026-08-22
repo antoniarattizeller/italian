@@ -1045,54 +1045,380 @@ window.COURSE = {
       title: "Simple prepositions",
       stage: 3,
       level: "A2",
-      status: "stub",
+      status: "ready",
       summary: "di, a, da, in, con, su, per, tra/fra — and their most common uses.",
-      sections: []
+      sections: [
+        {
+          title: "The eight prepositions",
+          body: [
+            "di = of / from (possession, origin, topic): il libro di Marco, sono di Roma.",
+            "a = to / at (cities, time): vado a Roma, a casa, alle otto.",
+            "da = from / at someone's place: vengo da Milano, vado dal medico.",
+            "in = in / to (countries, rooms, transport): in Italia, in cucina, in treno."
+          ]
+        },
+        {
+          title: "The others",
+          body: [
+            "con = with: vengo con te. su = on / about: il libro è su tavolo -> sul tavolo; un film su Roma.",
+            "per = for / in order to: questo è per te; studio per imparare.",
+            "tra / fra = between / among, and 'in' for future time: tra i due, tra un'ora. (tra and fra are interchangeable.)",
+            "Remember: with cities use a (a Roma), with countries use in (in Italia)."
+          ]
+        }
+      ],
+      tables: [
+        {
+          title: "Common uses",
+          columns: ["Preposition", "Main use", "Example"],
+          rows: [
+            ["di", "possession / origin", "la casa di Anna"],
+            ["a", "to / at, cities, time", "a Milano, alle tre"],
+            ["da", "from / at someone's", "dal dentista"],
+            ["in", "in / to countries, transport", "in Francia, in bici"],
+            ["con", "with", "con gli amici"],
+            ["su", "on / about", "sul letto"],
+            ["per", "for / in order to", "per due giorni"],
+            ["tra / fra", "between / in (time)", "tra dieci minuti"]
+          ]
+        }
+      ],
+      examples: [
+        { it: "Sono di Napoli, ma abito a Roma.", en: "I'm from Naples, but I live in Rome.", de: "Ich komme aus Neapel, aber ich wohne in Rom." },
+        { it: "Vado in Italia in treno con mia sorella.", en: "I'm going to Italy by train with my sister.", de: "Ich fahre mit dem Zug mit meiner Schwester nach Italien." },
+        { it: "Il regalo è per te. Ci vediamo tra un'ora.", en: "The gift is for you. See you in an hour.", de: "Das Geschenk ist für dich. Wir sehen uns in einer Stunde." }
+      ],
+      exercises: [
+        {
+          prompt: "Completa con la preposizione giusta (di, a, da, in, con, su, per, tra): Sono ___ Milano. Vado ___ Parigi. Il libro è ___ Marco. Parto ___ due ore.",
+          reveal: {
+            body: ["Sono di Milano (origine). Vado a Parigi (città). Il libro è di Marco (possesso). Parto tra due ore (tempo futuro)."]
+          }
+        },
+        {
+          prompt: "Scrivi tre frasi sui tuoi programmi usando 'a', 'in' e 'con'.",
+          reveal: {
+            examples: [
+              { it: "Domani vado a Firenze." },
+              { it: "In estate viaggio in Spagna." },
+              { it: "Esco con i miei amici stasera." }
+            ]
+          }
+        }
+      ],
+      questions: [
+        { id: "g-prep-city", type: "multiple-choice", prompt: "Which preposition goes with a city? '___ Roma'", answer: "a", options: ["a", "in", "di", "da"], explanation: "Cities take a; countries take in." },
+        { id: "g-prep-country", type: "multiple-choice", prompt: "'I live in Italy' = Abito ___ Italia.", answer: "in", options: ["in", "a", "di", "su"], explanation: "Countries take in." },
+        { id: "g-prep-origin", type: "multiple-choice", prompt: "'I'm from Rome' = Sono ___ Roma.", answer: "di", options: ["di", "da", "a", "in"], explanation: "Origin (essere di) uses di." },
+        { id: "g-prep-doctor", type: "multiple-choice", prompt: "'I'm going to the doctor's' = Vado ___ medico.", answer: "dal", options: ["dal", "al", "nel", "del"], explanation: "da = to someone's place (da+il = dal)." }
+      ]
     },
     {
       id: "preposizioni-articolate",
       title: "Combined prepositions",
       stage: 3,
       level: "A2",
-      status: "stub",
+      status: "ready",
       summary: "Preposition + article: del, al, dal, nel, sul, ... and when you need them.",
-      sections: []
+      sections: [
+        {
+          title: "Preposition + article merge",
+          body: [
+            "When di, a, da, in, su come before a definite article, they merge into one word: a + il = al, in + la = nella, su + i = sui.",
+            "You need the combined form whenever the noun has 'the': Vado al cinema (a + il cinema). Il gatto è sul divano (su + il divano).",
+            "con and per are usually left separate at A2 (con il, per la), though 'col' exists."
+          ]
+        },
+        {
+          title: "How to read the table",
+          body: [
+            "Take the preposition down the side and the article across the top; the cell is the merged word.",
+            "di -> del/dello/della/dei/degli/delle; a -> al/allo/alla/ai/agli/alle; da -> dal...; in -> nel...; su -> sul..."
+          ]
+        }
+      ],
+      tables: [
+        {
+          title: "Combined forms",
+          columns: ["", "il", "lo", "la", "l'", "i", "gli", "le"],
+          rows: [
+            ["di", "del", "dello", "della", "dell'", "dei", "degli", "delle"],
+            ["a", "al", "allo", "alla", "all'", "ai", "agli", "alle"],
+            ["da", "dal", "dallo", "dalla", "dall'", "dai", "dagli", "dalle"],
+            ["in", "nel", "nello", "nella", "nell'", "nei", "negli", "nelle"],
+            ["su", "sul", "sullo", "sulla", "sull'", "sui", "sugli", "sulle"]
+          ]
+        }
+      ],
+      examples: [
+        { it: "Il libro è sul tavolo, vicino alla finestra.", en: "The book is on the table, near the window.", de: "Das Buch ist auf dem Tisch, neben dem Fenster." },
+        { it: "Torno dal lavoro alle sei e vado al supermercato.", en: "I get back from work at six and go to the supermarket.", de: "Ich komme um sechs von der Arbeit und gehe zum Supermarkt." },
+        { it: "Parliamo degli esami e dei problemi.", en: "We talk about the exams and the problems.", de: "Wir reden über die Prüfungen und die Probleme." }
+      ],
+      exercises: [
+        {
+          prompt: "Unisci preposizione e articolo: a + il = ___, in + la = ___, su + i = ___, di + gli = ___, da + l' = ___.",
+          reveal: {
+            body: ["al, nella, sui, degli, dall'."]
+          }
+        },
+        {
+          prompt: "Completa: Vado ___ (a + il) cinema. Il gatto dorme ___ (su + il) divano. Torno ___ (da + la) scuola.",
+          reveal: {
+            body: ["Vado al cinema. Il gatto dorme sul divano. Torno dalla scuola."]
+          }
+        }
+      ],
+      questions: [
+        { id: "g-artprep-a-il", type: "typed", prompt: "Combine: a + il = ?", answer: "al", accepted: ["al"] },
+        { id: "g-artprep-in-la", type: "typed", prompt: "Combine: in + la = ?", answer: "nella", accepted: ["nella"] },
+        { id: "g-artprep-su-i", type: "typed", prompt: "Combine: su + i = ?", answer: "sui", accepted: ["sui"] },
+        { id: "g-artprep-di-gli", type: "multiple-choice", prompt: "Combine: di + gli = ?", answer: "degli", options: ["degli", "dei", "delle", "dello"] },
+        { id: "g-artprep-cinema", type: "typed", prompt: "'I go to the cinema' = Vado ___ cinema.", answer: "al", accepted: ["al"] }
+      ]
     },
     {
       id: "preposizioni-luogo",
       title: "Place prepositions",
       stage: 3,
       level: "A2",
-      status: "stub",
+      status: "ready",
       summary: "Where things are: sopra, sotto, davanti a, dietro, vicino a, accanto a, tra. (Pairs with the Locations vocab.)",
-      sections: []
+      sections: [
+        {
+          title: "Saying where",
+          body: [
+            "Place prepositions describe where something is: sopra (above), sotto (under), davanti (in front), dietro (behind), dentro (inside), fuori (outside), tra/fra (between).",
+            "Several of them need a linking word before the noun: davanti a, vicino a, accanto a, di fronte a, in mezzo a, intorno a, and lontano da.",
+            "That linking a/da then combines with the article: davanti alla scuola, vicino al bar, lontano dalla città."
+          ]
+        }
+      ],
+      tables: [
+        {
+          title: "Place prepositions",
+          columns: ["Italian", "Meaning", "Example"],
+          rows: [
+            ["sopra / su", "above / on", "sopra il tavolo"],
+            ["sotto", "under", "sotto la sedia"],
+            ["davanti a", "in front of", "davanti alla porta"],
+            ["dietro", "behind", "dietro la casa"],
+            ["vicino a", "near", "vicino al centro"],
+            ["accanto a", "next to", "accanto al bar"],
+            ["di fronte a", "opposite", "di fronte alla chiesa"],
+            ["tra / fra", "between", "tra la banca e la posta"]
+          ]
+        }
+      ],
+      examples: [
+        { it: "Il gatto è sotto il tavolo e il cane è davanti alla porta.", en: "The cat is under the table and the dog is in front of the door.", de: "Die Katze ist unter dem Tisch und der Hund vor der Tür." },
+        { it: "La farmacia è vicino alla stazione, accanto al bar.", en: "The pharmacy is near the station, next to the bar.", de: "Die Apotheke ist in der Nähe des Bahnhofs, neben der Bar." }
+      ],
+      exercises: [
+        {
+          prompt: "Completa con la preposizione di luogo e l'articolo: Il libro è ___ (on) tavolo. La macchina è ___ (in front of) casa. Abito ___ (near) centro.",
+          reveal: {
+            body: ["Il libro è sul tavolo. La macchina è davanti alla casa. Abito vicino al centro."]
+          }
+        },
+        {
+          prompt: "Descrivi dove sono cinque oggetti nella tua stanza usando le preposizioni di luogo.",
+          reveal: {
+            examples: [
+              { it: "Il letto è vicino alla finestra." },
+              { it: "Lo zaino è sotto la scrivania." },
+              { it: "La lampada è sul comodino, accanto al letto." }
+            ]
+          }
+        }
+      ],
+      questions: [
+        { id: "g-luogo-under", type: "multiple-choice", prompt: "Which means 'under'?", answer: "sotto", options: ["sotto", "sopra", "dietro", "davanti"] },
+        { id: "g-luogo-davanti", type: "multiple-choice", prompt: "'In front of the school' = ___ scuola.", answer: "davanti alla", options: ["davanti alla", "davanti la", "davanti della", "davanti a la"], explanation: "davanti a + la = davanti alla." },
+        { id: "g-luogo-near", type: "typed", prompt: "'near the bar' = ___ bar (vicino + a + il).", answer: "vicino al", accepted: ["vicino al"] }
+      ]
     },
     {
       id: "pronomi-diretti",
       title: "Direct object pronouns",
       stage: 3,
       level: "A2",
-      status: "stub",
+      status: "ready",
       summary: "lo, la, li, le, mi, ti, ci, vi — replacing the direct object (Lo vedo).",
-      sections: []
+      sections: [
+        {
+          title: "Replacing the direct object",
+          body: [
+            "A direct object pronoun replaces a noun that follows the verb without a preposition: Vedo Marco -> Lo vedo.",
+            "The forms are: mi (me), ti (you), lo (him/it m.), la (her/it f.), ci (us), vi (you pl.), li (them m.), le (them f.).",
+            "They go before the conjugated verb: La conosco. Non li mangio. With an infinitive they can attach to the end: Voglio vederlo."
+          ]
+        },
+        {
+          title: "In the passato prossimo",
+          body: [
+            "lo and la shorten to l' before a vowel: L'ho visto ieri.",
+            "With avere, the past participle agrees with lo/la/li/le: Le mele? Le ho comprate. I libri? Li ho letti."
+          ]
+        }
+      ],
+      tables: [
+        {
+          title: "Direct object pronouns",
+          columns: ["Person", "Pronoun", "Example"],
+          rows: [
+            ["me", "mi", "Mi vedi?"],
+            ["you (tu)", "ti", "Ti chiamo."],
+            ["him / it (m)", "lo", "Lo conosco."],
+            ["her / it (f)", "la", "La invito."],
+            ["us", "ci", "Ci aspetti?"],
+            ["you (voi)", "vi", "Vi saluto."],
+            ["them (m)", "li", "Li vedo."],
+            ["them (f)", "le", "Le compro."]
+          ]
+        }
+      ],
+      examples: [
+        { it: "Conosci Marco? Sì, lo conosco bene.", en: "Do you know Marco? Yes, I know him well.", de: "Kennst du Marco? Ja, ich kenne ihn gut." },
+        { it: "Le mele sono buone: le compro sempre.", en: "The apples are good: I always buy them.", de: "Die Äpfel sind gut: Ich kaufe sie immer." },
+        { it: "Ti chiamo stasera.", en: "I'll call you tonight.", de: "Ich rufe dich heute Abend an." }
+      ],
+      exercises: [
+        {
+          prompt: "Sostituisci l'oggetto con il pronome: Mangio la pizza -> ___ mangio. Vedo Marco -> ___ vedo. Compro le scarpe -> ___ compro. Leggo i libri -> ___ leggo.",
+          reveal: {
+            body: ["La mangio. Lo vedo. Le compro. Li leggo."]
+          }
+        },
+        {
+          prompt: "Rispondi a queste domande usando un pronome diretto: Conosci la mia amica? Guardi la TV la sera? Prendi il caffè la mattina?",
+          reveal: {
+            examples: [
+              { it: "Sì, la conosco." },
+              { it: "Sì, la guardo la sera." },
+              { it: "Sì, lo prendo ogni mattina." }
+            ]
+          }
+        }
+      ],
+      questions: [
+        { id: "g-dir-pizza", type: "multiple-choice", prompt: "'Mangio la pizza' -> ___ mangio.", answer: "La", options: ["La", "Lo", "Le", "Li"], explanation: "la pizza (f.sg) -> la." },
+        { id: "g-dir-libri", type: "multiple-choice", prompt: "'Leggo i libri' -> ___ leggo.", answer: "Li", options: ["Li", "Le", "Lo", "La"], explanation: "i libri (m.pl) -> li." },
+        { id: "g-dir-marco", type: "typed", prompt: "'Vedo Marco' -> ___ vedo.", answer: "lo", accepted: ["lo"] },
+        { id: "g-dir-agree", type: "multiple-choice", prompt: "'Le mele? ___ ho comprate.' Which pronoun makes the participle agree?", answer: "Le", options: ["Le", "La", "Li", "Lo"], explanation: "le mele -> le, participle -> comprate." }
+      ]
     },
     {
       id: "pronomi-indiretti",
       title: "Indirect object pronouns",
       stage: 3,
       level: "A2",
-      status: "stub",
+      status: "ready",
       summary: "gli, le, mi, ti, ci, vi — replacing 'to someone' (Le parlo).",
-      sections: []
+      sections: [
+        {
+          title: "Replacing 'to someone'",
+          body: [
+            "An indirect object pronoun replaces a + a person: Telefono a Marco -> Gli telefono. Scrivo a Maria -> Le scrivo.",
+            "The forms are: mi (to me), ti (to you), gli (to him), le (to her), ci (to us), vi (to you pl.), gli (to them).",
+            "Note the difference from direct pronouns only in the third person: lo/la (him/her) vs. gli/le (to him/to her)."
+          ]
+        },
+        {
+          title: "Verbs that take 'a'",
+          body: [
+            "Common verbs with an indirect object: telefonare a, scrivere a, parlare a, dare a, chiedere a, rispondere a, regalare a, and piacere.",
+            "In the passato prossimo the participle does NOT agree with indirect pronouns: Le ho parlato (not parlata)."
+          ]
+        }
+      ],
+      tables: [
+        {
+          title: "Indirect object pronouns",
+          columns: ["Person", "Pronoun", "Example"],
+          rows: [
+            ["to me", "mi", "Mi scrivi?"],
+            ["to you (tu)", "ti", "Ti telefono."],
+            ["to him", "gli", "Gli parlo."],
+            ["to her", "le", "Le rispondo."],
+            ["to us", "ci", "Ci scrivono."],
+            ["to you (voi)", "vi", "Vi do il libro."],
+            ["to them", "gli", "Gli telefono."]
+          ]
+        }
+      ],
+      examples: [
+        { it: "Telefoni a Marco? Sì, gli telefono adesso.", en: "Are you calling Marco? Yes, I'm calling him now.", de: "Rufst du Marco an? Ja, ich rufe ihn jetzt an." },
+        { it: "Scrivo a Maria: le scrivo un'email.", en: "I write to Maria: I write her an email.", de: "Ich schreibe Maria: Ich schreibe ihr eine E-Mail." },
+        { it: "I bambini hanno fame: gli do un panino.", en: "The children are hungry: I give them a sandwich.", de: "Die Kinder haben Hunger: Ich gebe ihnen ein Brötchen." }
+      ],
+      exercises: [
+        {
+          prompt: "Sostituisci con il pronome indiretto: Parlo a Luca -> ___ parlo. Scrivo a Sara -> ___ scrivo. Telefono ai miei amici -> ___ telefono.",
+          reveal: {
+            body: ["Gli parlo. Le scrivo. Gli telefono. (a + persona -> pronome indiretto)"]
+          }
+        },
+        {
+          prompt: "Pensa a un amico lontano. Scrivi tre cose che gli/le fai (telefonare, scrivere, regalare).",
+          reveal: {
+            examples: [
+              { it: "Le telefono ogni domenica." },
+              { it: "Le scrivo lunghi messaggi." },
+              { it: "Per il compleanno le regalo un libro." }
+            ]
+          }
+        }
+      ],
+      questions: [
+        { id: "g-ind-luca", type: "multiple-choice", prompt: "'Parlo a Luca' -> ___ parlo.", answer: "Gli", options: ["Gli", "Le", "Lo", "La"], explanation: "a Luca (to him) -> gli." },
+        { id: "g-ind-sara", type: "multiple-choice", prompt: "'Scrivo a Sara' -> ___ scrivo.", answer: "Le", options: ["Le", "Gli", "La", "Li"], explanation: "a Sara (to her) -> le." },
+        { id: "g-ind-vs-direct", type: "multiple-choice", prompt: "Which pair is direct 'him' vs. indirect 'to him'?", answer: "lo / gli", options: ["lo / gli", "gli / lo", "la / le", "mi / ti"], explanation: "Direct lo, indirect gli." },
+        { id: "g-ind-them", type: "typed", prompt: "'I phone them' = ___ telefono.", answer: "gli", accepted: ["gli"] }
+      ]
     },
     {
       id: "ci-ne",
       title: "Ci and ne",
       stage: 3,
       level: "A2",
-      status: "stub",
+      status: "ready",
       summary: "The little words ci (there / about it) and ne (of it / of them).",
-      sections: []
+      sections: [
+        {
+          title: "ci (there / about it)",
+          body: [
+            "ci replaces a place introduced by a, in, or su = 'there': Vai a Roma? Sì, ci vado. Sei mai stato in Italia? No, non ci sono mai stato.",
+            "ci also replaces a + something with verbs like pensare a and credere a: Pensi al lavoro? Sì, ci penso sempre."
+          ]
+        },
+        {
+          title: "ne (of it / of them)",
+          body: [
+            "ne replaces di + something, and quantities 'of it/of them': Quante mele vuoi? Ne voglio due. Vuoi del pane? Sì, ne voglio un po'.",
+            "ne also replaces di + topic: Parli di politica? Sì, ne parlo spesso.",
+            "In the passato prossimo with a quantity, the participle agrees with what ne stands for: Ho comprato tre mele -> Ne ho comprate tre."
+          ]
+        }
+      ],
+      examples: [
+        { it: "Vai spesso in palestra? Sì, ci vado tre volte alla settimana.", en: "Do you often go to the gym? Yes, I go there three times a week.", de: "Gehst du oft ins Fitnessstudio? Ja, ich gehe dreimal pro Woche hin." },
+        { it: "Quanti caffè bevi? Ne bevo due al giorno.", en: "How many coffees do you drink? I drink two (of them) a day.", de: "Wie viele Kaffees trinkst du? Ich trinke zwei am Tag." },
+        { it: "Parliamo del progetto? Sì, ne parliamo domani.", en: "Shall we talk about the project? Yes, we'll talk about it tomorrow.", de: "Reden wir über das Projekt? Ja, wir reden morgen darüber." }
+      ],
+      exercises: [
+        {
+          prompt: "Rispondi con 'ci' o 'ne': Vai al cinema stasera? Quante pizze mangi? Pensi spesso alle vacanze? Vuoi dell'acqua?",
+          reveal: {
+            body: ["Sì, ci vado. Ne mangio una. Sì, ci penso spesso. Sì, ne voglio un po'.", "ci = luogo o 'a qualcosa'; ne = quantità o 'di qualcosa'."]
+          }
+        }
+      ],
+      questions: [
+        { id: "g-cine-place", type: "multiple-choice", prompt: "'Vai a Roma? Sì, ___ vado.'", answer: "ci", options: ["ci", "ne", "lo", "li"], explanation: "ci replaces a place." },
+        { id: "g-cine-quantity", type: "multiple-choice", prompt: "'Quante mele vuoi? ___ voglio due.'", answer: "Ne", options: ["Ne", "Ci", "Le", "Li"], explanation: "ne replaces a quantity 'of them'." },
+        { id: "g-cine-di", type: "multiple-choice", prompt: "'Parli di politica? Sì, ___ parlo.'", answer: "ne", options: ["ne", "ci", "la", "lo"], explanation: "di + topic -> ne." }
+      ]
     },
 
     // ---------------------------------------------------------------- Stage 4

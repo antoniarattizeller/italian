@@ -143,17 +143,30 @@ window.COURSE = {
 
 Supported now:
 
-- `multiple-choice`
-- `typed` (accent-insensitive; supports an `accepted` array of alternatives)
+- `multiple-choice` — options + one answer.
+- `typed` — accent- and punctuation-insensitive; supports an `accepted` array
+  of alternatives.
+- `transform` — show a `source` sentence and a task `prompt` ("Metti al passato
+  prossimo:"); the learner rewrites it. Graded like `typed` (lenient), and the
+  full correct sentence is revealed. Used for tense transformations.
 
-Auto-generated:
+Auto-generated (Vocabulary mode), all in Italian:
 
-- Every `vocab`/topic word with an `it` and an `en`/`de` becomes a typed
-  "write the Italian" question in **Vocabulary** mode.
+- **Definition → word**: prompt is the Italian `def`; multiple-choice
+  (distractors from the same topic) or typed, alternating for variety.
+- **Cloze**: the word's Italian example `ex` with the word blanked; MC or typed.
+  Generated only when the word appears in its example.
 - Numbers 0–100 are generated in **Numbers** mode.
 
-Likely future additions: `conjugation`, `article` (choose il/lo/la/...),
-`sentence-build`, `listening`.
+### Spaced repetition (Leitner)
+
+Every question (written and auto-generated) is tracked by a stable id in a
+Leitner system stored in `localStorage` (`italian-srs`): box 1–5 with a due
+date. Correct → promote (2/7/16/35-day intervals); wrong → back to box 1 and
+re-queued within the session. The deck surfaces due and new items first.
+
+Likely future additions: `article` (choose il/lo/la/...), `sentence-build`,
+`listening`; a review dashboard; error-spotting questions.
 
 ## A2 grammar categories (scaffold list)
 

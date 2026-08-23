@@ -371,7 +371,10 @@ window.COURSE = {
         { id: "g-pres-prendere-loro", type: "typed", prompt: "Complete: loro (prendere) ___", answer: "prendono", accepted: ["prendono"] },
         { id: "g-pres-dormire-tu", type: "typed", prompt: "Complete: tu (dormire) ___", answer: "dormi", accepted: ["dormi"] },
         { id: "g-pres-capire-io", type: "typed", prompt: "Complete: io (capire) ___", answer: "capisco", accepted: ["capisco"] },
-        { id: "g-pres-are-loro", type: "multiple-choice", prompt: "What is the loro ending for regular -are verbs?", answer: "-ano", options: ["-ano", "-ono", "-ete", "-iamo"], explanation: "parlano, mangiano, lavorano." }
+        { id: "g-pres-are-loro", type: "multiple-choice", prompt: "What is the loro ending for regular -are verbs?", answer: "-ano", options: ["-ano", "-ono", "-ete", "-iamo"], explanation: "parlano, mangiano, lavorano." },
+        { id: "g-pres-gap-lavora", type: "typed", prompt: "Completa al presente: Ogni giorno Marco ___ (lavorare) in ufficio.", answer: "lavora", accepted: ["lavora"] },
+        { id: "g-pres-gap-scrivono", type: "typed", prompt: "Completa al presente: I bambini ___ (scrivere) una lettera.", answer: "scrivono", accepted: ["scrivono"] },
+        { id: "g-pres-gap-capisci", type: "typed", prompt: "Completa al presente: Tu ___ (capire) l'italiano?", answer: "capisci", accepted: ["capisci"], explanation: "capire è un verbo in -isc-." }
       ]
     },
     {
@@ -1174,7 +1177,9 @@ window.COURSE = {
         { id: "g-artprep-in-la", type: "typed", prompt: "Combine: in + la = ?", answer: "nella", accepted: ["nella"] },
         { id: "g-artprep-su-i", type: "typed", prompt: "Combine: su + i = ?", answer: "sui", accepted: ["sui"] },
         { id: "g-artprep-di-gli", type: "multiple-choice", prompt: "Combine: di + gli = ?", answer: "degli", options: ["degli", "dei", "delle", "dello"] },
-        { id: "g-artprep-cinema", type: "typed", prompt: "'I go to the cinema' = Vado ___ cinema.", answer: "al", accepted: ["al"] }
+        { id: "g-artprep-cinema", type: "typed", prompt: "'I go to the cinema' = Vado ___ cinema.", answer: "al", accepted: ["al"] },
+        { id: "g-artprep-gap-tavolo", type: "typed", prompt: "Completa (preposizione articolata): Il libro è ___ (su + il) tavolo.", answer: "sul", accepted: ["sul"] },
+        { id: "g-artprep-gap-scuola", type: "typed", prompt: "Completa (preposizione articolata): Torno ___ (da + la) scuola.", answer: "dalla", accepted: ["dalla"] }
       ]
     },
     {
@@ -1488,7 +1493,12 @@ window.COURSE = {
         { id: "g-pp-part-parlare", type: "typed", prompt: "Give the past participle of 'parlare'.", answer: "parlato", accepted: ["parlato"] },
         { id: "g-pp-part-fare", type: "typed", prompt: "Give the (irregular) past participle of 'fare'.", answer: "fatto", accepted: ["fatto"] },
         { id: "g-pp-agree", type: "multiple-choice", prompt: "'Maria (andare)' in passato prossimo =", answer: "è andata", options: ["è andata", "è andato", "ha andato", "ha andata"], explanation: "essere + agreement with feminine subject." },
-        { id: "g-pp-avere", type: "typed", prompt: "Say 'I ate' (mangiare, io).", answer: "ho mangiato", accepted: ["ho mangiato"] }
+        { id: "g-pp-avere", type: "typed", prompt: "Say 'I ate' (mangiare, io).", answer: "ho mangiato", accepted: ["ho mangiato"] },
+        { id: "g-pp-tr-pizza", type: "transform", prompt: "Metti al passato prossimo:", source: "Mangio una pizza.", answer: "Ho mangiato una pizza.", accepted: ["ho mangiato una pizza"], explanation: "mangiare -> avere + mangiato." },
+        { id: "g-pp-tr-cinema", type: "transform", prompt: "Metti al passato prossimo:", source: "Vado al cinema.", answer: "Sono andato al cinema.", accepted: ["sono andato al cinema", "sono andata al cinema"], explanation: "andare -> essere; il participio concorda (andato/andata)." },
+        { id: "g-pp-tr-parte", type: "transform", prompt: "Metti al passato prossimo:", source: "Marco parte per Roma.", answer: "Marco è partito per Roma.", accepted: ["marco è partito per roma"], explanation: "partire -> essere partito." },
+        { id: "g-pp-gap-mare", type: "typed", prompt: "Completa al passato prossimo: Ieri Marco ___ (andare) al mare.", answer: "è andato", accepted: ["è andato"], explanation: "andare -> essere andato." },
+        { id: "g-pp-gap-colazione", type: "typed", prompt: "Completa al passato prossimo: Stamattina (io) ___ (fare) colazione tardi.", answer: "ho fatto", accepted: ["ho fatto"], explanation: "fare -> avere + fatto." }
       ]
     },
     {
@@ -1557,7 +1567,10 @@ window.COURSE = {
         { id: "g-imp-parlare-io", type: "typed", prompt: "Imperfetto: io (parlare) ___", answer: "parlavo", accepted: ["parlavo"] },
         { id: "g-imp-essere-lui", type: "typed", prompt: "Imperfetto: lui (essere) ___", answer: "era", accepted: ["era"] },
         { id: "g-imp-fare-noi", type: "typed", prompt: "Imperfetto: noi (fare) ___", answer: "facevamo", accepted: ["facevamo"] },
-        { id: "g-imp-use", type: "multiple-choice", prompt: "Which is a typical use of the imperfetto?", answer: "a habit in the past ('used to')", options: ["a habit in the past ('used to')", "a single completed action", "a future plan", "a command"], explanation: "Habits, descriptions, background." }
+        { id: "g-imp-use", type: "multiple-choice", prompt: "Which is a typical use of the imperfetto?", answer: "a habit in the past ('used to')", options: ["a habit in the past ('used to')", "a single completed action", "a future plan", "a command"], explanation: "Habits, descriptions, background." },
+        { id: "g-imp-tr-gioco", type: "transform", prompt: "Metti all'imperfetto:", source: "Gioco a calcio ogni giorno.", answer: "Giocavo a calcio ogni giorno.", accepted: ["giocavo a calcio ogni giorno"], explanation: "giocare -> giocavo (abitudine nel passato)." },
+        { id: "g-imp-tr-casa", type: "transform", prompt: "Metti all'imperfetto:", source: "Abitiamo al mare.", answer: "Abitavamo al mare.", accepted: ["abitavamo al mare"], explanation: "abitare -> abitavamo." },
+        { id: "g-imp-gap-bambino", type: "typed", prompt: "Completa all'imperfetto: Da bambino (io) ___ (essere) molto timido.", answer: "ero", accepted: ["ero"], explanation: "essere -> ero (irregolare)." }
       ]
     },
     {
@@ -1682,7 +1695,10 @@ window.COURSE = {
         { id: "g-fut-parlare-io", type: "typed", prompt: "Future: io (parlare) ___", answer: "parlerò", accepted: ["parlerò", "parlero"] },
         { id: "g-fut-essere-loro", type: "typed", prompt: "Future: loro (essere) ___", answer: "saranno", accepted: ["saranno"] },
         { id: "g-fut-andare-noi", type: "typed", prompt: "Future: noi (andare) ___", answer: "andremo", accepted: ["andremo"] },
-        { id: "g-fut-ending", type: "multiple-choice", prompt: "What is the io future ending?", answer: "-ò", options: ["-ò", "-ei", "-avo", "-o"], explanation: "parlerò, sarò, avrò." }
+        { id: "g-fut-ending", type: "multiple-choice", prompt: "What is the io future ending?", answer: "-ò", options: ["-ò", "-ei", "-avo", "-o"], explanation: "parlerò, sarò, avrò." },
+        { id: "g-fut-tr-parto", type: "transform", prompt: "Metti al futuro:", source: "Domani parto per Roma.", answer: "Domani partirò per Roma.", accepted: ["domani partirò per roma", "domani partiro per roma"], explanation: "partire -> partirò." },
+        { id: "g-fut-tr-andiamo", type: "transform", prompt: "Metti al futuro:", source: "L'anno prossimo andiamo in Italia.", answer: "L'anno prossimo andremo in Italia.", accepted: ["l'anno prossimo andremo in italia"], explanation: "andare -> andr- -> andremo." },
+        { id: "g-fut-gap-tempo", type: "typed", prompt: "Completa al futuro: Quando (io) ___ (avere) tempo, ti chiamo.", answer: "avrò", accepted: ["avrò", "avro"], explanation: "avere -> avr- -> avrò." }
       ]
     },
     {
@@ -1751,7 +1767,10 @@ window.COURSE = {
         { id: "g-cond-volere-io", type: "typed", prompt: "Conditional: io (volere) ___", answer: "vorrei", accepted: ["vorrei"] },
         { id: "g-cond-potere-tu", type: "typed", prompt: "Conditional: tu (potere) ___", answer: "potresti", accepted: ["potresti"] },
         { id: "g-cond-parlare-lui", type: "typed", prompt: "Conditional: lui (parlare) ___", answer: "parlerebbe", accepted: ["parlerebbe"] },
-        { id: "g-cond-use", type: "multiple-choice", prompt: "'Vorrei un caffè' is more polite than...", answer: "Voglio un caffè", options: ["Voglio un caffè", "Ho un caffè", "Sono un caffè", "Faccio un caffè"], explanation: "Conditional softens the request." }
+        { id: "g-cond-use", type: "multiple-choice", prompt: "'Vorrei un caffè' is more polite than...", answer: "Voglio un caffè", options: ["Voglio un caffè", "Ho un caffè", "Sono un caffè", "Faccio un caffè"], explanation: "Conditional softens the request." },
+        { id: "g-cond-tr-voglio", type: "transform", prompt: "Rendi più gentile (condizionale):", source: "Voglio un caffè.", answer: "Vorrei un caffè.", accepted: ["vorrei un caffè", "vorrei un caffe"], explanation: "voglio -> vorrei." },
+        { id: "g-cond-tr-puoi", type: "transform", prompt: "Rendi più gentile (condizionale):", source: "Puoi aiutarmi?", answer: "Potresti aiutarmi?", accepted: ["potresti aiutarmi"], explanation: "puoi -> potresti." },
+        { id: "g-cond-gap-piacere", type: "typed", prompt: "Completa al condizionale: Mi ___ (piacere) visitare Roma.", answer: "piacerebbe", accepted: ["piacerebbe"], explanation: "piacere -> mi piacerebbe." }
       ]
     },
     {

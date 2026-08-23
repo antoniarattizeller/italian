@@ -318,6 +318,32 @@ button {
   text-transform: uppercase;
 }
 
+.badge-box {
+  border-color: #2f5a4a;
+  color: #6fbfa0;
+}
+
+.srs-note {
+  display: inline-block;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.72rem;
+  margin-top: 4px;
+  opacity: 0.75;
+}
+
+.quiz-source {
+  font-size: 1.35rem;
+  margin: 4px 0 0;
+}
+
+.continue-actions {
+  margin-top: 14px;
+}
+
+.continue-actions[hidden] {
+  display: none;
+}
+
 .badge-draft {
   border-color: #7a5c1e;
   color: #d9a441;

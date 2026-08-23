@@ -192,6 +192,66 @@ function acceptedVocabAnswers(value) {
   return [...new Set([raw, clean].filter(Boolean))];
 }
 
+// ---------------------------------------------------------------- Spaced repetition (Leitner)
+//
+// Each question id has a box (1..5) and a due date, stored in localStorage.
+// A correct answer promotes the item one box (longer wait); a wrong answer
+// resets it to box 1 (comes back soon). Intervals grow with the box, following
+// the classic Leitner schedule.
+
+const SRS_KEY = "italian-srs";
+const DAY_MS = 86400000;
+const SRS_INTERVAL_DAYS = [0, 0, 2, 7, 16, 35]; // index = box (1..5); box 1 -> next session
+
+function loadSrs() {
+  try {
+    return JSON.parse(localStorage.getItem(SRS_KEY) || "{}");
+  } catch {
+    return {};
+  }
+}
+
+function saveSrs(map) {
+  localStorage.setItem(SRS_KEY, JSON.stringify(map));
+}
+
+function srsBox(id) {
+  const rec = loadSrs()[id];
+  return rec ? rec.box : 0; // 0 = new / never seen
+}
+
+function srsIsDue(id, now = Date.now()) {
+  const rec = loadSrs()[id];
+  return !rec || rec.due <= now;
+}
+
+function srsReview(id, correct) {
+  const map = loadSrs();
+  const rec = map[id] || { box: 1, due: 0 };
+  const box = correct ? Math.min(5, rec.box + 1) : 1;
+  map[id] = { box, due: Date.now() + SRS_INTERVAL_DAYS[box] * DAY_MS };
+  saveSrs(map);
+  return map[id];
+}
+
+// Order a pool so that new and due items come first, waiting items last, so a
+// session always surfaces what most needs review but never runs dry.
+function buildDeck(pool) {
+  const now = Date.now();
+  const dueNew = [];
+  const waiting = [];
+  pool.forEach((question) => {
+    if (srsIsDue(question.id, now)) dueNew.push(question);
+    else waiting.push(question);
+  });
+  return [...shuffle(dueNew), ...shuffle(waiting)];
+}
+
+function dueCount(pool) {
+  const now = Date.now();
+  return pool.filter((question) => srsIsDue(question.id, now)).length;
+}
+
 // ---------------------------------------------------------------- Chrome
 
 function setTitle(title) {
@@ -628,7 +688,7 @@ function rebuildQuizPool() {
   if (poolKey !== state.quiz.poolKey) {
     state.quiz.poolKey = poolKey;
     state.quiz.pool = pool;
-    state.quiz.deck = shuffle(pool);
+    state.quiz.deck = buildDeck(pool);
     state.quiz.current = null;
     state.quiz.answered = false;
     state.quiz.round = 1;
@@ -663,7 +723,7 @@ function renderQuizStage() {
     <div class="quiz-stats">
       <div class="stat"><strong>${state.quiz.correct}</strong><span>Correct</span></div>
       <div class="stat"><strong>${state.quiz.total}</strong><span>Total</span></div>
-      <div class="stat"><strong>${state.quiz.round}</strong><span>Round</span></div>
+      <div class="stat"><strong>${dueCount(state.quiz.pool)}</strong><span>Due</span></div>
     </div>
   `;
 
@@ -676,26 +736,20 @@ function renderQuizStage() {
   }
 
   const question = state.quiz.current;
+  const box = srsBox(question.id);
+  const boxBadge = box ? `Box ${box}/5` : "New";
   return `
     ${stats}
     <div class="badge-row">
       <span class="badge">${escapeHtml(question.kindLabel || "")}</span>
       <span class="badge">${escapeHtml(question.unitTitle || "")}</span>
-      <span class="badge">${escapeHtml(question.type)}</span>
+      <span class="badge badge-box">${boxBadge}</span>
     </div>
-    <div class="quiz-prompt">
-      <div class="meta-label">Question</div>
-      <h3>${escapeHtml(question.prompt)}</h3>
-    </div>
+    ${renderQuestionPrompt(question)}
     ${renderQuestionInput(question)}
     <div class="feedback" id="feedback"></div>
-    <div class="difficulty-actions" id="difficulty-actions" hidden>
-      <div class="meta-label">How did it feel?</div>
-      <div class="card-actions">
-        <button class="secondary-button" type="button" data-difficulty="easy">Easy</button>
-        <button class="secondary-button" type="button" data-difficulty="hard">Hard</button>
-        <button class="secondary-button" type="button" data-difficulty="very-hard">Very hard</button>
-      </div>
+    <div class="continue-actions" id="continue-actions" hidden>
+      <button class="button" type="button" data-action="continue-quiz">Continua &rarr;</button>
     </div>
     <div class="card-actions">
       <button class="ghost-button" type="button" data-action="reset-score">Reset score</button>
@@ -703,11 +757,30 @@ function renderQuizStage() {
   `;
 }
 
+function renderQuestionPrompt(question) {
+  // A transform question shows the source sentence prominently under the task.
+  if (question.type === "transform") {
+    return `
+      <div class="quiz-prompt">
+        <div class="meta-label">${escapeHtml(question.prompt)}</div>
+        <h3 class="quiz-source">${escapeHtml(question.source || "")}</h3>
+      </div>
+    `;
+  }
+  return `
+    <div class="quiz-prompt">
+      <div class="meta-label">Question</div>
+      <h3>${escapeHtml(question.prompt)}</h3>
+    </div>
+  `;
+}
+
 function renderQuestionInput(question) {
-  if (question.type === "typed") {
+  if (question.type !== "multiple-choice") {
+    const placeholder = question.type === "transform" ? "Riscrivi la frase" : "Type your answer";
     return `
       <div class="answer-row">
-        <input class="text-input" id="typed-answer" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Type your answer">
+        <input class="text-input" id="typed-answer" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="${placeholder}">
         <button class="button" type="button" data-action="submit-typed">Check</button>
       </div>
     `;
@@ -727,7 +800,7 @@ function renderQuestionInput(question) {
 
 function drawQuestion() {
   if (!state.quiz.deck.length) {
-    state.quiz.deck = shuffle(state.quiz.pool);
+    state.quiz.deck = buildDeck(state.quiz.pool);
     state.quiz.round += 1;
   }
   return state.quiz.deck.shift() || null;
@@ -747,7 +820,10 @@ function normalizeAnswer(value) {
     .trim()
     .toLowerCase()
     .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "");
+    .replace(/[\u0300-\u036f]/g, "")  // strip accents
+    .replace(/[.,!?;:]/g, "")         // ignore punctuation (helps sentence transforms)
+    .replace(/\s+/g, " ")             // collapse whitespace
+    .trim();
 }
 
 function isCorrectAnswer(question, value) {
@@ -776,33 +852,37 @@ function answerQuestion(value, button = null) {
   const input = document.getElementById("typed-answer");
   if (input) input.disabled = true;
 
+  // Spaced repetition: promote on correct, reset on wrong.
+  const record = srsReview(question.id, correct);
+
+  // A wrong item also comes back within this same session, a few cards later.
+  if (!correct) {
+    const position = Math.min(state.quiz.deck.length, 4);
+    state.quiz.deck.splice(position, 0, question);
+  }
+
+  const boxNote = correct
+    ? `Moved to box ${record.box}/5.`
+    : `Back to box 1 — you'll see it again soon.`;
+
   const feedback = document.getElementById("feedback");
   feedback.className = `feedback ${correct ? "good" : "bad"}`;
   feedback.innerHTML = correct
-    ? `Correct. ${escapeHtml(question.explanation || "")}`
-    : `Not yet. Correct answer: <strong>${escapeHtml(question.answer)}</strong>. ${escapeHtml(question.explanation || "")}`;
+    ? `Corretto! ${escapeHtml(question.explanation || "")} <span class="srs-note">${boxNote}</span>`
+    : `Non ancora. Risposta: <strong>${escapeHtml(question.answer)}</strong>. ${escapeHtml(question.explanation || "")} <span class="srs-note">${boxNote}</span>`;
 
-  document.getElementById("difficulty-actions")?.removeAttribute("hidden");
+  const continueActions = document.getElementById("continue-actions");
+  if (continueActions) continueActions.removeAttribute("hidden");
+  document.querySelector('[data-action="continue-quiz"]')?.focus();
 }
 
-function rateAndContinue(difficulty) {
+function advanceQuiz() {
   if (!state.quiz.current) return;
-  applyDifficulty(state.quiz.current, difficulty);
   state.quiz.current = drawQuestion();
   state.quiz.answered = false;
   const stage = document.getElementById("quiz-stage");
   if (stage) stage.innerHTML = renderQuizStage();
   document.getElementById("typed-answer")?.focus();
-}
-
-function applyDifficulty(question, difficulty) {
-  if (difficulty === "hard") {
-    state.quiz.deck.splice(Math.max(1, Math.floor(state.quiz.deck.length / 2)), 0, question);
-  }
-  if (difficulty === "very-hard") {
-    state.quiz.deck.splice(Math.max(1, Math.floor(state.quiz.deck.length / 3)), 0, question);
-    state.quiz.deck.push(question);
-  }
 }
 
 // ---------------------------------------------------------------- Notebook
@@ -1112,8 +1192,8 @@ document.addEventListener("click", (event) => {
     answerQuestion(document.getElementById("typed-answer")?.value || "");
   }
 
-  if (target.dataset.difficulty) {
-    rateAndContinue(target.dataset.difficulty);
+  if (target.dataset.action === "continue-quiz") {
+    advanceQuiz();
   }
 
   if (target.dataset.action === "reset-score") {
@@ -1168,7 +1248,17 @@ document.addEventListener("submit", (event) => {
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape") closeSidebar();
 
-  if (event.key === "Enter" && document.activeElement?.id === "typed-answer") {
+  if (event.key !== "Enter") return;
+
+  // After answering, Enter advances to the next question (from anywhere).
+  if (state.view === "quiz" && state.quiz.answered) {
+    event.preventDefault();
+    advanceQuiz();
+    return;
+  }
+
+  // While answering a typed/transform/cloze question, Enter submits.
+  if (document.activeElement?.id === "typed-answer") {
     answerQuestion(document.activeElement.value);
   }
 });

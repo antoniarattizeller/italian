@@ -97,24 +97,76 @@ function tagQuestion(question, unit) {
   };
 }
 
-function makeVocabQuestion(word, index, unit) {
-  // Prefer an Italian definition (immersion). Fall back to en/de translation.
-  const prompt = word.def
-    ? `Quale parola? ${word.def}`
-    : `Write the Italian for: ${word.en || ""}${word.de ? ` / ${word.de}` : ""}`;
-  const explanation = [word.note, word.ex].filter(Boolean).join(" ");
+function taggedTypedQuestion(id, prompt, answer, accepted, explanation, unit) {
   return {
-    id: `vocab-${unit.key}-${index}-${word.it}`,
-    type: "typed",
-    prompt,
-    answer: stripArticle(word.it),
-    accepted: acceptedVocabAnswers(word.it),
-    explanation,
-    unitKey: unit.key,
-    unitKind: unit.kind,
-    unitTitle: unit.data.title,
+    id, type: "typed", prompt, answer, accepted, explanation,
+    unitKey: unit.key, unitKind: unit.kind, unitTitle: unit.data.title,
     kindLabel: KIND_LABEL[unit.kind] || unit.kind
   };
+}
+
+function taggedMcQuestion(id, prompt, answer, distractors, explanation, unit) {
+  return {
+    id, type: "multiple-choice", prompt, answer, options: [answer, ...distractors], explanation,
+    unitKey: unit.key, unitKind: unit.kind, unitTitle: unit.data.title,
+    kindLabel: KIND_LABEL[unit.kind] || unit.kind
+  };
+}
+
+// Pick up to n distractor words from the same topic (deterministic, so question
+// ids and the SRS boxes stay stable across sessions).
+function pickDistractors(baseForms, answer, seed, n = 3) {
+  const pool = baseForms.filter((b) => normalizeAnswer(b) !== normalizeAnswer(answer));
+  const out = [];
+  for (let k = 1; out.length < n && k <= pool.length; k += 1) {
+    const candidate = pool[(seed + k) % pool.length];
+    if (!out.some((o) => normalizeAnswer(o) === normalizeAnswer(candidate))) out.push(candidate);
+  }
+  return out;
+}
+
+// Turn an example sentence into a gap-fill by blanking the base word, if it
+// appears as a whole word (handles multi-word entries too). Returns null if not.
+function clozeSentence(example, base) {
+  if (!example || !base) return null;
+  const escaped = base.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const re = new RegExp(`(^|[^\\p{L}'])(${escaped})(?=$|[^\\p{L}'])`, "iu");
+  if (!re.test(example)) return null;
+  return example.replace(re, "$1_____");
+}
+
+// Build a varied set of vocabulary questions for one unit: definition -> word
+// and cloze (example with the word blanked), each as multiple-choice or typed.
+function vocabQuestionsForUnit(unit) {
+  const words = unitWords(unit).filter(isQuizableWord);
+  const baseForms = words.map((word) => stripArticle(word.it));
+  const canMc = baseForms.length >= 4;
+  const out = [];
+
+  words.forEach((word, index) => {
+    const base = stripArticle(word.it);
+    const accepted = acceptedVocabAnswers(word.it);
+    const explanation = [word.note, word.ex].filter(Boolean).join(" ");
+    const defPrompt = word.def ? `Quale parola? ${word.def}` : `In italiano: ${word.en || word.de || ""}`;
+
+    // Definition question: MC on even indexes, typed on odd (a balanced mix).
+    const defId = `vocab-${unit.id}-${index}-def`;
+    out.push(canMc && index % 2 === 0
+      ? taggedMcQuestion(defId, defPrompt, base, pickDistractors(baseForms, base, index), explanation, unit)
+      : taggedTypedQuestion(defId, defPrompt, base, accepted, explanation, unit));
+
+    // Cloze question (only if the word appears in its example). Opposite format.
+    const gap = clozeSentence(word.ex, base);
+    if (gap) {
+      const clozeId = `vocab-${unit.id}-${index}-cloze`;
+      const clozePrompt = `Completa: ${gap}`;
+      out.push(canMc && index % 2 === 1
+        ? taggedMcQuestion(clozeId, clozePrompt, base, pickDistractors(baseForms, base, index + 1), explanation, unit)
+        : taggedTypedQuestion(clozeId, clozePrompt, base, accepted, explanation, unit));
+    }
+  });
+
+  return out;
 }
 
 function writtenPool(units = allUnits()) {
@@ -124,11 +176,7 @@ function writtenPool(units = allUnits()) {
 }
 
 function autoVocabPool(units = allUnits()) {
-  return units.flatMap((unit) =>
-    unitWords(unit)
-      .filter((word) => isQuizableWord(word))
-      .map((word, index) => makeVocabQuestion(word, index, unit))
-  );
+  return units.flatMap((unit) => vocabQuestionsForUnit(unit));
 }
 
 function personalVocabularyQuestions() {

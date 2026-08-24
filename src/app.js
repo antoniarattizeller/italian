@@ -3,7 +3,7 @@ const state = {
   unitKey: null,
   quiz: {
     initialized: false,
-    mode: "mixed",
+    mode: "all",
     selectedUnitKeys: new Set(),
     pool: [],
     deck: [],
@@ -225,7 +225,13 @@ function questionPool(mode = state.quiz.mode) {
   if (mode === "numbers") return numberWritingQuestions();
   if (mode === "vocab") return [...autoVocabPool(), ...personalVocabularyQuestions()];
   if (mode === "grammar") return writtenPool(grammarUnits());
+  if (mode === "all") return [...writtenPool(), ...autoVocabPool(), ...personalVocabularyQuestions()];
   return [...writtenPool(), ...personalVocabularyQuestions()];
+}
+
+// Everything the learner can practise (used by the progress dashboard).
+function allTrackableQuestions() {
+  return [...writtenPool(), ...autoVocabPool(), ...personalVocabularyQuestions()];
 }
 
 function stripArticle(value) {
@@ -353,6 +359,7 @@ function render() {
   if (state.view === "vocab") return renderVocabList();
   if (state.view === "reference") return renderReferenceList();
   if (state.view === "quiz") return renderQuizBuilder();
+  if (state.view === "progress") return renderProgress();
   if (state.view === "notebook") return renderNotebook();
   renderHome();
 }
@@ -684,9 +691,10 @@ function renderQuizBuilder() {
         <div class="filter-group compact-first">
           <div class="meta-label">Practice type</div>
           <div class="mode-grid">
-            <button class="mode-button ${state.quiz.mode === "mixed" ? "active" : ""}" type="button" data-quiz-mode="mixed">Mixed</button>
+            <button class="mode-button ${state.quiz.mode === "all" ? "active" : ""}" type="button" data-quiz-mode="all">All</button>
             <button class="mode-button ${state.quiz.mode === "grammar" ? "active" : ""}" type="button" data-quiz-mode="grammar">Grammar</button>
             <button class="mode-button ${state.quiz.mode === "vocab" ? "active" : ""}" type="button" data-quiz-mode="vocab">Vocabulary</button>
+            <button class="mode-button ${state.quiz.mode === "mixed" ? "active" : ""}" type="button" data-quiz-mode="mixed">Grammar+notes</button>
             <button class="mode-button ${state.quiz.mode === "numbers" ? "active" : ""}" type="button" data-quiz-mode="numbers">Numbers</button>
           </div>
         </div>
@@ -931,6 +939,103 @@ function advanceQuiz() {
   const stage = document.getElementById("quiz-stage");
   if (stage) stage.innerHTML = renderQuizStage();
   document.getElementById("typed-answer")?.focus();
+}
+
+// ---------------------------------------------------------------- Progress dashboard
+
+function srsStats(questions) {
+  const now = Date.now();
+  const boxes = [0, 0, 0, 0, 0, 0]; // index 0 = new/unseen, 1..5 = Leitner boxes
+  let due = 0;
+  questions.forEach((question) => {
+    boxes[srsBox(question.id)] += 1;
+    if (srsIsDue(question.id, now)) due += 1;
+  });
+  return { total: questions.length, boxes, due, seen: questions.length - boxes[0] };
+}
+
+function renderSrsBar(stats) {
+  const total = stats.total || 1;
+  const segments = [
+    ["seg-new", stats.boxes[0], "new"],
+    ["seg-b1", stats.boxes[1], "box 1"],
+    ["seg-b2", stats.boxes[2], "box 2"],
+    ["seg-b3", stats.boxes[3], "box 3"],
+    ["seg-b4", stats.boxes[4], "box 4"],
+    ["seg-b5", stats.boxes[5], "box 5"]
+  ].filter(([, count]) => count > 0);
+  return `<div class="srs-bar">${segments.map(([cls, count, label]) =>
+    `<span class="srs-seg ${cls}" style="width:${(count / total * 100).toFixed(1)}%" title="${label}: ${count}"></span>`
+  ).join("")}</div>`;
+}
+
+function progressRow(unit, byUnit) {
+  const questions = byUnit[unit.key] || [];
+  if (!questions.length) return "";
+  const stats = srsStats(questions);
+  return `
+    <div class="progress-row">
+      <div class="progress-row-head">
+        <button class="link-button" type="button" data-route-unit="${escapeHtml(unit.key)}">${escapeHtml(unit.data.title)}</button>
+        <span class="progress-meta">${stats.boxes[5]}/${stats.total} mastered${stats.due ? ` &middot; ${stats.due} due` : ""}</span>
+      </div>
+      ${renderSrsBar(stats)}
+    </div>
+  `;
+}
+
+function renderProgress() {
+  setTitle("Progress");
+  const questions = allTrackableQuestions();
+  const overall = srsStats(questions);
+  const byUnit = {};
+  questions.forEach((question) => {
+    (byUnit[question.unitKey] = byUnit[question.unitKey] || []).push(question);
+  });
+
+  app.innerHTML = `
+    <section class="page-header">
+      <h1 class="page-title">Progress</h1>
+      <p class="page-copy">Your spaced-repetition progress. A correct answer moves an item up a box; a wrong answer sends it back to box 1.</p>
+    </section>
+
+    <section class="grid three">
+      <article class="card"><div class="meta-label">Seen</div><h3>${overall.seen} / ${overall.total}</h3><p>practised at least once</p></article>
+      <article class="card"><div class="meta-label">Mastered</div><h3>${overall.boxes[5]}</h3><p>items in box 5</p></article>
+      <article class="card"><div class="meta-label">Due now</div><h3>${overall.due}</h3><p>ready to review</p></article>
+    </section>
+
+    <section class="section">
+      <article class="card">
+        <h3>Overall</h3>
+        ${renderSrsBar(overall)}
+        <div class="srs-legend">
+          <span><i class="seg-new"></i>new</span>
+          <span><i class="seg-b1"></i>box 1</span>
+          <span><i class="seg-b2"></i>2</span>
+          <span><i class="seg-b3"></i>3</span>
+          <span><i class="seg-b4"></i>4</span>
+          <span><i class="seg-b5"></i>5</span>
+        </div>
+        <div class="card-actions">
+          <button class="button" type="button" data-action="review-due"${overall.due ? "" : " disabled"}>Review ${overall.due} due now</button>
+          <button class="ghost-button" type="button" data-action="reset-progress">Reset progress</button>
+        </div>
+      </article>
+    </section>
+
+    ${grammarStages().map((stage) => `
+      <section class="section">
+        <div class="section-head"><h2>${escapeHtml(stage.title)}</h2></div>
+        ${stage.units.map((unit) => progressRow(unit, byUnit)).join("")}
+      </section>
+    `).join("")}
+
+    <section class="section">
+      <div class="section-head"><h2>Vocabulary</h2></div>
+      ${vocabUnits().map((unit) => progressRow(unit, byUnit)).join("")}
+    </section>
+  `;
 }
 
 // ---------------------------------------------------------------- Notebook
@@ -1249,6 +1354,21 @@ document.addEventListener("click", (event) => {
     state.quiz.total = 0;
     resetQuizDeck();
     renderQuizBuilder();
+  }
+
+  if (target.dataset.action === "review-due") {
+    state.quiz.initialized = true;
+    state.quiz.mode = "all";
+    state.quiz.selectedUnitKeys = new Set(allUnits().map((unit) => unit.key));
+    resetQuizDeck();
+    route("quiz");
+  }
+
+  if (target.dataset.action === "reset-progress") {
+    if (window.confirm("Reset all spaced-repetition progress? This cannot be undone.")) {
+      saveSrs({});
+      renderProgress();
+    }
   }
 
   if (target.dataset.toggleReveal) {
